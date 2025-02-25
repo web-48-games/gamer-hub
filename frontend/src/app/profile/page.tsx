@@ -1,33 +1,30 @@
-type Player = {
-    name: string,
-    gamesPlayed: number,
-    favoriteGame: string,
+import {kMaxLength} from "node:buffer";
+
+export type Player = {
+    name: string
+    gamesPlayed: number
+    favoriteGame: string
     createdAt: string
 }
 
-export default function (props: Player) {
-    let players: Player[] = [
+export default function () {
+    let player: Player =
         {
             name: 'Sven Hralfingr',
             gamesPlayed: 100,
             favoriteGame: 'Monopoly',
             createdAt: '5/23/2021'
-        },
-        {
-            name: 'Joey Wheeler',
-            gamesPlayed: 321,
-            favoriteGame: 'Settlers of Catan',
-            createdAt: '2/16/2008'
-        },
-        {
-            name: 'Zagreus Haas',
-            gamesPlayed: 442,
-            favoriteGame: 'Ticket to Ride',
-            createdAt: '5/23/2021'
         }
-    ]
     return (
-        <h1 className={"text-3xl font-bold underline"}>This is the Player Profile Page.</h1>
+        <>
+            <p className="bold">Replace this with navbar</p>
+            <section className="container">
+                <h1 className={"text-3xl font-bold"}>page for {player.name}</h1>
 
+                <h3 className={"text-xl font-bold"}>This will be replaced with player profile card that includes player name, username, their avatar image, and some user stats.</h3>
+            </section>
+
+            <p className="bold">Replace this with footer</p>
+        </>
     )
 }

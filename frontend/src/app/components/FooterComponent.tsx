@@ -1,28 +1,14 @@
+import React from 'react';
 
-import { Footer, FooterBrand, FooterCopyright, FooterDivider, FooterLink, FooterLinkGroup } from "flowbite-react";
-
-export function Component() {
+export function FooterComponent() {
     return (
-        <Footer container>
-            <div className="w-full text-center">
-                <div className="w-full justify-between sm:flex sm:items-center sm:justify-between">
-                    <FooterBrand
-                        href="https://flowbite.com"
-                        src="https://flowbite.com/docs/images/logo.svg"
-                        alt="Flowbite Logo"
-                        name="Flowbite"
-                    />
-                    <FooterLinkGroup>
-                        <FooterLink href="#">About</FooterLink>
-                        <FooterLink href="#">Privacy Policy</FooterLink>
-                        <FooterLink href="#">Licensing</FooterLink>
-                        <FooterLink href="#">Contact</FooterLink>
-                    </FooterLinkGroup>
+        <div className="bg-gray-200">
+            <footer className="border-2 border-gray-400 p-10">
+                <div className="text-center text-2xl font-medium">
+                    {/*<img src="/dice.svg"/>*/}
+                    <h1>A Game Away</h1>
                 </div>
-                <FooterDivider />
-                <FooterCopyright href="#" by="Flowbite™" year={2022} />
-            </div>
-        </Footer>
-    );
+            </footer>
+        </div>
+    )
 }
-

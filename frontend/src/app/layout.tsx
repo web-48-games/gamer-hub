@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import '../globals.css'
+import {Navigation} from "@/app/Components/Navigation";
 
 
 export const metadata: Metadata = {
-    title: 'Title Goes Here',
+    title: 'A Game Away',
     description: 'description goes here',
 }
 
@@ -16,7 +17,7 @@ export default function RootLayout(props : RootLayoutProps) {
     return (
         <html  lang="en" suppressHydrationWarning>
         <body>
-
+        <Navigation />
         {children}
         </body>
         </html>

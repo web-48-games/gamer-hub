@@ -1,4 +1,4 @@
-import {FooterComponent} from "@/app/Components/FooterComponent";
+import {FooterComponent} from "@/app/components/FooterComponent";
 
 
 export default function Home() {

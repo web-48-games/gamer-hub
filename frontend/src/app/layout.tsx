@@ -15,7 +15,10 @@ export default function RootLayout(props : RootLayoutProps) {
     const { children } = props
     return (
         <html  lang="en" suppressHydrationWarning>
-        <body>{children}</body>
+        <body>
+
+        {children}
+        </body>
         </html>
     )
 }

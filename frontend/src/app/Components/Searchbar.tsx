@@ -1,13 +1,13 @@
 export function Searchbar() {
     return (
         <>
-            <form className="max-w-lg mx-auto">
+            <form className="w-full md:w-64 lg:w-80">
                 <div className="flex">
                     <label htmlFor="search-dropdown"
                            className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your Email</label>
                     <button id="dropdown-button" data-dropdown-toggle="dropdown"
                             className="shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
-                            type="button">All categories <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
+                            type="button">Categories <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
                                                               xmlns="http://www.w3.org/2000/svg" fill="none"
                                                               viewBox="0 0 10 6">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"

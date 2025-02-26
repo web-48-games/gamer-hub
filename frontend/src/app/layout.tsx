@@ -4,7 +4,7 @@ import {Navigation} from "@/app/Components/Navigation";
 
 
 export const metadata: Metadata = {
-    title: 'Title Goes Here',
+    title: 'A Game Away',
     description: 'description goes here',
 }
 

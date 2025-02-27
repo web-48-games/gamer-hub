@@ -15,7 +15,7 @@ export default function Home() {
 
     return (
         <>
-            <div className="container mx-auto">
+            <div className="container flex justify-center">
                 <PlayerCard name={playerinfo.name} avatarUrl={playerinfo.avatarUrl} gamesPlayed={playerinfo.gamesPlayed} gamesLiked={playerinfo.gamesLiked} createdAt={playerinfo.createdAt}/>
             </div>
         </>

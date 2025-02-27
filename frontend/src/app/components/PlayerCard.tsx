@@ -11,15 +11,15 @@ export function PlayerCard(props: Player) {
     return (
         <>
             <div
-                className="w-full max-w-sm bg-sky-100 border border-slate-100 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-                <div className="px-4 pt-4">
+                className="w-full md:max-w-xl bg-blue-300 border border-slate-300 rounded-lg shadow-md dark:text-white dark:bg-gray-700 dark:border-gray-500 p-8">
+                <div className="p-4 pt-4 bg-sky-50 border border-gray-400 shadow-sm rounded-lg w-full">
                     <div className="flex">
                         {/* Left side - Profile info */}
                         <div className="flex flex-col items-center pb-10">
                             <img className="w-24 h-24 mb-3 rounded-full shadow-lg"
                                  src={avatarUrl} alt="Placeholder Image"/>
                             <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{name}</h5>
-                            <span className="text-sm text-gray-500 dark:text-gray-400">Player Role</span>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">Badges?</span>
                         </div>
 
                         {/* Right side - Stats (stacked vertically) */}

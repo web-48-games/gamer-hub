@@ -1,8 +1,20 @@
+"use client"
 
 import { Button, Navbar, NavbarBrand, NavbarCollapse, NavbarLink, NavbarToggle } from "flowbite-react";
-import {Searchbar} from "@/app/Components/Searchbar";
+import {Searchbar} from "@/app/components/Searchbar";
+import React, { useRef } from 'react'
+import { AuthModalContainer } from "@/app/components/login-signup/AuthModalContainer";
 
 export function Navigation() {
+    const authModalRef = useRef<any>(null)
+
+    const handleAuthButtonClick = () => {
+        if (authModalRef.current) {
+            authModalRef.current.openSignupModal()
+        }
+    }
+
+
     return (
         <Navbar fluid rounded>
             <NavbarBrand href="https://flowbite-react.com" className={"order-1"}>
@@ -10,7 +22,7 @@ export function Navigation() {
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">A Game Away</span>
             </NavbarBrand>
             <div className="flex order-2 md:order-3 ml-4">
-                <Button>Login/Sign Up</Button>
+                <Button onClick={handleAuthButtonClick}>Login/Sign Up</Button>
                 <NavbarToggle />
             </div>
             <NavbarCollapse className={"order-4 md:order-2 mx-auto"}>
@@ -20,6 +32,8 @@ export function Navigation() {
                 <NavbarLink className={"mt-3"} href="#">Sessions</NavbarLink>
                 <NavbarLink className={"mt-3"} href="#">Profile Page</NavbarLink>
             </NavbarCollapse>
+
+            <AuthModalContainer ref={authModalRef} />
         </Navbar>
     );
 }

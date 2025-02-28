@@ -1,23 +1,29 @@
-type ToggleLinkProps = {
+export type ToggleLinkProps = {
     mode: string
+    toggleFunction: () => void
 }
 
-export function ToggleLink(props: ToggleLinkProps) {
-    const {mode} = props
+export function ToggleLink({mode, toggleFunction}: ToggleLinkProps) {
     return (
         <>
             {mode === 'login' ?
                 <div className={"text-center"}>
-                    <p className={"shadow-sm"}>Already have an account?</p>
+                    <p className={"text-green-700"}>Don't have an account?</p>
                     <p>
-                        <a href="#">Log-in</a>
+                        <a onClick={toggleFunction}
+                           className="text-blue-600 hover:underline cursor-pointer">
+                            Sign-up
+                        </a>
                     </p>
                 </div>
                 :
-                <div>
-                    <p>Don't have an account?</p>
+                <div className={"text-center"}>
+                    <p className={"text-green-700"}>Already have an account?</p>
                     <p>
-                        <a href="#">Sign Up</a>
+                        <a onClick={toggleFunction}
+                            className="text-blue-600 hover:underline cursor-pointer">
+                            Log-in
+                        </a>
                     </p>
                 </div>
             }

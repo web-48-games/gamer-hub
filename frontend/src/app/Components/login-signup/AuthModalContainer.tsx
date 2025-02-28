@@ -1,6 +1,6 @@
 import React, {useState, forwardRef, useImperativeHandle} from 'react'
-import {Login} from "@/app/components/login-signup/Login"
-import {Signup} from "@/app/components/login-signup/Signup"
+import {Login} from '@/app/Components/login-signup/Login'
+import {Signup} from '@/app/Components/login-signup/Signup'
 
 export const AuthModalContainer = forwardRef((props, ref) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);

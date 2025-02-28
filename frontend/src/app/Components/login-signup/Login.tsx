@@ -1,8 +1,8 @@
-import {TitleComponent} from "@/app/components/login-signup/TitleComponent";
-import {ActionButton} from "@/app/components/login-signup/ActionButton";
-import {ToggleLink} from "@/app/components/login-signup/ToggleLink";
-import {InputField} from "@/app/components/login-signup/InputField";
-import {ModalContainer} from "@/app/components/login-signup/ModalContainer";
+import {TitleComponent} from "@/app/Components/login-signup/TitleComponent";
+import {ActionButton} from "@/app/Components/login-signup/ActionButton";
+import {ToggleLink} from "@/app/Components/login-signup/ToggleLink";
+import {InputField} from "@/app/Components/login-signup/InputField";
+import {ModalContainer} from "@/app/Components/login-signup/ModalContainer";
 import React from "react";
 
 type LoginProps = {

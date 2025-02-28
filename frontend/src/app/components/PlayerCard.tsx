@@ -6,8 +6,12 @@ export type Player = {
     gamesLiked: number,
 }
 
-export function PlayerCard(props: Player) {
-    let {name, avatarUrl, gamesPlayed, createdAt, gamesLiked} = props
+export type PlayerCardProps = {
+    player: Player
+}
+
+export function PlayerCard(props: PlayerCardProps) {
+    let {player:{name, avatarUrl, gamesPlayed, createdAt, gamesLiked}} = props
     return (
         <>
             <div

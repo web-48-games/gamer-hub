@@ -1,9 +1,9 @@
-import {PlayerCard} from "@/app/components/PlayerCard";
-import {Player} from "@/app/components/PlayerCard"
+import {PlayerCard} from "@/app/Components/PlayerCard";
+import {Player} from "@/app/Components/PlayerCard"
 
 
 export default function () {
-    let playerinfo : Player = {
+    let playerInfo : Player = {
         name: 'Rock Howard',
         avatarUrl: '/window.svg',
         gamesPlayed: 27,
@@ -15,7 +15,7 @@ export default function () {
     return (
         <>
             <div className="container flex justify-center">
-                <PlayerCard name={playerinfo.name} avatarUrl={playerinfo.avatarUrl} gamesPlayed={playerinfo.gamesPlayed} gamesLiked={playerinfo.gamesLiked} createdAt={playerinfo.createdAt}/>
+                <PlayerCard player = {playerInfo}/>
             </div>
         </>
     )

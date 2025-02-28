@@ -15,7 +15,7 @@ export default function () {
     return (
         <>
             <div className="container flex justify-center">
-            <PlayerCard name={playerinfo.name} avatarUrl={playerinfo.avatarUrl} gamesPlayed={playerinfo.gamesPlayed} gamesLiked={playerinfo.gamesLiked} createdAt={playerinfo.createdAt}/>
+                <PlayerCard name={playerinfo.name} avatarUrl={playerinfo.avatarUrl} gamesPlayed={playerinfo.gamesPlayed} gamesLiked={playerinfo.gamesLiked} createdAt={playerinfo.createdAt}/>
             </div>
         </>
     )

@@ -1,6 +1,6 @@
 
 import { Button, Navbar, NavbarBrand, NavbarCollapse, NavbarLink, NavbarToggle } from "flowbite-react";
-import {Searchbar} from "@/app/components/Searchbar";
+import {Searchbar} from "@/app/Components/Searchbar";
 
 export function Navigation() {
     return (

@@ -18,7 +18,9 @@ export function SessionCard(props: SessionCardProps) {
     }
     return (
         <>
-            <PlayerCard player={playerDetails}/>
+            <div className="container">
+                <PlayerCard player={playerDetails}/>
+            </div>
         </>
     )
 }

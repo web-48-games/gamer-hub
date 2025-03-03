@@ -1,4 +1,4 @@
-
+"use client"
 import { Button, Navbar, NavbarBrand, NavbarCollapse, NavbarLink, NavbarToggle } from "flowbite-react";
 import {Searchbar} from "@/app/Components/Searchbar";
 
@@ -15,10 +15,10 @@ export function Navigation() {
             </div>
             <NavbarCollapse className={"order-4 md:order-2 mx-auto"}>
                 <Searchbar/>
-                <NavbarLink className={"mt-3"} href="#">Home</NavbarLink>
-                <NavbarLink className={"mt-3"} href="#">Games</NavbarLink>
-                <NavbarLink className={"mt-3"} href="#">Sessions</NavbarLink>
-                <NavbarLink className={"mt-3"} href="#">Profile Page</NavbarLink>
+                <NavbarLink className={"mt-3"} href="/">Home</NavbarLink>
+                <NavbarLink className={"mt-3"} href="/games">Games</NavbarLink>
+                <NavbarLink className={"mt-3"} href="/sessions">Sessions</NavbarLink>
+                <NavbarLink className={"mt-3"} href="/profile">Profile Page</NavbarLink>
             </NavbarCollapse>
         </Navbar>
     );

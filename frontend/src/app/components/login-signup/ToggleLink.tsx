@@ -11,7 +11,7 @@ export function ToggleLink({mode, toggleFunction}: ToggleLinkProps) {
                     <p className={"text-green-700"}>Don't have an account?</p>
                     <p>
                         <a onClick={toggleFunction}
-                           className="text-blue-600 hover:underline cursor-pointer">
+                           className="text-blue-600 font-bold text-lg hover:underline cursor-pointer">
                             Sign-up
                         </a>
                     </p>
@@ -21,7 +21,7 @@ export function ToggleLink({mode, toggleFunction}: ToggleLinkProps) {
                     <p className={"text-green-700"}>Already have an account?</p>
                     <p>
                         <a onClick={toggleFunction}
-                            className="text-blue-600 hover:underline cursor-pointer">
+                            className="text-blue-600 font-bold text-lg hover:underline cursor-pointer">
                             Log-in
                         </a>
                     </p>

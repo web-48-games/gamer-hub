@@ -17,7 +17,7 @@ export function InputField(props: Props) {
         <>
             <div>
                 <label htmlFor={name}
-                       className="block text-sm font-medium text-gray-700 mb-1">
+                       className="block text-sm font-bold text-blue-800 mb-1">
                     {labelText}
                 </label>
                 <input type={type} name={name} id={id} required

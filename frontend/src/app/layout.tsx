@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import '../globals.css'
 
-import {Navigation} from "@/app/components/Navigation";
+import {Navigation} from "@/app/Components/Navigation";
 
-import {FooterComponent} from "@/app/components/FooterComponent";
+import {FooterComponent} from "@/app/Components/FooterComponent";
 
 
 

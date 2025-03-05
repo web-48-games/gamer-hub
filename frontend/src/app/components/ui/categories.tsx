@@ -1,7 +1,7 @@
 
 import { Dropdown, DropdownDivider, DropdownHeader, DropdownItem } from "flowbite-react";
 
-export function Component() {
+export function Categories() {
         return (
             <Dropdown label="Categories" dismissOnClick={false}>
                     <DropdownItem>Classic</DropdownItem>

@@ -14,7 +14,7 @@ export default function () {
 
     return (
         <>
-            <div className="container flex justify-center">
+            <div className="container flex justify-center mx-auto">
                 <PlayerCard player = {playerInfo}/>
             </div>
         </>

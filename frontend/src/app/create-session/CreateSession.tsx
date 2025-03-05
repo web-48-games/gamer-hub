@@ -29,10 +29,17 @@ export function CreateSession() {
                     }}/>
 
                     <InputField inputProps={{
-                        name: "genre-tags",
+                        name: "genre",
                         type: "text",
-                        id: "genre-tags",
-                        labelText: "Genres/Tags:"
+                        id: "genre",
+                        labelText: "Genre:"
+                    }}/>
+
+                    <InputField inputProps={{
+                        name: "tag",
+                        type: "text",
+                        id: "tag",
+                        labelText: "Tags:"
                     }}/>
 
                     <InputField inputProps={{

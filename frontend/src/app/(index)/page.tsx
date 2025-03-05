@@ -9,8 +9,8 @@ import {Catamaran} from "next/dist/compiled/@next/font/dist/google";
 export default function Home() {
     return (
        <>
-           <Categories />
-           <PageIntro />
+           <PageIntro/>
+           <Categories/>
        </>
     )
 }

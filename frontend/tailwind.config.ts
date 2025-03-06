@@ -12,8 +12,9 @@ const config: Config = {
     extend: {
       colors: {
         sandyBrown: "#F4A261",
+        brownAccent: "#391C04",
         mint: "#8BD0AD",
-        floralWhite: "#FDF7EC",
+        floralWhite: "#FBF0DA",
         charcoal: "#264653",
         burntSienna: "#EB866F"
       },

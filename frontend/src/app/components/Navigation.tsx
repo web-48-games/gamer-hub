@@ -22,16 +22,19 @@ export function Navigation() {
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">A Game Away</span>
             </NavbarBrand>
             <div className="flex order-2 md:order-3 ml-4 ">
-                <Button onClick={handleAuthButtonClick} className="bg-mint text-charcoal">Login/Sign Up</Button>
+                <Button onClick={handleAuthButtonClick} className="bg-mint text-charcoal hover:!text-floralWhite">Login/Sign Up</Button>
                 <NavbarToggle />
             </div>
+
             <NavbarCollapse className={"order-4 md:order-2 mx-auto"}>
+                <NavbarLink className={"mt-3 text-[1rem] text-charcoal hover:!text-floralWhite"} href="/">Home</NavbarLink>
+                <NavbarLink className={"mt-3 text-[1rem] text-charcoal hover:!text-floralWhite"} href="/games">Games</NavbarLink>
+                <NavbarLink className={"mt-3 text-[1rem] text-charcoal hover:!text-floralWhite"} href="/sessions">Sessions</NavbarLink>
+                <NavbarLink className={"mt-3 text-[1rem] text-charcoal hover:!text-floralWhite"} href="/profile">Profile Page</NavbarLink>
                 <Searchbar/>
-                <NavbarLink className={"mt-3"} href="/">Home</NavbarLink>
-                <NavbarLink className={"mt-3"} href="/games">Games</NavbarLink>
-                <NavbarLink className={"mt-3"} href="/sessions">Sessions</NavbarLink>
-                <NavbarLink className={"mt-3"} href="/profile">Profile Page</NavbarLink>
             </NavbarCollapse>
+
+
 
             <AuthModalContainer ref={authModalRef} />
         </Navbar>

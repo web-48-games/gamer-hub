@@ -8,28 +8,22 @@ const config: Config = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
 
   ],
-  theme: {},
+  theme: {
+    extend: {
+      colors: {
+        sandyBrown: "#F4A261",
+        mint: "#74C69D",
+        floralWhite: "#FDF7EC",
+        charcoal: "#264653",
+        burntSienna: "#EB866F"
+      },
+    },
+  },
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
     plugin(),
   ],
-}
-
-module.exports = {
-  theme:
-      {
-        extend: {
-          colors: {
-            primary: "F4A261",
-            accent: "74C69D",
-            background: "FDF7EC",
-            text: "264653",
-            Surface: "E76F51"
-          },
-        },
-      },
-      plugins: [],
 }
 
 export default config

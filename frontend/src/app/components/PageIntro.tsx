@@ -15,19 +15,22 @@ export function PageIntro() {
             </section>
 
 
-            <section className="w-full p-14 bg-burntSienna">
-                <h1 className="text-[2.5rem] text-charcoal">Welcome to A Game Away</h1>
-                <p className="text-[1.5rem] text-charcoal">Find your table, adventures await!</p>
+            <section className=" p-14 bg-burntSienna">
+                <h1 className="text-[2.5rem] ">Welcome to A Game Away</h1>
+                <p className="text-[1.5rem] ">Find your table, adventures await!</p>
             </section>
-            <section className="container mx-auto grid grid-cols-1 sm:grid-cols-2 items-center">
-                <h1 className="text-[4rem]">Play & Explore!</h1>
-                <div className="relative overflow-hidden rounded-full size-[75%]">
+
+            <section className="">
+                <h1 className="text-[4rem] text-charcoal">Play & Explore!</h1>
+                <div className="relative overflow-hidden rounded-full">
                     <img src="/play-and-explore-placeholder.jpg" alt="Play"/>
                 </div>
-                <div className="relative overflow-hidden rounded-full size-[75%]">
+            </section>
+            <section>
+                <div className="relative overflow-hidden rounded-full ">
                     <img src="/play-and-explore-placeholder.jpg" alt="Play"/>
                 </div>
-                <h1 className="text-[4rem]">Connect & Make Memories!</h1>
+                <h1 className="text-[4rem] text-charcoal">Connect & Make Memories!</h1>
             </section>
         </>
     )

@@ -16,4 +16,20 @@ const config: Config = {
   ],
 }
 
+module.exports = {
+  theme:
+      {
+        extend: {
+          colors: {
+            primary: "F4A261",
+            accent: "74C69D",
+            background: "FDF7EC",
+            text: "264653",
+            Surface: "E76F51"
+          },
+        },
+      },
+      plugins: [],
+}
+
 export default config

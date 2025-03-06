@@ -15,7 +15,7 @@ export function PageIntro() {
             {/*</section>*/}
 
 
-            <section className=" p-14 bg-mint text-center font-semibold">
+            <section className=" p-16 bg-cornflower text-center font-semibold">
                 <h1 className="text-[2.5rem] pb-4 text-charcoal">Welcome to A Game Away</h1>
                 <p className="text-[1.5rem] text-charcoal">Find your table, adventures await!</p>
             </section>

@@ -14,6 +14,8 @@ const config: Config = {
         sandyBrown: "#F4A261",
         brownAccent: "#391C04",
         mint: "#8BD0AD",
+        cornflower: "#a4cafe",
+        blueAccent: "#f0f9ff",
         floralWhite: "#FBF0DA",
         charcoal: "#264653",
         burntSienna: "#EB866F"

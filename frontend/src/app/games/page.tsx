@@ -39,17 +39,22 @@ export default function () {
                     }]}/>
             </section>
             <hr className="border-b border-gray-300 border-2"/>
-            <section className="mx-auto container">
-                <div className={"flex flex-col md:flex-row"}>
-                    <div className="md:w-1/4 lg:w-1/5">
+            <section className="mx-auto container relative">
+                <div className={"flex"}>
+                    <div className="w-64 shrink-0 hidden md:block">
                         <FilterMenu/>
                     </div>
-                    <div className={"w-full md:w-3/4 lg:w-4/5"}>
+                    <div className={"w-full md:ml-4"}>
                         <GameResult gameData={gameInfo}/>
                         <GameResult gameData={gameInfo}/>
                         <GameResult gameData={gameInfo}/>
                         <GameResult gameData={gameInfo}/>
                     </div>
+                </div>
+                {/* Mobile filter is rendered outside the flex container
+       so it can be positioned fixed without interference */}
+                <div className="md:hidden">
+                    <FilterMenu />
                 </div>
 
             </section>

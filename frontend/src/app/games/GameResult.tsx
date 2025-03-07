@@ -21,14 +21,19 @@ export function GameResult(props: gameResultProps) {
 
     return (
         <>
-            <div className={"flex p-4 my-4 h-auto bg-green-200 rounded-lg"}>
-                <img className={"max-w-40"} src={gameImageUrl} alt= "depicting {gameImageUrl}"/>
-                <section className={"max-w-80 p-2 m-2"}>
+            <div className={"flex flex-col items-center sm:flex-row p-4 my-4 h-auto bg-green-200 rounded-lg"}>
+                <img className={"w-40 h-40 object-cover p-2"} src={gameImageUrl} alt= {`depicting ${gameName}`}/>
+                <section className={"flex-grow p-4"}>
                     <h2 className={"font-bold text-2xl mb-4"}>{gameName}</h2>
                     <p>Genre: {gameGenre}</p>
                     <p>Released on: {gameReleased}</p>
                 </section>
-                <ActionButton buttonText={"Find Sessions"}/>
+
+                <div className="flex items-center p-4">
+                    <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 whitespace-nowrap">
+                        Find Sessions
+                    </button>
+                </div>
             </div>
         </>
     )

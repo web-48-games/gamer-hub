@@ -1,9 +1,11 @@
 export type Player = {
-    name: string,
-    avatarUrl: string,
-    gamesPlayed: number,
-    createdAt: string,
-    gamesLiked: number,
+    name: string
+    avatarUrl: string
+    gamesPlayed: number
+    createdAt: string
+    gamesLiked: number
+    email: string
+    aboutMe: string
 }
 
 export type PlayerCardProps = {
@@ -11,7 +13,7 @@ export type PlayerCardProps = {
 }
 
 export function PlayerCard(props: PlayerCardProps) {
-    let {player:{name, avatarUrl, gamesPlayed, createdAt, gamesLiked}} = props
+    let {player:{name, avatarUrl, gamesPlayed, createdAt, gamesLiked, email, aboutMe}} = props
     return (
         <>
             <div
@@ -31,10 +33,15 @@ export function PlayerCard(props: PlayerCardProps) {
                             <ul>
                                 <li className={"p-2 mb-1 list-none"}>Participated in {gamesPlayed} game sessions</li>
                                 <li className={"p-2 mb-1 list-none"}>Liked {gamesLiked} games</li>
+                                <li className={"p-2 mb-1 list-none"}>Contact me at: {email}</li>
                             </ul>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className={"container mx-auto"}>
+                <h3 className={"text-center text-4xl font-semibold p-2"}>About Me:</h3>
+                <p className={"p-4 mt-2 mb-8"}> {aboutMe}</p>
             </div>
         </>
     )

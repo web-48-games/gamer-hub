@@ -26,7 +26,6 @@ export function Navigation() {
                 <NavbarToggle />
             </div>
             <NavbarCollapse className={"order-4 md:order-2 mx-auto"}>
-                <Searchbar/>
                 <NavbarLink className={"mt-3"} href="/">Home</NavbarLink>
                 <NavbarLink className={"mt-3"} href="/games">Games</NavbarLink>
                 <NavbarLink className={"mt-3"} href="/sessions">Sessions</NavbarLink>

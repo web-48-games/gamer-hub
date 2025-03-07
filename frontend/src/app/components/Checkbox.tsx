@@ -6,6 +6,9 @@ export type CheckboxProps = {
 
 export function Checkbox(props: CheckboxProps) {
     let {labelText} = props
+    // below might be where we handle how the filtering gets triggered
+    // const [checked, setChecked] = useState(false)
+    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {}
     return(
         <>
             <div className="flex items-center mb-4">

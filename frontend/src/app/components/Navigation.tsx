@@ -1,9 +1,9 @@
 "use client"
 
 import { Button, Navbar, NavbarBrand, NavbarCollapse, NavbarLink, NavbarToggle } from "flowbite-react";
-import {Searchbar} from "@/app/Components/Searchbar";
+import {Searchbar} from "@/app/components/Searchbar";
 import React, { useRef } from 'react'
-import { AuthModalContainer } from "@/app/Components/login-signup/AuthModalContainer";
+import { AuthModalContainer } from "@/app/components/login-signup/AuthModalContainer";
 
 export function Navigation() {
     const authModalRef = useRef<any>(null)

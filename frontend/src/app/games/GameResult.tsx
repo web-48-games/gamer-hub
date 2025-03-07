@@ -1,5 +1,7 @@
+import {Button} from "flowbite-react";
+import {ActionButton} from "@/app/components/login-signup/ActionButton";
 
-export type GameData = {
+export type gameData = {
     gameName: string
     gameImageUrl: string
     gameGenre: string
@@ -9,23 +11,24 @@ export type GameData = {
     gameRanking: number
 }
 
-type GameResultProps = {
-    gameData: GameData
+type gameResultProps = {
+    gameData: gameData
 }
 
-export function GameResult(props: GameResultProps) {
+export function GameResult(props: gameResultProps) {
     let {gameData} = props
     let {gameName, gameImageUrl, gameGenre, gameReleased, gameMaxPlayers, gameDescription, gameRanking} = gameData
 
     return (
         <>
-            <div className={"flex p-4 my-4 w-full h-auto bg-green-200 rounded-lg"}>
-                <img className={"w-1/3 max-w-40"} src={gameImageUrl} alt= "depicting {gameImageUrl}"/>
-                <section className={"w-2/3 p-2 m-2"}>
+            <div className={"flex p-4 my-4 h-auto bg-green-200 rounded-lg"}>
+                <img className={"max-w-40"} src={gameImageUrl} alt= "depicting {gameImageUrl}"/>
+                <section className={"max-w-80 p-2 m-2"}>
                     <h2 className={"font-bold text-2xl mb-4"}>{gameName}</h2>
                     <p>Genre: {gameGenre}</p>
                     <p>Released on: {gameReleased}</p>
                 </section>
+                <ActionButton buttonText={"Find Sessions"}/>
             </div>
         </>
     )

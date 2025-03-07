@@ -1,12 +1,12 @@
 // import {Categories} from "@/app/games/categories";
 import {Carousel} from "@/app/games/carousel";
 import React from "react";
-import {GameResult, GameData} from "@/app/games/GameResult";
+import {GameResult, gameData} from "@/app/games/GameResult";
 import {FilterMenu} from "@/app/components/FilterMenu";
 
 
 export default function () {
-    let gameInfo: GameData = {
+    let gameInfo: gameData = {
         gameName: "Wingspan",
         gameImageUrl: "/wingspan_sample.webp",
         gameGenre: "Strategy",
@@ -39,14 +39,19 @@ export default function () {
                     }]}/>
             </section>
             <hr className="border-b border-gray-300 border-2"/>
-            <section className="container flex">
-                <FilterMenu/>
-                <div>
-                    <GameResult gameData={gameInfo}/>
-                    <GameResult gameData={gameInfo}/>
-                    <GameResult gameData={gameInfo}/>
-                    <GameResult gameData={gameInfo}/>
+            <section className="mx-auto container">
+                <div className={"flex flex-col md:flex-row"}>
+                    <div className="md:w-1/4 lg:w-1/5">
+                        <FilterMenu/>
+                    </div>
+                    <div className={"w-full md:w-3/4 lg:w-4/5"}>
+                        <GameResult gameData={gameInfo}/>
+                        <GameResult gameData={gameInfo}/>
+                        <GameResult gameData={gameInfo}/>
+                        <GameResult gameData={gameInfo}/>
+                    </div>
                 </div>
+
             </section>
         </>
     )

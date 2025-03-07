@@ -6,12 +6,9 @@ import {Categories} from "@/app/games/categories";
 
 export default function Home() {
     return (
-       <>
 
-           <PageIntro/>
-           <Categories/>
-
-       </>
+        <>
+            <PageIntro/>
+        </>
     )
 }
-

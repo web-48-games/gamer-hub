@@ -16,21 +16,27 @@ export function Navigation() {
 
 
     return (
-        <Navbar fluid rounded>
+        <Navbar fluid rounded className="bg-sandyBrown border-b-2 border-b-charcoal">
             <NavbarBrand href="https://flowbite-react.com" className={"order-1"}>
                 <img src="/favicon.ico" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
-                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">A Game Away</span>
+                <span className="self-center whitespace-nowrap text-xl font-semibold text-brownAccent dark:text-white">A Game Away</span>
             </NavbarBrand>
-            <div className="flex order-2 md:order-3 ml-4">
-                <Button onClick={handleAuthButtonClick}>Login/Sign Up</Button>
+            <div className="flex order-2 md:order-3 ml-4 ">
+                <Button onClick={handleAuthButtonClick} className="bg-mint text-charcoal hover:!text-floralWhite">Login/Sign Up</Button>
                 <NavbarToggle />
             </div>
+
             <NavbarCollapse className={"order-4 md:order-2 mx-auto"}>
-                <NavbarLink className={"mt-3"} href="/">Home</NavbarLink>
-                <NavbarLink className={"mt-3"} href="/games">Games</NavbarLink>
-                <NavbarLink className={"mt-3"} href="/sessions">Sessions</NavbarLink>
-                <NavbarLink className={"mt-3"} href="/profile">Profile Page</NavbarLink>
+
+                <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/">Home</NavbarLink>
+                <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/games">Games</NavbarLink>
+                <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/sessions">Sessions</NavbarLink>
+                <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/profile">Profile Page</NavbarLink>
+                <Searchbar/>
+
             </NavbarCollapse>
+
+
 
             <AuthModalContainer ref={authModalRef} />
         </Navbar>

@@ -56,7 +56,9 @@ export default function () {
                 <div className="md:hidden">
                     <FilterMenu />
                 </div>
-
+                <section>
+                <GameCard gameCardInfo={gameInfo}/>
+                </section>
             </section>
         </>
     )

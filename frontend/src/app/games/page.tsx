@@ -37,6 +37,9 @@ export default function () {
             </section>
             <hr className="border-b border-gray-300 border-2"/>
             <GameResult gameData={gameInfo} />
+            <GameResult gameData={gameInfo} />
+            <GameResult gameData={gameInfo} />
+            <GameResult gameData={gameInfo} />
         </>
     )
 }

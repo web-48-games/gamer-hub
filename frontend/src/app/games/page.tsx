@@ -3,7 +3,7 @@ import {Carousel} from "@/app/games/carousel";
 import React from "react";
 import {GameResult, gameData} from "@/app/games/GameResult";
 import {FilterMenu} from "@/app/components/FilterMenu";
-
+import {GameCard} from "@/app/components/GameCard";
 
 export default function () {
     let gameInfo: gameData = {
@@ -56,7 +56,9 @@ export default function () {
                 <div className="md:hidden">
                     <FilterMenu />
                 </div>
-
+                <section>
+                <GameCard gameCardInfo={gameInfo}/>
+                </section>
             </section>
         </>
     )

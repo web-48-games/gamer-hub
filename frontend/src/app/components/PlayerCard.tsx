@@ -22,21 +22,16 @@ export function PlayerCard(props: PlayerCardProps) {
                         <div className="flex flex-col items-center pb-10">
                             <img className="w-24 h-24 mb-3 rounded-full shadow-lg"
                                  src={avatarUrl} alt="Placeholder Image"/>
-                            <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{name}</h5>
-                            <span className="text-sm text-gray-500 dark:text-gray-400">Badges?</span>
+                            <h3 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{name}</h3>
+                            <span className="text-sm text-gray-500 dark:text-gray-400">Created: {createdAt}</span>
                         </div>
 
                         {/* Right side - Stats (stacked vertically) */}
                         <div className="flex flex-col ml-6 justify-center">
-                            <p className="mb-2">
-                                Played {gamesPlayed} games
-                            </p>
-                            <p className="mb-2">
-                                Liked {gamesLiked} games
-                            </p>
-                            <p>
-                                A Game Away member since: {createdAt}
-                            </p>
+                            <ul>
+                                <li className={"p-2 mb-1 list-none"}>Participated in {gamesPlayed} game sessions</li>
+                                <li className={"p-2 mb-1 list-none"}>Liked {gamesLiked} games</li>
+                            </ul>
                         </div>
                     </div>
                 </div>

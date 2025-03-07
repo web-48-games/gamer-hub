@@ -1,5 +1,5 @@
 
-import {PageIntro} from "@/app/Components/PageIntro";
+import {PageIntro} from "@/app/components/PageIntro";
 import React from "react";
 import {Categories} from "@/app/games/categories";
 

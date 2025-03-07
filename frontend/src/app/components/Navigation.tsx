@@ -17,7 +17,7 @@ export function Navigation() {
 
     return (
         <Navbar fluid rounded className="bg-sandyBrown border-b-2 border-b-charcoal">
-            <NavbarBrand href="https://flowbite-react.com" className={"order-1"}>
+            <NavbarBrand href="/" className={"order-1"}>
                 <img src="/favicon.ico" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
                 <span className="self-center whitespace-nowrap text-xl font-semibold text-brownAccent dark:text-white">A Game Away</span>
             </NavbarBrand>

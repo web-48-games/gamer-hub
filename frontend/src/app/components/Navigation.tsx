@@ -32,7 +32,6 @@ export function Navigation() {
                 <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/games">Games</NavbarLink>
                 <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/sessions">Sessions</NavbarLink>
                 <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/profile">Profile Page</NavbarLink>
-                <Searchbar/>
 
             </NavbarCollapse>
 

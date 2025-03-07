@@ -1,7 +1,9 @@
-import {Categories} from "@/app/games/categories";
+// import {Categories} from "@/app/games/categories";
 import {Carousel} from "@/app/games/carousel";
 import React from "react";
 import {GameResult, GameData} from "@/app/games/GameResult";
+import {FilterMenu} from "@/app/components/FilterMenu";
+
 
 export default function () {
     let gameInfo: GameData = {
@@ -16,9 +18,10 @@ export default function () {
     return (
         <>
             <section className="container mx-auto p-20">
-                <div className={"flex justify-center items-center"}>
-                    <Categories/>
-                </div>
+                {/*<div className={"flex justify-center items-center"}>*/}
+                {/*    <Categories />*/}
+                {/*</div>*/}
+
                 <Carousel slides={[{
                     title: "HELLO WORLD",
                     button: "CLICK ME",
@@ -36,10 +39,15 @@ export default function () {
                     }]}/>
             </section>
             <hr className="border-b border-gray-300 border-2"/>
-            <GameResult gameData={gameInfo} />
-            <GameResult gameData={gameInfo} />
-            <GameResult gameData={gameInfo} />
-            <GameResult gameData={gameInfo} />
+            <section className="container flex">
+                <FilterMenu/>
+                <div>
+                    <GameResult gameData={gameInfo}/>
+                    <GameResult gameData={gameInfo}/>
+                    <GameResult gameData={gameInfo}/>
+                    <GameResult gameData={gameInfo}/>
+                </div>
+            </section>
         </>
     )
 }

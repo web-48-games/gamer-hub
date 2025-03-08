@@ -16,6 +16,7 @@ const config: Config = {
         mint: "#8BD0AD",
         cornflower: "#a4cafe",
         blueAccent: "#f0f9ff",
+        gameListBlue: "#bcf0da",
         floralWhite: "#FBF0DA",
         charcoal: "#264653",
         burntSienna: "#EB866F"

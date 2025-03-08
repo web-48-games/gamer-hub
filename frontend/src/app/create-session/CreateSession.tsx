@@ -36,13 +36,6 @@ export function CreateSession() {
                     }}/>
 
                     <InputField inputProps={{
-                        name: "tag",
-                        type: "text",
-                        id: "tag",
-                        labelText: "Tags:"
-                    }}/>
-
-                    <InputField inputProps={{
                         name: "session-address",
                         type: "text",
                         id: "session-address",
@@ -50,17 +43,17 @@ export function CreateSession() {
                     }}/>
 
                     <InputField inputProps={{
-                        name: "session-time",
+                        name: "session-start-time",
                         type: "time",
-                        id: "session-time",
-                        labelText: "Session Time"
+                        id: "session-start-time",
+                        labelText: "Session Start Time"
                     }}/>
 
                     <InputField inputProps={{
-                        name: "session-date",
+                        name: "session-start-date",
                         type: "date",
-                        id: "session-date",
-                        labelText: "Session Date:"
+                        id: "session-start-date",
+                        labelText: "Session Start Date:"
                     }}/>
 
                     <ActionButton buttonText={"Create Session"}/>

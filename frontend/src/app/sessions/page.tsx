@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { SessionCard } from './SessionCard';
-import {Searchbar} from "@/app/Components/Searchbar";
+import {Searchbar} from "@/app/components/Searchbar";
 
 // sessions page.tsx
 const mockSessions = [

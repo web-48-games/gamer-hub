@@ -10,20 +10,20 @@ export function GameCard(props: GameCardProps) {
 
     return (
         <>
-            <div className={"bg-mint border-2 border-charcoal p-6 rounded-lg"}>
+            <div className={"m-20 md:max-w-lg bg-mint border-2 border-charcoal p-6 rounded-lg"}>
                 <div>
                     <div className="bg-gameListBlue p-4">
                         <div>
-                            {gameImageUrl}
+                            <img className={"w-full"} src={gameImageUrl} alt="Wingspan Placeholder"/>
                         </div>
-                        <h1 className={"text-[1.5rem]"}>{gameName}</h1>
-                        <p>Game Description</p>
+                        <h1 className={"text-[1.5rem] font-semibold"}>{gameName}</h1>
+                        <p className={"font-semibold"}>Game Description</p>
                         <p>{gameDescription}</p>
-                        <p>Max Players</p>
+                        <p className={"font-semibold"}>Max Players</p>
                         <p>{gameMaxPlayers}</p>
                         <p>{}</p>
-                     </div>
-                 </div>
+                    </div>
+                </div>
             </div>
         </>
     )

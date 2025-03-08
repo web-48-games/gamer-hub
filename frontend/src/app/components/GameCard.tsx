@@ -12,6 +12,8 @@ export function GameCard(props: GameCardProps) {
         <>
             <div className={"bg-mint p-6 rounded-lg"}>
                 <div>
+
+                <div>
                   <h1 className={"text-charcoal text-[1.5rem]"}>{gameName}</h1>
                     <p>{gameDescription}</p>
                 </div>
@@ -20,6 +22,7 @@ export function GameCard(props: GameCardProps) {
                     <p>{gameMaxPlayers}</p>
 
                 </div>
+            </div>
             </div>
         </>
     )

@@ -10,7 +10,7 @@ export function GameCard(props: GameCardProps) {
 
     return (
         <>
-            <div className={"m-20 md:max-w-lg bg-mint border-2 border-charcoal p-6 rounded-lg"}>
+            <div className={"m-20 md:max-w-lg bg-green-200 border-2 border-charcoal p-6 rounded-lg"}>
                 <div>
                     <div className="bg-gameListBlue p-4">
                         <div>

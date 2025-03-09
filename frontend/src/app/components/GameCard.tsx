@@ -6,12 +6,12 @@ export type GameCardProps = {
 }
 
 export function GameCard(props: GameCardProps) {
-    let {gameCardInfo:{gameName, gameImageUrl, gameGenre, gameReleased, gameMaxPlayers, gameDescription, gameRanking}} = props;
+    let {gameCardInfo:{gameName, gameImageUrl,gameMaxPlayers, gameDescription, gameRanking}} = props;
 
     return (
         <>
             <div className={"m-10 sm:m-20 md:max-w-lg bg-blue-100 border-2 border-charcoal p-6 rounded-lg"}>
-                <div className={"flex flex-col items-center sm:flex-row p-4 bg-white"}>
+                <div className={"flex flex-col flex-wrap items-center sm:flex-row p-4 bg-white"}>
                     <div>
                         <img className={"w-full"} src={gameImageUrl} alt="Wingspan Placeholder"/>
                     </div>
@@ -21,7 +21,8 @@ export function GameCard(props: GameCardProps) {
                         <p>{gameDescription}</p>
                         <p className={"font-semibold"}>Max Players</p>
                         <p>{gameMaxPlayers}</p>
-                        <p>{}</p>
+                        <p className="font-semibold">Game Ranking</p>
+                        <p>{gameRanking}</p>
                     </div>
                 </div>
             </div>

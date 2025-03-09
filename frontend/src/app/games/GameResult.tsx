@@ -1,3 +1,5 @@
+import React from "react";
+import {GameCard} from "@/app/components/GameCard";
 
 export type gameData = {
     gameName: string
@@ -19,7 +21,7 @@ export function GameResult(props: gameResultProps) {
 
     return (
         <>
-            <div className={"flex flex-col items-center sm:flex-row p-4 my-4 h-auto bg-green-200 rounded-lg"}>
+            <div className={"flex flex-col items-center sm:flex-row p-4 my-4 h-auto bg-green-200 rounded-lg group"}>
                 <img className={"w-40 h-40 object-cover p-2"} src={gameImageUrl} alt= {`depicting ${gameName}`}/>
                 <section className={"flex-grow p-4"}>
                     <h2 className={"font-bold text-2xl mb-4"}>{gameName}</h2>
@@ -31,6 +33,11 @@ export function GameResult(props: gameResultProps) {
                     <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 whitespace-nowrap">
                         Find Sessions
                     </button>
+                </div>
+
+                {/*Popup GameCard - appears on left*/}
+                <div className={"absolute top-1/2 left-full transform -translate-y-1/2 p-4 bg-gray-800 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-80 z-10"}>
+                    <GameCard gameCardInfo={gameData} />
                 </div>
             </div>
         </>

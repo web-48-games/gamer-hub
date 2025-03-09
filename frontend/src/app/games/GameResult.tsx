@@ -21,7 +21,7 @@ export function GameResult(props: gameResultProps) {
 
     return (
         <>
-            <div className={"flex flex-col items-center sm:flex-row p-4 my-4 h-auto bg-green-200 rounded-lg relative group"}>
+            <div className={"flex flex-col items-center sm:flex-row p-4 my-4 h-auto bg-green-200 rounded-lg relative group max-w-full"}>
                 <img className={"w-40 h-40 object-cover p-2"} src={gameImageUrl} alt= {`depicting ${gameName}`}/>
                 <section className={"flex-grow p-4"}>
                     <h2 className={"font-bold text-2xl mb-4"}>{gameName}</h2>

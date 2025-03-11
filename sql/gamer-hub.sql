@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS game(
                                game_year_published TIMESTAMPTZ
 );
 
+
 CREATE TABLE IF NOT EXISTS favorite(
         favorite_game_id UUID NOT NULL,
         favorite_profile_id UUID NOT NULL,

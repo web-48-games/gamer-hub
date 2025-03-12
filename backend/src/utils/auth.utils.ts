@@ -1,5 +1,6 @@
 import * as argon2 from 'argon2'
 import { sign } from 'jsonwebtoken'
+import crypto from 'crypto'
 
 
 export function generateJwt (payload: object, signature: string): string {

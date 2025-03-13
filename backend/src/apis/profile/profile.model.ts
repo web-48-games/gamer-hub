@@ -21,4 +21,13 @@ export async function updateProfile(profile: PrivateProfile): Promise<string> {
     return 'Profile updated successfully'
 }
 
-export async function selectPrivateProfileByProfileEmail()
+export async function selectPrivateProfileByProfileEmail(profileEmail: string): Promise<PrivateProfile | null> {
+    // create a sql statement that selects the profile by profileEmail and execute the statement
+    const rowList = await sql`SELECT profile_id, profile_about_me, profile_activation_token, profile_avatar_url, profile_creation_date, profile_email, profile_hash, profile_name FROM profile WHERE profile_email=${profileEmail}`
+
+    // make sure result is an array made of 1 profile or null
+    const result = PrivateProfileSchema.array().max(1).parse(rowList)
+
+    // return profile or null for no matching profile found
+    return result?.length === 1 ? result[0] : null
+}

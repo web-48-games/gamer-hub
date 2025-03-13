@@ -23,17 +23,16 @@ export async function signUpController(request: Request, response: Response) {
         const profileActivationToken = setActivationToken()
         const profileAvatarUrl = 'http://placekitten.com/300/300'
         const basepath = `${request.protocol}://${request.hostname}:8080${request.originalUrl}activation/${profileActivationToken}`
-        const html = `<h1>welcome to gamefinder<h1>
-        <p>In order to start finding games please verify your account<a href="${basepath}">${basepath}<a> 
-        `
+        const html = `<h1>Welcome to A Game Away</h1>
+        <p>In order to start finding games please verify your account<a href="${basepath}">${basepath}</a></p>>`
         const mailgunMessage = {
-            from: `Mailgun Sandbox <postmaester@${process.env.MAILGUN_DOMAIN as string}>`,
+            from: `Mailgun Sandbox <postmaster@${process.env.MAILGUN_DOMAIN as string}>`,
             to: profileEmail,
-            subject: `Welcome to gamefinder`,
+            subject: `Welcome to A Game Away`,
             html
         }
         const profile : PrivateProfile = {
-                profileId: profileId,
+            profileId: profileId,
             profileAboutMe: null,
             profileActivationToken,
             profileEmail,

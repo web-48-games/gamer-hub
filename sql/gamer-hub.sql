@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS profile(
                                   profile_activation_token CHAR(32),
                                   profile_avatar_url VARCHAR(128),
                                   profile_creation_date TIMESTAMPTZ,
-                                  profile_email VARCHAR(128),
+                                  profile_email VARCHAR(128) UNIQUE,
                                   profile_hash CHAR(97),
                                   profile_name VARCHAR(32)
 );

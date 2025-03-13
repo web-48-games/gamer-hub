@@ -20,3 +20,5 @@ export async function updateProfile(profile: PrivateProfile): Promise<string> {
     await sql`UPDATE profile SET profile_about_me=${profileAboutMe}, profile_activation_token=${profileActivationToken}, profile_avatar_url=${profileAvatarUrl}, profile_creation_date=${profileCreationDate}, profile_email=${profileEmail}, profile_hash=${profileHash}, profile_name=${profileName} WHERE profile_id = ${profileId}`
     return 'Profile updated successfully'
 }
+
+export async function selectPrivateProfileByProfileEmail()

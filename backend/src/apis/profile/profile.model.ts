@@ -1,8 +1,29 @@
-import {PrivateProfileSchema} from "./profile.validator";
+import {PrivateProfileSchema, PublicProfileSchema} from "./profile.validator";
 import {z} from 'zod'
 import {sql} from "../../utils/database.utils";
 
+/**
+ * The shape of the private profile that is only used by express. it must never be returned to the controller.
+ * @property profileId {string} the primary key
+ * @property profileAboutMe {string} the profile's about me section
+ * @property profileActivationToken {string|null} the profile's activation token
+ * @property profileCreationDate {date|null} time profile was created
+ * @property profileAvatarUrl {string|null} the profile's image url
+ * @property profileEmail {string} the profile's email
+ * @property profileHash {string} the profile's hash
+ * @property profileName {string} the profile's name
+ **/
 export type PrivateProfile = z.infer<typeof PrivateProfileSchema>
+
+/**
+ * The shape of the public profile that can shared with Next.js
+ * @property profileId {string} the primary key
+ * @property profileAboutMe {string} the profile's about me section
+ * @property profileCreationDate {date|null} time profile was created
+ * @property profileAvatarUrl {string|null} the profile's image url
+ * @property profileName {string} the profile's name
+ **/
+export type PublicProfile = z.infer<typeof PublicProfileSchema>
 
 export async function insertProfile(profile: PrivateProfile): Promise<string> {
     const {profileId, profileName, profileEmail, profileHash, profileAboutMe, profileAvatarUrl, profileCreationDate, profileActivationToken} = profile

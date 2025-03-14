@@ -3,6 +3,7 @@ import {Request, Response} from 'express'
 import {z} from "zod";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {MessageSchema} from "./message.validator";
+import {insertMessage} from "./message.model";
 
 /**
  * @param request object containing message

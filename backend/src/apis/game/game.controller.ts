@@ -1,7 +1,8 @@
 import {GameSchema} from "./game.validator";
 import {Request, Response} from "express";
 import {zodErrorResponse} from "../../utils/response.utils";
-import {selectGameByGameId} from "./game.model";
+import {selectGameByGameId, selectGamesByGenre} from "./game.model";
+import {z} from "zod";
 
 
 export async function getGameByGameIdController(request: Request, response: Response) {
@@ -26,21 +27,20 @@ export async function getGameByGameIdController(request: Request, response: Resp
     }
 }
 
-export async function getGamesController(request: Request, response: Response): Promise<Response> {
+export async function getGamesByGenre(request: Request, response: Response): Promise<Response> {
     try {
-        // change schema to a 'GameFilterSchema' after defining it in validator
-        const validationResult = GameSchema.safeParse(request.body)
+        const validationResult = z.string({message: 'please provide valid gameGenre'}).safeParse(request.params.gameGenre)
 
         if (!validationResult.success) {
             return zodErrorResponse(response, validationResult.error)
         }
 
         // define based on what we decide how the filtering will work
-        const {} = validationResult.data
+        const gameGenres = validationResult.data
 
-        const games = await selectGames()
+        const gamesData = await selectGamesByGenre(gameGenres)
 
-        return response.json({ status: 200, message: null, data: games })
+        return response.json({ status: 200, message: null, data: gamesData })
 
     } catch(error) {
         console.error(error)
@@ -48,4 +48,31 @@ export async function getGamesController(request: Request, response: Response): 
     }
 }
 
-export async function getFeaturedGames() {}
+// com back to finish
+export async function getFeaturedGamesController(request: Request, response: Response): Promise<Response> {
+    try {
+        // just an arbitrary value, maybe comeback and change to something else
+        let cap:number = 5
+        const featuredGames = await selectFeaturedGames(cap)
+        return response.json({
+            status: 200,
+            data: featuredGames,
+            message: 'Featured Games found successfully'
+        })
+    } catch(error) {
+        console.error(error)
+        return response.json({
+            status: 500,
+            data: null,
+            message: error.message
+        })
+    }
+}
+
+// export async function incrementGameLikes() {
+//     try {
+//
+//     } catch(error) {
+//         console.error(error)
+//     }
+// }

@@ -1,7 +1,13 @@
 import {GameSchema} from "./game.validator";
 import {Request, Response} from "express";
 import {zodErrorResponse} from "../../utils/response.utils";
-import {selectGameByGameId, selectGamesByGenre} from "./game.model";
+import {
+    selectFeaturedGames,
+    selectGameByGameId,
+    selectGameByGameName,
+    selectGamesByGameYearPublished,
+    selectGamesByGenre
+} from "./game.model";
 import {z} from "zod";
 
 
@@ -48,7 +54,7 @@ export async function getGamesByGenre(request: Request, response: Response): Pro
     }
 }
 
-// com back to finish
+// come back to finish
 export async function getFeaturedGamesController(request: Request, response: Response): Promise<Response> {
     try {
         // just an arbitrary value, maybe comeback and change to something else
@@ -69,10 +75,49 @@ export async function getFeaturedGamesController(request: Request, response: Res
     }
 }
 
-// export async function incrementGameLikes() {
-//     try {
-//
-//     } catch(error) {
-//         console.error(error)
-//     }
-// }
+
+export async function getGameByGameNameController(request: Request, response: Response): Promise<Response> {
+    try {
+        // validate request with game schema
+        const validationResult = GameSchema.pick({gameName: true}).safeParse(request.body)
+
+        // if validation is not successful, tell the client
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        const {gameName} = validationResult.data
+
+        const game = await selectGameByGameName(gameName)
+
+        return response.json({ status: 200, message: null, data: game })
+
+    } catch(error) {
+        console.error(error)
+        return response.json({
+            status: 500,
+            data: null,
+            message: error.message
+        })
+    }
+}
+
+export async function getGamesByYearPublished(request: Request, response: Response): Promise<Response> {
+    try {
+        const validationResult = z.coerce.number({message: 'please provide valid gameYearPublished'}).safeParse(request.params.gameYearPublished)
+
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+        // define based on what we decide how the filtering will work
+        const gameYearPublished = validationResult.data
+
+        const gamesData = await selectGamesByGameYearPublished(gameYearPublished)
+
+        return response.json({ status: 200, message: null, data: gamesData })
+
+    } catch(error) {
+        console.error(error)
+        return (response.json({ status: 500, data: null, message: error.message }))
+    }
+}

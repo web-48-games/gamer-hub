@@ -22,3 +22,6 @@ const router = Router()
 
 //define endpoint for posting a message
 router.route('/').get(postMessageController)
+
+//Authenticated Routes
+export const messageRoute = {basePath, router}

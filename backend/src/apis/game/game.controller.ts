@@ -16,7 +16,7 @@ export async function postGamesController(request: Request, response: Response):
     try {
         const validationResult = GameSchema.safeParse(request.body)
 
-        if ( !validationResult.success ) {
+        if (!validationResult.success ) {
             return zodErrorResponse(response, validationResult.error)
         }
 

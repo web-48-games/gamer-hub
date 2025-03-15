@@ -11,7 +11,7 @@
 //import statement pulling Router "part" from express
 import {Router} from 'express'
 //import for message functions
-import {post} from
+import {postMessageController} from "./message.controller";
 
 
 //Starting path, can be modified to access different controllers or specific instances
@@ -21,5 +21,4 @@ const basePath = '/apis/like'
 const router = Router()
 
 //define endpoint for posting a message
-router.route('/message/:message_id')
-    .
+router.route('/').get(postMessageController)

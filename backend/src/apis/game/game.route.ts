@@ -4,15 +4,16 @@ import {
     getGameByGameIdController,
     getGameByGameNameController,
     getGamesByGenre,
-    getGamesByYearPublished
+    getGamesByYearPublished, postGamesController
 } from "./game.controller";
 
 
-const basePath = 'apis/game'
+const basePath = 'apis/game' as const
 
 const router = Router()
 
 // come back to finish this off later
+router.route('/').post(postGamesController)
 router.route('/:gameId').get(getGameByGameIdController)
 router.route('/:gameName').get(getGameByGameNameController)
 router.route('/games/:genre').get(getGamesByGenre)

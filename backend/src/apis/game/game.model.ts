@@ -5,6 +5,14 @@ import {sql} from "../../utils/database.utils";
 
 export type Game = z.infer<typeof GameSchema>
 
+// might not be in practical use b/c game will be external data but useful for testing
+export async function insertGame(game : Game): Promise<string> {
+    const {gameId, gameDescription, gameGenre, gameImageUrl, gameMaxPlayers, gameName, gameYearPublished} = game
+
+    await sql`INSERT INTO game (game_id, game_description, game_genre, game_image_url, game_max_players, game_name, game_year_published) VALUES(${gameId}, ${gameDescription}, ${gameGenre}, ${gameImageUrl}, ${gameMaxPlayers}, ${gameName}, ${gameYearPublished})`
+
+    return 'Game successfully posted'
+}
 
 export async function selectGameByGameId(gameId: string): Promise<Game | null> {
     const rowList = <Game[]>await sql`SELECT * FROM game WHERE game_id=${gameId}`

@@ -2,6 +2,7 @@ import {GameSchema} from "./game.validator";
 import {Request, Response} from "express";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {
+    Game, insertGame,
     selectFeaturedGames,
     selectGameByGameId,
     selectGameByGameName,
@@ -10,6 +11,44 @@ import {
 } from "./game.model";
 import {z} from "zod";
 
+// might not be in practical use b/c game will be external data but useful for testing
+export async function postGamesController(request: Request, response: Response): Promise<Response> {
+    try {
+        const validationResult = GameSchema.safeParse(request.body)
+
+        if ( !validationResult.success ) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        const {gameId, gameDescription, gameGenre, gameImageUrl, gameMaxPlayers, gameName, gameYearPublished} = validationResult.data
+
+        const game: Game =  {
+            gameId,
+            gameDescription,
+            gameGenre,
+            gameImageUrl,
+            gameMaxPlayers,
+            gameName,
+            gameYearPublished,
+        }
+
+        const result = await insertGame(game)
+
+        return response.json({
+            status: 200,
+            message: result,
+            data: null
+        })
+
+    } catch(error) {
+        console.error(error)
+        return response.json({
+            status: 500,
+            data: null,
+            message: error.message
+        })
+    }
+}
 
 export async function getGameByGameIdController(request: Request, response: Response) {
     try {

@@ -12,7 +12,7 @@ import {insertMessage} from "./message.model";
 export async function postMessageController(request: Request, response: Response): Promise<Response> {
     try {
 
-        //set up to validate what comes through from the request paramter
+        //set up to validate what comes through from the request parameter
         const validationResult = MessageSchema.safeParse(request.params) //.params might be .body
 
         //if validation fails, return a response to the client; error on the clients end

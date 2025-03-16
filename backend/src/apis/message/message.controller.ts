@@ -40,3 +40,14 @@ export async function postMessageController(request: Request, response: Response
         return response.json({status: 500, message: error.message, data: []})
     }
 }
+
+//function for getting messages
+export async function getMessageController (request: Request, response: Response): Promise<string> {
+    try {
+
+
+
+    } catch(error) {
+        console.error(error)
+    }
+ }

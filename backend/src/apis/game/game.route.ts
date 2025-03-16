@@ -9,7 +9,7 @@ import {
 } from "./game.controller";
 
 
-const basePath = '/apis/game' as const
+const basePath = '/apis/games' as const
 
 const router = Router()
 
@@ -17,9 +17,9 @@ const router = Router()
 router.route('/').post(postGamesController)
 router.route('/gameId/:gameId').get(getGameByGameIdController)
 router.route('/gameName/:gameName').get(getGameByGameNameController)
-router.route('/games/genre/:genre').get(getGamesByGenre)
-router.route('/games/year-published/:gameYearPublished').get(getGamesByYearPublished)
-router.route('/games/featured').get(getFeaturedGamesController)
+router.route('/genre/:gameGenre').get(getGamesByGenre)
+router.route('/year-published/:gameYearPublished').get(getGamesByYearPublished)
+router.route('/featured').get(getFeaturedGamesController)
 
 // Authenticated routes
 export const gameRoute = { basePath, router }

@@ -8,8 +8,5 @@ export const GameSchema = z.object({
     gameImageUrl: z.string().max(128, {message: 'please provide valid gameImageUrl'}),
     gameMaxPlayers: z.number({message: 'please provide a valid number of gameMaxPlayers'}),
     gameName: z.string().max(32, {message: 'please provide valid gameName'}),
-    gameYearPublished: z.coerce.date()
-        .transform((date)  => date.getFullYear())
-        .refine(year => year >= -3500 && year <= 2025,
-            {message: 'please provide valid gameYearPublished'})
+    gameYearPublished: z.coerce.date({message: 'please provide valid gameYear Published'})
 })

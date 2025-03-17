@@ -118,7 +118,7 @@ export async function getFeaturedGamesController(request: Request, response: Res
 export async function getGameByGameNameController(request: Request, response: Response): Promise<Response> {
     try {
         // validate request with game schema
-        const validationResult = GameSchema.pick({gameName: true}).safeParse(request.params.gameName)
+        const validationResult = GameSchema.pick({gameName: true}).safeParse(request.params)
 
         // if validation is not successful, tell the client
         if (!validationResult.success) {
@@ -143,19 +143,31 @@ export async function getGameByGameNameController(request: Request, response: Re
 
 export async function getGamesByYearPublished(request: Request, response: Response): Promise<Response> {
     try {
-        const validationResult = GameSchema.safeParse(request.params.gameYearPublished)
-        console.log(validationResult)
+        // gives safeparse an object instead of the string that is gameYearPublished
+        const yearParam = request.params.gameYearPublished
+        const validateThisData = { gameYearPublished: yearParam }
+        const validationResult = GameSchema.pick({gameYearPublished: true}).safeParse(validateThisData)
 
         if (!validationResult.success) {
             return zodErrorResponse(response, validationResult.error)
         }
-        // define based on what we decide how the filtering will work
-        const {gameYearPublished} = validationResult.data
-        console.log(gameYearPublished)
+        // extract validated Date then year for further validation below
+        const date = validationResult.data.gameYearPublished
+        const year = date.getFullYear()
 
-        const gamesData = await selectGamesByGameYearPublished(gameYearPublished)
+        // year must be between oldest and newest games on boardgamegeek
+        if (year < -3500 || year > 2025) {
+            return response.json({
+                status: 400,
+                data: null,
+                message: "Year must be between -3500 and 2025"
+            });
+        }
 
-        return response.json({ status: 200, message: null, data: gamesData })
+        // year is good to use for our model method
+        const gamesData = await selectGamesByGameYearPublished(year)
+
+        return response.json({ status: 200, message: null, data: gamesData})
 
     } catch(error) {
         console.error(error)

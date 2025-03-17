@@ -46,8 +46,8 @@ export async function selectGameByGameName(gameName: string): Promise<Game | nul
     return result.length === 1 ? result[0] : null
 }
 
-export async function selectGamesByGameYearPublished(gameYearPublished: number): Promise<Game[]> {
-    const rowList = <Game[]>await sql`SELECT game_id, game_description, game_genre, game_image_url, game_max_players, game_name, game_year_published FROM game WHERE game_year_published=${gameYearPublished}`
+export async function selectGamesByGameYearPublished(year: number): Promise<Game[]> {
+    const rowList = <Game[]>await sql`SELECT game_id, game_description, game_genre, game_image_url, game_max_players, game_name, game_year_published FROM game WHERE EXTRACT(YEAR FROM game_year_published)=${year}`
 
     return GameSchema.array().parse(rowList)
 }

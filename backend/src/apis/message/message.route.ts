@@ -12,16 +12,19 @@
 import {Router} from 'express'
 //import for message functions
 import {postMessageController} from "./message.controller";
+import {getMessageController} from "./message.controller";
 
 
-//Starting path, can be modified to access different controllers or specific instances
-const basePath = '/apis/message'
 
 //Instance of a Router
 const router = Router()
 
 //define endpoint for posting a message
 router.route('/').post(postMessageController)
+
+
+//Starting path, can be modified to access different controllers or specific instances
+const basePath = '/apis/message'
 
 //Authenticated Routes
 export const messageRoute = {basePath, router}

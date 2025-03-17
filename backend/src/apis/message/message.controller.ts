@@ -13,7 +13,7 @@ export async function postMessageController(request: Request, response: Response
     try {
 
         //set up to validate what comes through from the request parameter
-        const validationResult = MessageSchema.safeParse(request.params) //.params might be .body
+        const validationResult = MessageSchema.safeParse(request.body) //.params might be .body
 
         //if validation fails, return a response to the client; error on the clients end
         //functions as a success check before continuing rest of message process
@@ -25,10 +25,10 @@ export async function postMessageController(request: Request, response: Response
         const {messageId, messageProfileId, messageMeetupId, messageContent, messageTimestamp} = validationResult.data
 
         //declared message variable using MessageSchema properties
-        const message = {messageId, messageProfileId, messageMeetupId, messageContent, messageTimestamp}
+        const newMessage = {messageId, messageProfileId, messageMeetupId, messageContent, messageTimestamp}
 
         //awaiting results of insertMessage, refer to message.model.ts
-        const messageUpload= await insertMessage(message)
+        const messageUpload= await insertMessage(newMessage)
 
         //success message when testing on insomnia; last thing to happen on try block
         return response.json({status: 200, message: messageUpload, data: null})
@@ -46,6 +46,16 @@ export async function getMessageController (request: Request, response: Response
     try {
 
     const validationResult = MessageSchema.safeParse(request.params)
+
+    if (!validationResult.success) {
+        return zodErrorResponse(response, validationResult.error)
+    }
+
+    const {messageId, messageProfileId, messageMeetupId, messageContent} = validationResult.data
+
+    const message:
+
+    const messageProfileId
 
     } catch(error) {
         console.error(error)

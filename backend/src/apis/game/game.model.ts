@@ -29,12 +29,20 @@ export async function selectGamesByGenre(gameGenre: string): Promise<Game[]> {
 }
 
 // come back for carousel selection
-export async function selectFeaturedGames(cap: number): Promise<(Game & { favoriteCount: number})[]> {
-    return <Game[]>await sql`SELECT game_id, game_description, game_genre, game_image_url, game_max_players, game_name, game_year_published,
-                                     (SELECT COUNT(*) FROM favorite WHERE favorite_game_id = game_id) as favoriteCount
-                                     FROM game
-                                     ORDER BY "favoriteCount" DESC, game_name ASC
-                                     LIMIT ${cap}`
+export async function selectFeaturedGames(cap: number): Promise<Game[]> {
+    return <Game[]>await sql`
+        SELECT 
+            game_id, 
+            game_description, 
+            game_genre, 
+            game_image_url, 
+            game_max_players, 
+            game_name, 
+            game_year_published,
+            (SELECT COUNT(*) FROM favorite WHERE favorite_game_id = game_id) as favorite_count
+        FROM game
+        ORDER BY favorite_count DESC, game_name ASC
+        LIMIT ${cap}`
 }
 
 

@@ -18,7 +18,7 @@ router.route('/').post(postGamesController)
 router.route('/gameId/:gameId').get(getGameByGameIdController)
 router.route('/gameName/:gameName').get(getGameByGameNameController)
 router.route('/genre/:gameGenre').get(getGamesByGenre)
-router.route('/year-published/:gameYearPublished').get(getGamesByYearPublished)
+router.route('/year/:gameYearPublished').get(getGamesByYearPublished)
 router.route('/featured').get(getFeaturedGamesController)
 
 // Authenticated routes

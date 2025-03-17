@@ -53,7 +53,7 @@ export async function postGamesController(request: Request, response: Response):
 export async function getGameByGameIdController(request: Request, response: Response) {
     try {
         // validate request with game schema
-        const validationResult = GameSchema.pick({gameId: true}).safeParse(request.body)
+        const validationResult = GameSchema.pick({gameId: true}).safeParse(request.params)
 
         // if validation is not successful, tell the client
         if (!validationResult.success) {
@@ -118,7 +118,7 @@ export async function getFeaturedGamesController(request: Request, response: Res
 export async function getGameByGameNameController(request: Request, response: Response): Promise<Response> {
     try {
         // validate request with game schema
-        const validationResult = GameSchema.pick({gameName: true}).safeParse(request.body)
+        const validationResult = GameSchema.pick({gameName: true}).safeParse(request.params.gameName)
 
         // if validation is not successful, tell the client
         if (!validationResult.success) {
@@ -143,13 +143,15 @@ export async function getGameByGameNameController(request: Request, response: Re
 
 export async function getGamesByYearPublished(request: Request, response: Response): Promise<Response> {
     try {
-        const validationResult = z.coerce.number({message: 'please provide valid gameYearPublished'}).safeParse(request.params.gameYearPublished)
+        const validationResult = GameSchema.safeParse(request.params.gameYearPublished)
+        console.log(validationResult)
 
         if (!validationResult.success) {
             return zodErrorResponse(response, validationResult.error)
         }
         // define based on what we decide how the filtering will work
-        const gameYearPublished = validationResult.data
+        const {gameYearPublished} = validationResult.data
+        console.log(gameYearPublished)
 
         const gamesData = await selectGamesByGameYearPublished(gameYearPublished)
 

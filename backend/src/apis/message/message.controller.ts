@@ -3,7 +3,7 @@ import {Request, Response} from 'express'
 import {z} from "zod";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {MessageSchema} from "./message.validator";
-import {getMessages, insertMessage} from "./message.model";
+import {deleteMessage, getMessages, insertMessage} from "./message.model";
 import {Status} from "../../utils/interfaces/Status";
 
 /**
@@ -65,3 +65,36 @@ export async function getMessageController (request: Request, response: Response
         })
     }
  }
+
+ //function to delete a message by messageId with host permissions
+export async function deleteMessageController (request: Request, response: Response): Promise<Response<Status>> {
+    try {
+
+        //validate incoming request with message uuid schema
+        const validationResult = z.string().uuid({message: 'Please provide a valid messageId or null'}).safeParse(request.params.threadId)
+
+        //if validation fails, return response to client
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        //need profile Id or just message Id to delete?
+
+        //get message id from request parameters
+        const messageId = validationResult.data
+
+        //need to get message my messageId (write function for this in model?)
+        const message = await getMessages(messageId)
+
+        //need way to determine if user deleting is host, otherwise, message delete fails?
+
+        //delete message from database by message
+        const result = await deleteMessage(messageId)
+
+        return response.json({status: 200, message: result, data: null})
+
+
+    } catch (error) {
+        return response.json({status: 500, message: error.message, data: []})
+    }
+}

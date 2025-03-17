@@ -13,3 +13,19 @@ export async function insertMeetup(meetup: Meetup): Promise<string> {
 
     return 'meetup successfully posted'
 }
+export async function selectMeetupByMeetupId(meetupId: string): Promise<Meetup | null> {
+    const rowList = <Meetup[]> await sql`SELECT meetup_id, meetup_game_id, meetup_host_profile_id, meetup_address, meetup_created_at,meetup_description, meetup_duration, meetup_lat, meetup_long,meetup_start_time FROM meetup WHERE meetup_id = ${meetupId}`
+
+    const result = MeetUpSchema.array().max(1).parse(rowList)
+
+    return result.length === 0 ? null : result[0]
+
+}
+
+export async function deleteMeetupByMeetupId(meetupId: string): Promise<string> {
+    await sql`DELETE
+              FROM meetup
+              WHERE meetup_id = ${meetupId}`
+
+    return 'Meetup successfully deleted'
+}

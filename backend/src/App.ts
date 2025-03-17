@@ -10,6 +10,7 @@ import {signInRoute} from "./apis/sign-in/sign-in.route";
 import {gameRoute} from "./apis/game/game.route";
 import {messageRoute} from "./apis/message/message.route";
 import {meetUpRoute} from "./apis/meet-up/meet-up.route";
+import {profileRoute} from "./apis/profile/profile.route";
 
 
 // The following class creates the app and instantiates the server
@@ -53,6 +54,7 @@ export class App {
         this.app.use(gameRoute.basePath, gameRoute.router)
         this.app.use(messageRoute.basePath, messageRoute.router)
         this.app.use(meetUpRoute.basePath, meetUpRoute.router)
+        this.app.use(profileRoute.basePath, profileRoute.router)
     }
 
     // starts the server and tells the terminal to post a message that the server is running and on what port

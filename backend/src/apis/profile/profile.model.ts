@@ -1,8 +1,9 @@
-import {PrivateProfileSchema} from "./profile.validator";
+import {PrivateProfileSchema, PublicProfileSchema} from "./profile.validator";
 import {z} from 'zod'
 import {sql} from "../../utils/database.utils";
 
 export type PrivateProfile = z.infer<typeof PrivateProfileSchema>
+export type PublicProfile = z.infer<typeof PublicProfileSchema>
 
 export async function insertProfile(profile: PrivateProfile): Promise<string> {
     const {profileId, profileName, profileEmail, profileHash, profileAboutMe, profileAvatarUrl, profileCreationDate, profileActivationToken} = profile
@@ -29,5 +30,12 @@ export async function selectPrivateProfileByProfileEmail(profileEmail: string): 
     const result = PrivateProfileSchema.array().max(1).parse(rowList)
 
     // return profile or null for no matching profile found
+    return result?.length === 1 ? result[0] : null
+}
+
+export async function selectPublicProfileByProfileName(profileName: string): Promise<PublicProfile | null> {
+    const rowList = await sql`SELECT profile_id, profile_about_me, profile_activation_token, profile_avatar_url, profile_creation_date, profile_email, profile_hash, profile_name FROM profile WHERE profile_name=${profileName}`
+
+    const result = PublicProfileSchema.array().max(1).parse(rowList)
     return result?.length === 1 ? result[0] : null
 }

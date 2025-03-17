@@ -1,7 +1,7 @@
 import {PublicProfileSchema} from "./profile.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {Request, Response} from "express";
-import {selectPublicProfileByProfileId, selectPublicProfileByProfileName} from "./profile.model";
+import {PrivateProfile, selectPublicProfileByProfileId, selectPublicProfileByProfileName} from "./profile.model";
 
 
 export async function getPublicProfileByProfileNameController(request: Request, response: Response): Promise<Response> {
@@ -27,7 +27,7 @@ export async function getPublicProfileByProfileNameController(request: Request, 
     } catch (error: unknown) {
         console.error(error)
         // if an error occurs, return a preformatted response to the client
-        return response.json({status: 500, message: "internal server error", data: null})
+        return response.json({status: 500, message: error.message, data: null})
     }
 }
 
@@ -45,6 +45,58 @@ export async function getPublicProfileByProfileIdController(request: Request, re
 
     } catch(error) {
         console.error(error)
-        return response.json({status: 500, message: "internal server error", data: null})
+        return response.json({status: 500, message: error.message, data: null})
+    }
+}
+
+export async function putProfileController(request: Request, response: Response): Promise<Response> {
+    try {
+        const validationResult = PublicProfileSchema.safeParse(request.body)
+
+        if(!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        // validate profileId from request params
+        const validationResultParams = PublicProfileSchema.pick({profileId: true}).safeParse(request.params)
+
+        if (!validationResultParams.success) {
+            return zodErrorResponse(response, validationResultParams.error)
+        }
+
+        // get profileId of this session
+        const profileFromSession = request.session?.profile
+        const profileIdFromSession = profileFromSession?.profileId
+
+        const {profileId} = validationResultParams.data
+
+        if (profileIdFromSession !== profileId) {
+            return response.json({status: 400, message: "you cannot update a profile that is not yours", data: null})
+        }
+
+        // grab other profile data off the initial validated result
+        const {profileAboutMe, profileAvatarUrl, profileCreationDate, profileName} = validationResult.data
+
+        // grab the whole profile by id
+        const profile: PrivateProfile|null = await selectPrivateProfileByProfileId(profileId)
+
+        if(!profile) {
+            return response.json({status: 400, message: "profile does not exist", data: null})
+        }
+
+        //update the profile with new data
+        profile.profileAboutMe = profileAboutMe
+        profile.profileAvatarUrl = profileAvatarUrl
+        profile.profileCreationDate = profileCreationDate
+        profile.profileName = profileName
+
+        //update profile with new data above into the database
+        await updateProfile(profile)
+
+        return response.json({status: 200, message: "profile successfully updated", data: null})
+
+    } catch(error) {
+        console.error(error)
+        return response.json({status: 500, message: error.message, data: null})
     }
 }

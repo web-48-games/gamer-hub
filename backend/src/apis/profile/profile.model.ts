@@ -39,3 +39,10 @@ export async function selectPublicProfileByProfileName(profileName: string): Pro
     const result = PublicProfileSchema.array().max(1).parse(rowList)
     return result?.length === 1 ? result[0] : null
 }
+
+export async function selectPublicProfileByProfileId(profileId: string): Promise<PublicProfile | null> {
+    const rowList = await sql`SELECT profile_id, profile_about_me, profile_activation_token, profile_avatar_url, profile_creation_date, profile_email, profile_hash, profile_name FROM profile WHERE profile_id=${profileId}`
+
+    const result = PublicProfileSchema.array().max(1).parse(rowList)
+    return result?.length === 1 ? result[0] : null
+}

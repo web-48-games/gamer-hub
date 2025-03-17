@@ -1,7 +1,7 @@
 import {PublicProfileSchema} from "./profile.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {Request, Response} from "express";
-import {selectPublicProfileByProfileName} from "./profile.model";
+import {selectPublicProfileByProfileId, selectPublicProfileByProfileName} from "./profile.model";
 
 
 export async function getPublicProfileByProfileNameController(request: Request, response: Response): Promise<Response> {
@@ -27,6 +27,24 @@ export async function getPublicProfileByProfileNameController(request: Request, 
     } catch (error: unknown) {
         console.error(error)
         // if an error occurs, return a preformatted response to the client
+        return response.json({status: 500, message: "internal server error", data: null})
+    }
+}
+
+export async function getPublicProfileByProfileIdController(request: Request, response: Response): Promise<Response> {
+    try {
+        const validationResult = PublicProfileSchema.pick({profileId: true}).safeParse(request.params)
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+        const {profileId} = validationResult.data
+
+        const data = await selectPublicProfileByProfileId(profileId)
+
+        return response.json({status: 200, message: null, data})
+
+    } catch(error) {
+        console.error(error)
         return response.json({status: 500, message: "internal server error", data: null})
     }
 }

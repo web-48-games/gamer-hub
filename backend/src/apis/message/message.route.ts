@@ -20,7 +20,8 @@ import {getMessageController} from "./message.controller";
 const router = Router()
 
 //define endpoint for posting a message
-router.route('/').post(postMessageController)
+router.route('/')
+    .post(postMessageController)
 
 
 //Starting path, can be modified to access different controllers or specific instances

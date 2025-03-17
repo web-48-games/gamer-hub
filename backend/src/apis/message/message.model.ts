@@ -11,3 +11,11 @@ export async function insertMessage(message: Message): Promise<string> {
 
     return 'Message successfully posted'
 }
+
+//Function to get all messages from message table and return to user in response
+export async function getMessages():Promise<Message[]> {
+    const rowList = <Message[]>await sql`SELECT ( message_id, message_profile_id, message_meetup_id, message_content, message_timestamp ) FROM message ORDER BY message_timestamp`
+
+    //parse messages from database into an array of Message objects
+    return MessageSchema.array().parse(rowList)
+}

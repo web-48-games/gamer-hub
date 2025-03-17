@@ -3,7 +3,8 @@ import {Request, Response} from 'express'
 import {z} from "zod";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {MessageSchema} from "./message.validator";
-import {insertMessage} from "./message.model";
+import {getMessages, insertMessage} from "./message.model";
+import {Status} from "../../utils/interfaces/Status";
 
 /**
  * @param request object containing message
@@ -41,7 +42,7 @@ export async function postMessageController(request: Request, response: Response
     }
 }
 
-//function for getting messages
+//function for getting preexisting messages from tables to load in browser
 export async function getMessageController (request: Request, response: Response): Promise<string> {
     try {
 
@@ -51,13 +52,16 @@ export async function getMessageController (request: Request, response: Response
         return zodErrorResponse(response, validationResult.error)
     }
 
-    const {messageId, messageProfileId, messageMeetupId, messageContent} = validationResult.data
+    const data = await getMessages()
 
-    const message:
-
-    const messageProfileId
+    const status: Status = {status: 200, message: null, data}
 
     } catch(error) {
         console.error(error)
+        return response.json({
+            status: 500,
+            message: 'Error getting messages, please try again',
+            data: []
+        })
     }
  }

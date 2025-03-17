@@ -15,13 +15,13 @@ import {postMessageController} from "./message.controller";
 
 
 //Starting path, can be modified to access different controllers or specific instances
-const basePath = '/apis/like'
+const basePath = '/apis/message'
 
 //Instance of a Router
 const router = Router()
 
 //define endpoint for posting a message
-router.route('/').get(postMessageController)
+router.route('/').post(postMessageController)
 
 //Authenticated Routes
 export const messageRoute = {basePath, router}

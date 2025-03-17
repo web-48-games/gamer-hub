@@ -45,7 +45,7 @@ export async function postMessageController(request: Request, response: Response
 export async function getMessageController (request: Request, response: Response): Promise<string> {
     try {
 
-
+    const validationResult = MessageSchema.safeParse(request.params)
 
     } catch(error) {
         console.error(error)

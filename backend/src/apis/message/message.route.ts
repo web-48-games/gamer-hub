@@ -11,8 +11,12 @@
 //import statement pulling Router "part" from express
 import {Router} from 'express'
 //import for message functions
-import {postMessageController} from "./message.controller";
-import {getMessageController} from "./message.controller";
+import {
+    postMessageController,
+    deleteMessageByMessageIdController
+} from "./message.controller";
+import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
+
 
 //Starting path, can be modified to access different controllers or specific instances
 const basePath = '/apis/messages'
@@ -23,6 +27,7 @@ const router = Router()
 //define endpoint for posting a message
 router.route('/')
     .post(postMessageController)
+router.route('/:messageId').delete(isLoggedInController,deleteMessageByMessageIdController)
 
 
 //Authenticated Routes

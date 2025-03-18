@@ -16,9 +16,9 @@ export async function postMeetupController(request: Request, response: Response)
             return zodErrorResponse(response, validationResult.error)
         }
 
-        const {meetupId, meetupGameId, meetupHostProfileId, meetupAddress, meetupCreatedAt, meetupDescription, meetupDuration, meetupLat, meetupLng, meetupStartTime} = validationResult.data
+        const {meetupId, meetupGameId, meetupHostProfileId, meetupAddress, meetupCreatedAt, meetupDescription, meetupDuration, meetupLat, meetupLong, meetupStartTime} = validationResult.data
 
-        const meetup = {meetupId, meetupGameId, meetupHostProfileId, meetupAddress, meetupCreatedAt, meetupDescription, meetupDuration, meetupLat, meetupLng, meetupStartTime}
+        const meetup = {meetupId, meetupGameId, meetupHostProfileId, meetupAddress, meetupCreatedAt, meetupDescription, meetupDuration, meetupLat, meetupLong, meetupStartTime}
 
         const uploadMeetup = await insertMeetup(meetup)
 
@@ -31,7 +31,7 @@ export async function postMeetupController(request: Request, response: Response)
 
     }
 }
-export async function deleteMeetupByMeetupIdController (request: Request, response: Response): Promise<Response> {
+export async function deleteMeetupByMeetupIdController(request: Request, response: Response): Promise<Response> {
     try {
         // validating incoming request via host profile id with uuid schema
         const validationResult = z.string().uuid({message: 'please provide a valid meetupId'}).safeParse(request.params.meetupId)
@@ -41,13 +41,14 @@ export async function deleteMeetupByMeetupIdController (request: Request, respon
         }
         // pulling profile from session
         const profile: PublicProfile = request.session.profile as PublicProfile
-
+        console.log(request.session.profile)
+        console.log(profile)
         // set host profile id as profile id from session
         const hostProfileId: string = profile.profileId as string
-
+        console.log(hostProfileId)
         // get meetupId from request params
         const meetupId = validationResult.data
-
+        console.log(meetupId)
         //
         const meetup  = await selectMeetupByMeetupId(meetupId)
 
@@ -60,7 +61,7 @@ export async function deleteMeetupByMeetupIdController (request: Request, respon
         }
 
         const result = await deleteMeetupByMeetupId(meetupId)
-
+        console.log(result)
         return response.json({status: 200, message: result, data: null})
 
 

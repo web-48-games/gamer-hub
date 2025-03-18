@@ -9,7 +9,7 @@ export const MeetUpSchema = z.object({
     meetupDescription: z.string({required_error: 'please provide valid Description'}).max(512, {message: 'meetupDescription cannot exceed 512 characters'}),
     meetupDuration: z.number({message: 'please provide valid time of meetup duration in hours'}),
     meetupLat: z.number({message: 'please provide valid meetup latitude coordinates for meetup location'}),
-    meetupLng: z.number({message: 'please provide valid meetup longitude coordinates for meetup location'}),
+    meetupLong: z.number({message: 'please provide valid meetup longitude coordinates for meetup location'}),
     meetupStartTime: z.coerce.date({message: 'please provide valid timestamp of meetup Start time'})
 
 })

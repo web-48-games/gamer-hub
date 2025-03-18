@@ -30,9 +30,10 @@ export function isLoggedInController(request: Request, response: Response, next:
         }
 
         // verify that jwt token from request is valid
+        // debug this part as it doesn't make it past this
         verify(unverifiedJwtToken, signature)
-
-        // if jwt token is veified without throwing an error, call the next controller
+        console.log('did we make it here?')
+        // if jwt token is verified without throwing an error, call the next controller
         return next()
 
     } catch(error) {

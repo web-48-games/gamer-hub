@@ -83,7 +83,7 @@ export async function deleteMessageByMessageIdController (request: Request, resp
         const profile: PublicProfile = request.session.profile as PublicProfile
 
         //set message profile Id
-        const messageProfileId: string = message.messageProfileId as string
+        const messageProfileId: string = profile.profileId as string
 
         //get message id from request parameters
         const messageId = validationResult.data

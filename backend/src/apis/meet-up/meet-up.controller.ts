@@ -58,7 +58,6 @@ export async function deleteMeetupByMeetupIdController(request: Request, respons
         }
 
         const result = await deleteMeetupByMeetupId(meetupId)
-        console.log(result)
         return response.json({status: 200, message: result, data: null})
 
 

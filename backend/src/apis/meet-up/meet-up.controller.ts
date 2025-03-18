@@ -1,6 +1,6 @@
 import {MeetUpSchema} from "./meet-up.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
-import {deleteMeetupByMeetupId, insertMeetup, selectMeetupByMeetupId} from "./meet-up.model";
+import {deleteMeetupByMeetupId, insertMeetup, Meetup, selectMeetupByMeetupId} from "./meet-up.model";
 import {Request, Response} from "express";
 import {PublicProfile} from "../profile/profile.model";
 import {z} from "zod";
@@ -70,5 +70,33 @@ export async function deleteMeetupByMeetupIdController(request: Request, respons
         })
     }
 }
+export async function getMeetupByMeetupIdController(request: Request, response: Response): Promise<Response> {
 
+    try {
+
+        const validationResult = z.string().uuid({message: 'please provide a valid meetupId'}).safeParse(request.params.meetupId)
+
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+
+        }
+
+        const meetupId = validationResult.data
+
+        const meetup: Meetup | null = await selectMeetupByMeetupId(meetupId)
+
+        return response.json({status: 200, message: null, data: meetup})
+
+    }
+
+
+    catch(error){
+        console.error(error);
+        return response.json({
+            status: 500,
+            message: error.message,
+            data: []
+        })
+    }
+}
 

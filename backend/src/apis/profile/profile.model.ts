@@ -56,3 +56,11 @@ export async function selectPrivateProfileByProfileId(profileId: string): Promis
     // return profile or null for no matching profile found
     return result?.length === 1 ? result[0] : null
 }
+
+export async function deleteProfileByProfileId(profileId: string): Promise<string> {
+    await sql`DELETE
+        FROM profile
+        WHERE profile_id = ${profileId}`
+
+    return 'Profile successfully deleted'
+}

@@ -2,11 +2,13 @@ import {PublicProfileSchema} from "./profile.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {Request, Response} from "express";
 import {
-    PrivateProfile,
+    deleteProfileByProfileId,
+    PrivateProfile, PublicProfile,
     selectPrivateProfileByProfileId,
     selectPublicProfileByProfileId,
     selectPublicProfileByProfileName, updateProfile
 } from "./profile.model";
+import {z} from "zod";
 
 
 export async function getPublicProfileByProfileNameController(request: Request, response: Response): Promise<Response> {
@@ -106,6 +108,42 @@ export async function putProfileController(request: Request, response: Response)
     }
 }
 
+export async function deleteProfileByProfileIdController(request: Request, response: Response): Promise<Response> {
+    try {
+        // validating incoming request by parsing profile Id
+        const validationResult = z.string().uuid({message: 'please provide a valid profileId'}).safeParse(request.params.profileId)
+
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        const sessionProfile: PublicProfile = request.session.profile as PublicProfile
+        const sessionProfileId: string = sessionProfile.profileId as string
+
+        const profileId = validationResult.data
+        const profile = await selectPrivateProfileByProfileId(profileId)
+
+        if (profile?.profileId !== sessionProfileId) {
+            return response.json({
+                status: 403,
+                message: 'you cannot delete this profile',
+                data: null
+            })
+        }
+
+        const result = await deleteProfileByProfileId(profileId)
+        return response.json({
+            status: 200,
+            message: result,
+            data: null
+        })
+
+    } catch(error) {
+        console.error(error)
+        return response.json({status: 500, message: error.message, data: null})
+    }
+}
+
 export async function getMeetupsByProfileIdController(request: Request, response: Response) : Promise<Response> {
     try {
         const validationResult = PublicProfileSchema.pick({profileId: true}).safeParse(request.params)
@@ -119,7 +157,7 @@ export async function getMeetupsByProfileIdController(request: Request, response
         // const host = await selectMeetupByProfileId(profileId)
         // const players = await selectMeetupByRsvpId(RsvpId)
 
-        return response.json({status: 200, message: null, data})
+        // return response.json({status: 200, message: null, data})
 
     } catch(error) {
         console.error(error)

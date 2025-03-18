@@ -46,7 +46,7 @@ export async function deleteMeetupByMeetupIdController(request: Request, respons
         const hostProfileId: string = profile.profileId as string
         // get meetupId from request params
         const meetupId = validationResult.data
-        console.log(meetupId)
+
         const meetup = await selectMeetupByMeetupId(meetupId)
 
         if(meetup?.meetupHostProfileId !== hostProfileId) {
@@ -63,9 +63,10 @@ export async function deleteMeetupByMeetupIdController(request: Request, respons
 
 
     } catch (error) {
+        console.error(error);
         return response.json({
             status: 500,
-            message: '',
+            message: error.message,
             data: []
         })
     }

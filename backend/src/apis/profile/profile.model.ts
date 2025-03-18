@@ -46,3 +46,13 @@ export async function selectPublicProfileByProfileId(profileId: string): Promise
     const result = PublicProfileSchema.array().max(1).parse(rowList)
     return result?.length === 1 ? result[0] : null
 }
+
+export async function selectPrivateProfileByProfileId(profileId: string): Promise<PrivateProfile | null> {
+    const rowList = await sql`SELECT profile_id, profile_about_me, profile_activation_token, profile_avatar_url, profile_creation_date, profile_email, profile_hash, profile_name FROM profile WHERE profile_id=${profileId}`
+
+    // make sure result is an array made of 1 profile or null
+    const result = PrivateProfileSchema.array().max(1).parse(rowList)
+
+    // return profile or null for no matching profile found
+    return result?.length === 1 ? result[0] : null
+}

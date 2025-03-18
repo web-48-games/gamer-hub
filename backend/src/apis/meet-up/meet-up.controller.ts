@@ -35,22 +35,19 @@ export async function deleteMeetupByMeetupIdController(request: Request, respons
     try {
         // validating incoming request via host profile id with uuid schema
         const validationResult = z.string().uuid({message: 'please provide a valid meetupId'}).safeParse(request.params.meetupId)
+
         // if the validation is unsuccessful, return a preformatted response to the client
         if (!validationResult.success) {
             return zodErrorResponse(response, validationResult.error)
         }
         // pulling profile from session
         const profile: PublicProfile = request.session.profile as PublicProfile
-        console.log(request.session.profile)
-        console.log(profile)
         // set host profile id as profile id from session
         const hostProfileId: string = profile.profileId as string
-        console.log(hostProfileId)
         // get meetupId from request params
         const meetupId = validationResult.data
         console.log(meetupId)
-        //
-        const meetup  = await selectMeetupByMeetupId(meetupId)
+        const meetup = await selectMeetupByMeetupId(meetupId)
 
         if(meetup?.meetupHostProfileId !== hostProfileId) {
             return response.json({

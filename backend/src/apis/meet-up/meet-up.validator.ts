@@ -11,5 +11,4 @@ export const MeetUpSchema = z.object({
     meetupLat: z.number({message: 'please provide valid meetup latitude coordinates for meetup location'}),
     meetupLong: z.number({message: 'please provide valid meetup longitude coordinates for meetup location'}),
     meetupStartTime: z.coerce.date({message: 'please provide valid timestamp of meetup Start time'})
-
 })

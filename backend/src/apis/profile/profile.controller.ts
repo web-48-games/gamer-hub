@@ -1,7 +1,12 @@
 import {PublicProfileSchema} from "./profile.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {Request, Response} from "express";
-import {PrivateProfile, selectPublicProfileByProfileId, selectPublicProfileByProfileName} from "./profile.model";
+import {
+    PrivateProfile,
+    selectPrivateProfileByProfileId,
+    selectPublicProfileByProfileId,
+    selectPublicProfileByProfileName, updateProfile
+} from "./profile.model";
 
 
 export async function getPublicProfileByProfileNameController(request: Request, response: Response): Promise<Response> {

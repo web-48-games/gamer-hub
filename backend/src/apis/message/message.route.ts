@@ -15,6 +15,7 @@ import {
     postMessageController,
     deleteMessageByMessageIdController
 } from "./message.controller";
+import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 
 
 //Starting path, can be modified to access different controllers or specific instances
@@ -26,7 +27,8 @@ const router = Router()
 //define endpoint for posting a message
 router.route('/')
     .post(postMessageController)
-router.route('/:messageId').delete(deleteMessageByMessageIdController)
+router.route('/:messageId').delete(isLoggedInController,deleteMessageByMessageIdController)
+
 
 //Authenticated Routes
 export const messageRoute = {basePath, router}

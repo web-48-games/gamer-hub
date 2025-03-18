@@ -6,6 +6,7 @@ import {MessageSchema} from "./message.validator";
 import {deleteMessageByMessageId, insertMessage, Message, selectMessageByMessageId} from "./message.model";
 import {Status} from "../../utils/interfaces/Status";
 import {PublicProfile} from "../profile/profile.model";
+import {Meetup, selectMeetupByMeetupId} from "../meet-up/meet-up.model";
 
 /**
  * @param request object containing message
@@ -84,14 +85,21 @@ export async function deleteMessageByMessageIdController (request: Request, resp
 
         //set message profile Id
         const messageProfileId: string = profile.profileId as string
-
+        console.log(messageProfileId)
         //get message id from request parameters
         const messageId = validationResult.data
 
         //delete message from database by message
-        const message: Message = await selectMessageByMessageId(messageId)
+        const message: Message | null = await selectMessageByMessageId(messageId)
 
-        if(message?.messageProfileId !== messageProfileId) {
+        if(message === null) {
+            return response.json({status: 404, message: 'Message not found', data: null})
+        }
+
+        const meetup: Meetup | null = await selectMeetupByMeetupId(message.messageMeetupId)
+
+        // if not person that made message and not person that made meetup, not allowed to delete message
+        if(message?.messageProfileId !== messageProfileId && meetup?.meetupHostProfileId !== messageProfileId) {
             return response.json ({
                 status: 403,
                 message: 'You are not allowed to delete this message',
@@ -102,7 +110,7 @@ export async function deleteMessageByMessageIdController (request: Request, resp
         //Delete the message from the database by message id
         const result = await deleteMessageByMessageId(messageId)
 
-        return response.json({status: 200, message: message, data: null})
+        return response.json({status: 200, message: result, data: null})
 
 
     } catch (error) {

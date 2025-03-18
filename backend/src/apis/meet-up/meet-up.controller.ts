@@ -1,8 +1,9 @@
 import {MeetUpSchema} from "./meet-up.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
-import {insertMeetup} from "./meet-up.model";
+import {deleteMeetupByMeetupId, insertMeetup, selectMeetupByMeetupId} from "./meet-up.model";
 import {Request, Response} from "express";
-import
+import {PublicProfile} from "../profile/profile.model";
+import {z} from "zod";
 // meet-up adding social functions
 
 //
@@ -15,9 +16,9 @@ export async function postMeetupController(request: Request, response: Response)
             return zodErrorResponse(response, validationResult.error)
         }
 
-        const {meetupId, meetupGameId, meetupHostProfileId, meetupAddress, meetupCreatedAt, meetupDescription, meetupDuration, meetupLat, meetupLng, meetupStartTime} = validationResult.data
+        const {meetupId, meetupGameId, meetupHostProfileId, meetupAddress, meetupCreatedAt, meetupDescription, meetupDuration, meetupLat, meetupLong, meetupStartTime} = validationResult.data
 
-        const meetup = {meetupId, meetupGameId, meetupHostProfileId, meetupAddress, meetupCreatedAt, meetupDescription, meetupDuration, meetupLat, meetupLng, meetupStartTime}
+        const meetup = {meetupId, meetupGameId, meetupHostProfileId, meetupAddress, meetupCreatedAt, meetupDescription, meetupDuration, meetupLat, meetupLong, meetupStartTime}
 
         const uploadMeetup = await insertMeetup(meetup)
 
@@ -30,27 +31,25 @@ export async function postMeetupController(request: Request, response: Response)
 
     }
 }
-export async function deleteMeetupByMeetupHostProfileIdController (request: Request, response: Response): Promise<Response> {
+export async function deleteMeetupByMeetupIdController(request: Request, response: Response): Promise<Response> {
     try {
-
+        // validating incoming request via host profile id with uuid schema
         const validationResult = z.string().uuid({message: 'please provide a valid meetupId'}).safeParse(request.params.meetupId)
 
+        // if the validation is unsuccessful, return a preformatted response to the client
         if (!validationResult.success) {
             return zodErrorResponse(response, validationResult.error)
         }
-
+        // pulling profile from session
         const profile: PublicProfile = request.session.profile as PublicProfile
-
-
-        const meetupHostProfileId: string = profile.profileId as string
-
-
+        // set host profile id as profile id from session
+        const hostProfileId: string = profile.profileId as string
+        // get meetupId from request params
         const meetupId = validationResult.data
-
 
         const meetup = await selectMeetupByMeetupId(meetupId)
 
-        if(meetup?.meetupProfileId !== meetupProfileId) {
+        if(meetup?.meetupHostProfileId !== hostProfileId) {
             return response.json({
                 status: 403,
                 message: 'you are not allowed to delete this this meetup',
@@ -59,14 +58,15 @@ export async function deleteMeetupByMeetupHostProfileIdController (request: Requ
         }
 
         const result = await deleteMeetupByMeetupId(meetupId)
-
+        console.log(result)
         return response.json({status: 200, message: result, data: null})
 
 
     } catch (error) {
+        console.error(error);
         return response.json({
             status: 500,
-            message: '',
+            message: error.message,
             data: []
         })
     }

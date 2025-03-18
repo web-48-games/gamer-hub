@@ -3,8 +3,9 @@ import {Request, Response} from 'express'
 import {z} from "zod";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {MessageSchema} from "./message.validator";
-import {deleteMessage, getMessages, insertMessage} from "./message.model";
+import {deleteMessageByMessageId, insertMessage, Message, selectMessageByMessageId} from "./message.model";
 import {Status} from "../../utils/interfaces/Status";
+import {PublicProfile} from "../profile/profile.model";
 
 /**
  * @param request object containing message
@@ -43,7 +44,7 @@ export async function postMessageController(request: Request, response: Response
 }
 
 //function for getting preexisting messages from tables to load in browser
-export async function getMessageController (request: Request, response: Response): Promise<string> {
+/*export async function getMessageController (request: Request, response: Response): Promise<string> {
     try {
 
     const validationResult = MessageSchema.safeParse(request.params)
@@ -64,37 +65,49 @@ export async function getMessageController (request: Request, response: Response
             data: []
         })
     }
- }
+ }*/
 
  //function to delete a message by messageId with host permissions
-export async function deleteMessageController (request: Request, response: Response): Promise<Response<Status>> {
+export async function deleteMessageByMessageIdController (request: Request, response: Response): Promise<Response> {
     try {
 
         //validate incoming request with message uuid schema
-        const validationResult = z.string().uuid({message: 'Please provide a valid messageId or null'}).safeParse(request.params.threadId)
+        const validationResult = z.string().uuid({message: 'Please provide a valid messageId or null'}).safeParse(request.params.messageId)
 
         //if validation fails, return response to client
         if (!validationResult.success) {
             return zodErrorResponse(response, validationResult.error)
         }
 
-        //need profile Id or just message Id to delete?
+        //pulling profile from session
+        const profile: PublicProfile = request.session.profile as PublicProfile
+
+        //set message profile Id
+        const messageProfileId: string = message.messageProfileId as string
 
         //get message id from request parameters
         const messageId = validationResult.data
 
-        //need to get message my messageId (write function for this in model?)
-        const message = await getMessages(messageId)
-
-        //need way to determine if user deleting is host, otherwise, message delete fails?
-
         //delete message from database by message
-        const result = await deleteMessage(messageId)
+        const message: Message = await selectMessageByMessageId(messageId)
 
-        return response.json({status: 200, message: result, data: null})
+        if(message?.messageProfileId !== messageProfileId) {
+            return response.json ({
+                status: 403,
+                message: 'You are not allowed to delete this message',
+                data: null
+            })
+        }
+
+        //Delete the message from the database by message id
+        const result = await deleteMessageByMessageId(messageId)
+
+        return response.json({status: 200, message: message, data: null})
 
 
     } catch (error) {
-        return response.json({status: 500, message: error.message, data: []})
+        return response.json({
+            status: 500,
+            message: error.message, data: []})
     }
 }

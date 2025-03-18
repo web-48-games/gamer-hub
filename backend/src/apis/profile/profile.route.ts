@@ -1,6 +1,7 @@
 
 import {Router} from 'express'
 import {
+    getMeetupsByProfileIdController,
     getPublicProfileByProfileIdController,
     getPublicProfileByProfileNameController,
     putProfileController
@@ -15,10 +16,12 @@ const router = Router()
 
 
 // router.route('/')
+
 router.route('/name/:profileName').get(getPublicProfileByProfileNameController)
 router.route('/id/:profileId')
     .get(getPublicProfileByProfileIdController)
-    .put(isLoggedInController, putProfileController) // consider putting in an isLoggedInController
-router.route('/')
+    .put(isLoggedInController, putProfileController)
+// router.route('/meetups/:profileId').get(getMeetupsByProfileIdController)
+
 
 export const profileRoute = {basePath, router}

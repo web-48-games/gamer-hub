@@ -34,7 +34,7 @@ export async function selectMessageByMessageId(messageId: string): Promise<Messa
 //function to update message in message table
 export async function updateMessage(message: Message): Promise<string> {
     const {messageId, messageProfileId, messageMeetupId, messageContent, messageTimestamp} = message
-    await sql`UPDATE message SET message_id = ${messageId}, message_profile_id = ${messageProfileId}, message_meetup_id = ${messageMeetupId}, message_content = ${messageContent}, message_timestamp = ${messageTimestamp}`
+    await sql`UPDATE message SET message_content = ${messageContent}, message_timestamp = ${messageTimestamp} WHERE message_id = ${messageId}`
     return 'Message successfully updated'
 }
 

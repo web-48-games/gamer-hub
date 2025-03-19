@@ -13,7 +13,9 @@ import {Router} from 'express'
 //import for message functions
 import {
     postMessageController,
-    deleteMessageByMessageIdController, getAllMessagesController, updateMessageByMessageIdController
+    deleteMessageByMessageIdController,
+    getAllMessagesController,
+    updateMessageByMessageIdController
 } from "./message.controller";
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 

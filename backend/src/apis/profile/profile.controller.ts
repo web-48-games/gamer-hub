@@ -94,7 +94,6 @@ export async function putProfileController(request: Request, response: Response)
         //update the profile with new data
         profile.profileAboutMe = profileAboutMe
         profile.profileAvatarUrl = profileAvatarUrl
-        profile.profileCreationDate = profileCreationDate
         profile.profileName = profileName
 
         //update profile with new data above into the database

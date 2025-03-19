@@ -13,7 +13,7 @@ import {Router} from 'express'
 //import for message functions
 import {
     postMessageController,
-    deleteMessageByMessageIdController
+    deleteMessageByMessageIdController, getAllMessagesController
 } from "./message.controller";
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 
@@ -27,6 +27,7 @@ const router = Router()
 //define endpoint for posting a message
 router.route('/')
     .post(postMessageController)
+    .get(getAllMessagesController)
 router.route('/:messageId').delete(isLoggedInController,deleteMessageByMessageIdController)
 
 

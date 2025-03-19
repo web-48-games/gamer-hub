@@ -3,7 +3,13 @@ import {Request, Response} from 'express'
 import {z} from "zod";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {MessageSchema} from "./message.validator";
-import {deleteMessageByMessageId, insertMessage, Message, selectMessageByMessageId} from "./message.model";
+import {
+    deleteMessageByMessageId,
+    insertMessage,
+    Message,
+    selectAllMessages,
+    selectMessageByMessageId
+} from "./message.model";
 import {Status} from "../../utils/interfaces/Status";
 import {PublicProfile} from "../profile/profile.model";
 import {Meetup, selectMeetupByMeetupId} from "../meet-up/meet-up.model";
@@ -45,22 +51,23 @@ export async function postMessageController(request: Request, response: Response
 }
 
 //function to get pre-existing messages in a meetup
-export async function getMessagesController(request: Request, response: Response) {
+export async function getAllMessagesController(request: Request, response: Response) {
     try {
 
-        const validationResult = MessageSchema.safeParse(request.body)
+        //get messages from database and store in a variable called messageData
+        const messageData = await selectAllMessages()
 
-        if(!validationResult.success) {
-            return zodErrorResponse(response, validationResult.error)
-        }
+        //return the response within status code 200, a message, and messages as data
+        const status: Status = {status: 200, message: null, data: messageData}
+        return response.json(status)
 
-
-
-    } catch {
+        //if there is an error, return the response with the status code 500, an error message, and null data
+        } catch {
         return response.json({
             status: 500,
-            message: ,
-            data:null})
+            message: 'Error getting messages, please try again',
+            data: []
+        })
     }
 }
 

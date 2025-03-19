@@ -13,13 +13,12 @@ export async function insertMessage(message: Message): Promise<string> {
     return 'Message successfully posted'
 }
 
-//Function to get all messages from message table and return to user in response
-/*export async function getMessages():Promise<Message[]> {
-    const rowList = <Message[]>await sql`SELECT ( message_id, message_profile_id, message_meetup_id, message_content, message_timestamp ) FROM message ORDER BY message_timestamp DESC`
+//Function to get all existing messages in a meetup message board and return to user
+export async function selectAllMessages(): Promise<Message[]> {
+    const rowList = <Message[]>await sql`SELECT ( message_id, message_profile_id, message_meetup_id, message_content, message_timestamp FROM message ORDER BY thread_datetime DESC)`
 
-    //parse messages from database into an array of Message objects
     return MessageSchema.array().parse(rowList)
-}*/
+}
 
 //function to get message from message table in database by messageId and return it
 export async function selectMessageByMessageId(messageId: string): Promise<Message | null> {

@@ -15,7 +15,7 @@ export async function insertMessage(message: Message): Promise<string> {
 
 //Function to get all existing messages in a meetup message board and return to user
 export async function selectAllMessages(): Promise<Message[]> {
-    const rowList = <Message[]>await sql`SELECT ( message_id, message_profile_id, message_meetup_id, message_content, message_timestamp FROM message ORDER BY thread_datetime DESC)`
+    const rowList = <Message[]>await sql`SELECT  message_id, message_profile_id, message_meetup_id, message_content, message_timestamp FROM message ORDER BY NOW() DESC`
 
     return MessageSchema.array().parse(rowList)
 }

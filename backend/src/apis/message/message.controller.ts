@@ -59,7 +59,7 @@ export async function getMessagesController(request: Request, response: Response
     } catch {
         return response.json({
             status: 500,
-            message: ,
+            message: 'placeholder',
             data:null})
     }
 }

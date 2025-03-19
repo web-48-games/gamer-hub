@@ -110,11 +110,12 @@ export async function toggleFavoriteController(request: Request, response: Respo
         // after validation, deconstruct gameId thread from result
         const {favoriteGameId} = validationResult.data
         const profile = request.session.profile
-        const favoriteProfileId = profile?.profileId
+        // @ts-ignore
+        const favoriteProfileId = profile.profileId
 
         const favorite: Favorite = {
             favoriteGameId,
-            favoriteProfileId,
+            favoriteProfileId
         }
 
         const status: Status = {

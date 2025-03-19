@@ -2,7 +2,8 @@ import {Request, Response} from 'express'
 import {Favorite, FavoriteSchema} from "./favorite.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {PublicProfile} from "../profile/profile.model";
-import {insertFavorite} from "./favorite.model";
+import {insertFavorite, selectFavoritesByFavoriteGameId, selectFavoritesByFavoriteProfileId} from "./favorite.model";
+import {z} from "zod";
 
 export async function postFavoriteController(request: Request, response: Response) : Promise<Response> {
     try {
@@ -45,6 +46,19 @@ export async function postFavoriteController(request: Request, response: Respons
 
 export async function getFavoritesByFavoriteGameIdController(request: Request, response: Response) : Promise<Response> {
     try {
+        const validationResult = z.string().uuid("Please provide a valid favoriteGameId").safeParse(request.params.favoriteGameId)
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        const favoriteGameId = validationResult.data
+        const result = await selectFavoritesByFavoriteGameId(favoriteGameId)
+
+        return response.json({
+            status: 200,
+            message: null,
+            data: result
+        })
 
     } catch(error) {
         console.error(error)
@@ -58,7 +72,19 @@ export async function getFavoritesByFavoriteGameIdController(request: Request, r
 
 export async function getFavoritesByFavoriteProfileIdController(request: Request, response: Response) : Promise<Response> {
     try {
+        const validationResult = z.string().uuid("Please provide a valid favoriteProfileId").safeParse(request.params.favoriteProfileId)
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
 
+        const favoriteProfileId = validationResult.data
+        const result = await selectFavoritesByFavoriteProfileId(favoriteProfileId)
+
+        return response.json({
+            status: 200,
+            message: null,
+            data: result
+        })
     } catch(error) {
         console.error(error)
         return response.json({
@@ -84,7 +110,7 @@ export async function toggleFavoriteController(request: Request, response: Respo
 
 export async function deleteFavoriteController(request: Request, response: Response) : Promise<Response> {
     try {
-
+        const validationResult =
     } catch(error) {
         console.error(error)
         return response.json({

@@ -38,3 +38,20 @@ export async function deleteFavorite(favorite: Favorite) : Promise<string> {
 
     return 'favorite successfully deleted'
 }
+
+export async function selectFavoritesByFavoriteId(favorite: Favorite) : Promise<Favorite | null> {
+    const {favoriteProfileId, favoriteGameId} = favorite
+
+    // select favorite from its table by its primary key, the composite of two foreign keys
+    const rowList = <Favorite[]>await sql`
+                               SELECT favorite_game_id, favorite_profile_id
+                               FROM "favorite"
+                               WHERE favorite_profile_id = ${favoriteProfileId}
+                               AND favorite_game_id = ${favoriteGameId}`
+
+    // parse and store into a list
+    const result = FavoriteSchema.array().max(1).parse(rowList)
+    // return the favorite selected
+    return result.length === 0 ? null : result[0]
+
+}

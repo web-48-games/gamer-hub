@@ -5,10 +5,11 @@ import {PublicProfile} from "../profile/profile.model";
 import {
     deleteFavorite,
     insertFavorite,
-    selectFavoritesByFavoriteGameId,
+    selectFavoritesByFavoriteGameId, selectFavoritesByFavoriteId,
     selectFavoritesByFavoriteProfileId
 } from "./favorite.model";
 import {z} from "zod";
+import {Status} from "../../utils/interfaces/Status";
 
 export async function postFavoriteController(request: Request, response: Response) : Promise<Response> {
     try {
@@ -102,6 +103,35 @@ export async function getFavoritesByFavoriteProfileIdController(request: Request
 
 export async function toggleFavoriteController(request: Request, response: Response) : Promise<Response> {
     try {
+        const validationResult = FavoriteSchema.safeParse(request.body)
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+        // after validation, deconstruct gameId thread from result
+        const {favoriteGameId} = validationResult.data
+        const profile = request.session.profile
+        const favoriteProfileId = profile?.profileId
+
+        const favorite: Favorite = {
+            favoriteGameId,
+            favoriteProfileId,
+        }
+
+        const status: Status = {
+            status: 200,
+            message: '',
+            data: null
+        }
+
+        const selectedFavorite: Favorite | null = await selectFavoritesByFavoriteId(favorite)
+
+        if (selectedFavorite === null) {
+            status.message = await insertFavorite(favorite)
+        } else {
+            status.message = await deleteFavorite(favorite)
+        }
+
+        return response.json(status)
 
     } catch(error) {
         console.error(error)

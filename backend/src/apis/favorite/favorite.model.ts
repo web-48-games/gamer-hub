@@ -26,3 +26,15 @@ export async function selectFavoritesByFavoriteProfileId(favoriteProfileId: stri
 
     return FavoriteSchema.array().parse(rowList)
 }
+
+export async function deleteFavorite(favorite: Favorite) : Promise<string> {
+
+    const {favoriteProfileId, favoriteGameId} = favorite
+
+    await sql`DELETE
+    FROM "favorite"
+    WHERE favorite_profile_id = ${favoriteProfileId}
+    AND favorite_game_id = ${favoriteGameId}`
+
+    return 'favorite successfully deleted'
+}

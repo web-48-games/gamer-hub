@@ -2,7 +2,12 @@ import {Request, Response} from 'express'
 import {Favorite, FavoriteSchema} from "./favorite.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {PublicProfile} from "../profile/profile.model";
-import {insertFavorite, selectFavoritesByFavoriteGameId, selectFavoritesByFavoriteProfileId} from "./favorite.model";
+import {
+    deleteFavorite,
+    insertFavorite,
+    selectFavoritesByFavoriteGameId,
+    selectFavoritesByFavoriteProfileId
+} from "./favorite.model";
 import {z} from "zod";
 
 export async function postFavoriteController(request: Request, response: Response) : Promise<Response> {
@@ -110,7 +115,26 @@ export async function toggleFavoriteController(request: Request, response: Respo
 
 export async function deleteFavoriteController(request: Request, response: Response) : Promise<Response> {
     try {
-        const validationResult =
+        const validationResult = FavoriteSchema.safeParse(request.body)
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+        const {favoriteGameId} = validationResult.data
+        const profile = request.session.profile as PublicProfile
+        const favoriteProfileId = profile.profileId as string
+
+        const favorite: Favorite = {
+            favoriteGameId,
+            favoriteProfileId
+        }
+
+        let message = await deleteFavorite(favorite)
+        return response.json({
+            status: 200,
+            message: message,
+            data: null
+        })
+
     } catch(error) {
         console.error(error)
         return response.json({

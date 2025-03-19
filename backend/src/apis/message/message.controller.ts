@@ -8,7 +8,7 @@ import {
     insertMessage,
     Message,
     selectAllMessages,
-    selectMessageByMessageId
+    selectMessageByMessageId, updateMessage
 } from "./message.model";
 import {Status} from "../../utils/interfaces/Status";
 import {PublicProfile} from "../profile/profile.model";
@@ -68,6 +68,66 @@ export async function getAllMessagesController(request: Request, response: Respo
             message: 'Error getting messages, please try again',
             data: []
         })
+    }
+}
+
+//function to update message by messageId if user posted message
+export async function updateMessageByMessageIdController (request: Request, response: Response) {
+    try {
+    //validate updated message data coming from the request body
+    const validationResultForRequestBody = MessageSchema.safeParse(request.body)
+
+    //if the validation of the body is unsuccessful, return a preformatted response to the client
+    if(!validationResultForRequestBody.success) {
+        return zodErrorResponse(response, validationResultForRequestBody.error)
+    }
+
+    //validate the messageId coming from the request paramaters
+    const validationResultForRequestParams = MessageSchema.pick({messageId: true}).safeParse(request.params)
+
+    //if the validation of the params is unsuccessful, return a preformatted response to the client
+    if(!validationResultForRequestParams.success) {
+        return zodErrorResponse(response, validationResultForRequestParams.error)
+    }
+
+    //grab the messageId from the session
+    const messageFromSession = request.session?.message
+    const messageIdFromSession = messageFromSession?.messageId
+
+    //grab the messageId off of the validated request parameters - need to associate messageId with profile
+    const {messageId} = validationResultForRequestParams.data
+
+    if (messageIdFromSession !== messageId) {
+        return response.json({status: 400, message: "You cannot update a message that is not yours", data: null})
+    }
+
+    //grab the message data off of the validated request body
+    const {messageId, messageProfileId, messageMeetupId, messageContent, messageTimestamp} = validationResultForRequestBody.data
+
+    //grab the message by messageId
+    const message: Message | null = await selectMessageByMessageId(messageId)
+
+    //if the profile does not exist, return a preformatted response to the client
+    if(message === null) {
+        return response.json({status: 400, message: "Message does not exist", data: null})
+    }
+
+    //update the message with the new data
+    message.messageId = messageId
+    message.messageProfileId = messageProfileId
+    message.messageMeetupId = messageMeetupId
+    message.messageContent = messageContent
+    message.messageTimestamp = messageTimestamp
+
+    //update the message in the database
+    await updateMessage(message)
+
+    //return a response to the client with a success message
+    return response.json({status: 200, message: "Message successfully updated", data: null})
+
+    } catch (error: unknown) {
+        //if an error occurs, return a preformatted response to the client
+        return response.json({status:500, message: "Internal server error", data: null})
     }
 }
 

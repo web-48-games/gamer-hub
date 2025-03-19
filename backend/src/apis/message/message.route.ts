@@ -13,7 +13,7 @@ import {Router} from 'express'
 //import for message functions
 import {
     postMessageController,
-    deleteMessageByMessageIdController, getAllMessagesController
+    deleteMessageByMessageIdController, getAllMessagesController, updateMessageByMessageIdController
 } from "./message.controller";
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 
@@ -28,8 +28,9 @@ const router = Router()
 router.route('/')
     .post(postMessageController)
     .get(getAllMessagesController)
-router.route('/:messageId').delete(isLoggedInController,deleteMessageByMessageIdController)
-
+router.route('/:messageId')
+    .delete(isLoggedInController,deleteMessageByMessageIdController)
+    .put(isLoggedInController,updateMessageByMessageIdController)
 
 //Authenticated Routes
 export const messageRoute = {basePath, router}

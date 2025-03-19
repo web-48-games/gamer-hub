@@ -31,6 +31,13 @@ export async function selectMessageByMessageId(messageId: string): Promise<Messa
     return result.length === 0 ? null : result[0]
 }
 
+//function to update message in message table
+export async function updateMessage(message: Message): Promise<string> {
+    const {messageId, messageProfileId, messageMeetupId, messageContent, messageTimestamp} = message
+    await sql`UPDATE message SET message_id = ${messageId}, message_profile_id = ${messageProfileId}, message_meetup_id = ${messageMeetupId}, message_content = ${messageContent}, message_timestamp = ${messageTimestamp}`
+    return 'Message successfully updated'
+}
+
 //function to delete particular message from message table in database by messageId, returns message "Message successfully deleted"
 export async function deleteMessageByMessageId(messageId: string):Promise<string> {
 

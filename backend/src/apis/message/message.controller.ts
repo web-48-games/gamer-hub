@@ -44,29 +44,25 @@ export async function postMessageController(request: Request, response: Response
     }
 }
 
-//function for getting preexisting messages from tables to load in browser
-/*export async function getMessageController (request: Request, response: Response): Promise<string> {
+//function to get pre-existing messages in a meetup
+export async function getMessagesController(request: Request, response: Response) {
     try {
 
-    const validationResult = MessageSchema.safeParse(request.params)
+        const validationResult = MessageSchema.safeParse(request.body)
 
-    if (!validationResult.success) {
-        return zodErrorResponse(response, validationResult.error)
-    }
+        if(!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
 
-    const data = await getMessages()
 
-    const status: Status = {status: 200, message: null, data}
 
-    } catch(error) {
-        console.error(error)
+    } catch {
         return response.json({
             status: 500,
-            message: 'Error getting messages, please try again',
-            data: []
-        })
+            message: ,
+            data:null})
     }
- }*/
+}
 
  //function to delete a message by messageId with host permissions
 export async function deleteMessageByMessageIdController (request: Request, response: Response): Promise<Response> {

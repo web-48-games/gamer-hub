@@ -43,6 +43,54 @@ export async function postFavoriteController(request: Request, response: Respons
     }
 }
 
-export async function getFavoritesByGameIdController(request: Request, response: Response) : Promise<Response> {
+export async function getFavoritesByFavoriteGameIdController(request: Request, response: Response) : Promise<Response> {
+    try {
 
+    } catch(error) {
+        console.error(error)
+        return response.json({
+            status:500,
+            message: error.message,
+            data:null
+        })
+    }
+}
+
+export async function getFavoritesByFavoriteProfileIdController(request: Request, response: Response) : Promise<Response> {
+    try {
+
+    } catch(error) {
+        console.error(error)
+        return response.json({
+            status:500,
+            message: error.message,
+            data:null
+        })
+    }
+}
+
+export async function toggleFavoriteController(request: Request, response: Response) : Promise<Response> {
+    try {
+
+    } catch(error) {
+        console.error(error)
+        return response.json({
+            status:500,
+            message: error.message,
+            data:null
+        })
+    }
+}
+
+export async function deleteFavoriteController(request: Request, response: Response) : Promise<Response> {
+    try {
+
+    } catch(error) {
+        console.error(error)
+        return response.json({
+            status:500,
+            message: error.message,
+            data:null
+        })
+    }
 }

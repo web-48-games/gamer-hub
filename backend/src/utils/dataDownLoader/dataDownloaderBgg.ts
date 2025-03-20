@@ -20,8 +20,8 @@ function dataDownloader() : Promise<any> {
 
     async function downloadPosts() {
         try {
-            const {data} = await axios.get("https://jsonplaceholder.typicode.com/posts")
-
+            const {data} = await axios.get("https://boardgamegeek.com/xmlapi/boardgame/")
+            console.log(data)
             const createPosts = (array: any[]) : Post[] => {
                 // Change this part.  Instead of putting the posts into an arrray insert them into the database.
                 // See https://github.com/Deep-Dive-Coding-Fullstack-Licensing/example-capstone/blob/development/backend/utils/tweet/insertTweet.ts for example.

@@ -1,59 +1,65 @@
 import axios from "axios"
-import {XMLParser, XMLBuilder, XMLValidator} from "fast-xml-parser";
 import {Game, insertGame} from "../../apis/game/game.model";
 import {v7 as uuidv7} from "uuid";
+import {GameSchema} from "../../apis/game/game.validator";
+import {zodErrorResponse} from "../response.utils";
+import {response, Response} from 'express';
 
-interface Post {
-    postId: string | null,
-    postUserId: number,
-    postContent: string,
-    postTitle: string
-}
+const { XMLParser, XMLValidator } = require("fast-xml-parser")
 
 function dataDownloader() : Promise<any> {
     return main()
     async function main() {
         try {
             await downloadPosts()
-
+            return
         } catch (e) {
             console.log(e)
         }
     }
 
+    function range(start: number, end: number) {
+        const result = []
+        for (let i=start; i<=end; i++) {
+            result.push(i)
+        }
+        return result
+    }
+
     async function downloadPosts() {
         try {
-            for (let i = 1; i < 4; i++) {
-
-
-            const {data} = await axios.get(`https://boardgamegeek.com/xmlapi/boardgame/${i}`)
+            for (let i = 1; i < 1000; i++) {
+            const {data} = await axios.get(`https://boardgamegeek.com/xmlapi/boardgame/${range(20*(i-1)+1, i*20).join(',')}`)
                 if(XMLValidator.validate(data)){
                     const parser = new XMLParser();
                     let jsonObj = parser.parse(data);
 
-                    // console.log('Description:', jsonObj.boardgames.boardgame.description); // game_description
-                    // console.log('Genres:', jsonObj.boardgames.boardgame.boardgamecategory) // game_genre
-                    // console.log('Image:', jsonObj.boardgames.boardgame.image) // game_image_url
-                    // console.log('max players:', jsonObj.boardgames.boardgame.maxplayers) // game_max_players
-                    // Array.isArray(jsonObj.boardgames.boardgame.name) ? console.log('name(s):', jsonObj.boardgames.boardgame.name[0]) : console.log('name(s):', jsonObj.boardgames.boardgame.name) // game_name (it's possible to have multiple language names)
-                    // console.log('year published:', jsonObj.boardgames.boardgame.yearpublished); // game_year_published
+                    for (let currentGame of jsonObj.boardgames.boardgame) {
+                        let game: Game = {
+                            gameId: uuidv7(),
+                            gameDescription: currentGame.description,
+                            gameGenre: Array.isArray(currentGame.boardgamecategory) ? currentGame.boardgamecategory : [currentGame.boardgamecategory],
+                            gameImageUrl: currentGame.image,
+                            gameMaxPlayers: currentGame.maxplayers,
+                            gameName: Array.isArray(currentGame.name) ? currentGame.name[0] : currentGame.name,
+                            gameYearPublished: currentGame.yearpublished
+                        }
+                        // console.log(game)
+                        const validateGame = GameSchema.safeParse(game)
 
-                    let game: Game = {
-                        gameId: uuidv7(),
-                        gameDescription: jsonObj.boardgames.boardgame.description,
-                        gameGenre: jsonObj.boardgames.boardgame.boardgamecategory,
-                        gameImageUrl: jsonObj.boardgames.boardgame.image,
-                        gameMaxPlayers: jsonObj.boardgames.boardgame.maxplayers,
-                        gameName: Array.isArray(jsonObj.boardgames.boardgame.name) ? jsonObj.boardgames.boardgame.name[0] : jsonObj.boardgames.boardgame.name,
-                        gameYearPublished: jsonObj.boardgames.boardgame.yearpublished
+                        if (validateGame.success) {
+                            console.log(game.gameName, i)
+                            await insertGame(game)
+                        }
                     }
-                    await insertGame(game)
                 }
             }
+            console.log('finished.')
 
         } catch (error) {
             console.error(error)
         }
+        return
     }
 }
 

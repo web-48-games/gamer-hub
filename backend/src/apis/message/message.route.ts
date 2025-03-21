@@ -15,7 +15,8 @@ import {
     postMessageController,
     deleteMessageByMessageIdController,
     getAllMessagesController,
-    updateMessageByMessageIdController
+    updateMessageByMessageIdController,
+    getMessageByMessageMeetupId, getMessageByMessageProfileId
 } from "./message.controller";
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 
@@ -30,9 +31,13 @@ const router = Router()
 router.route('/')
     .post(postMessageController)
     .get(getAllMessagesController)
-router.route('/:messageId')
+router.route('/messageId/:messageId')
     .delete(isLoggedInController,deleteMessageByMessageIdController)
     .put(isLoggedInController,updateMessageByMessageIdController)
+router.route('/messageMeetupId/:messageMeetupId')
+    .get(getMessageByMessageMeetupId)
+router.route('/messageProfileId/:messageProfileId')
+    .get(getMessageByMessageProfileId)
 
 //Authenticated Routes
 export const messageRoute = {basePath, router}

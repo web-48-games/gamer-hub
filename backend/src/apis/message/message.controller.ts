@@ -7,8 +7,8 @@ import {
     deleteMessageByMessageId,
     insertMessage,
     Message,
-    selectAllMessages,
-    selectMessageByMessageId, updateMessage
+    selectAllMessages, selectMessageByMeetupId, selectMessagebyMeetupId,
+    selectMessageByMessageId, selectMessageByProfileId, updateMessage
 } from "./message.model";
 import {Status} from "../../utils/interfaces/Status";
 import {PublicProfile} from "../profile/profile.model";
@@ -69,6 +69,58 @@ export async function getAllMessagesController(request: Request, response: Respo
             data: []
         })
     }
+}
+
+//function to get messageId by messageMeetupId
+export async function getMessageByMessageMeetupId (request: Request, response: Response): Promise<Response> {
+    try {
+
+    const validationResult = z.string().uuid({message: 'please provide a valid messageMeetupId'}).safeParse(request.params.messageMeetupId)
+
+    if (!validationResult.success) {
+        return zodErrorResponse(response, validationResult.error)
+    }
+
+    const messageMeetupId = validationResult.data
+
+    const data = await selectMessageByMeetupId(messageMeetupId)
+
+    return response.json({status: 200, message: 'Message Successfully Found', data: data})
+
+    } catch (error) {
+        return response.json ({
+            status: 500,
+            message: error.message,
+            data: []
+        })
+    }
+
+}
+
+//function to get messageId by messageProfileId
+export async function getMessageByMessageProfileId (request: Request, response: Response): Promise<Response> {
+    try {
+
+        const validationResult = z.string().uuid({message: 'please provide a valid messageProfileId'}).safeParse(request.params.messageProfileId)
+
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        const messageProfileId = validationResult.data
+
+        const data = await selectMessageByProfileId(messageProfileId)
+
+        return response.json({status: 200, message: 'Message Successfully Found', data: data})
+
+    } catch (error) {
+        return response.json ({
+            status: 500,
+            message: error.message,
+            data: []
+        })
+    }
+
 }
 
 //function to update message by messageId if user posted message

@@ -2,7 +2,7 @@ import {GameSchema} from "./game.validator";
 import {Request, Response} from "express";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {
-    Game, insertGame,
+    Game, insertGame, selectFavoriteGames,
     selectFeaturedGames,
     selectGameByGameId,
     selectGameByGameName,
@@ -10,6 +10,7 @@ import {
     selectGamesByGenre
 } from "./game.model";
 import {z} from "zod";
+import {FavoriteSchema} from "../favorite/favorite.validator";
 
 // might not be in practical use b/c game will be external data but useful for testing
 export async function postGamesController(request: Request, response: Response): Promise<Response> {
@@ -158,7 +159,7 @@ export async function getGamesByYearPublished(request: Request, response: Respon
 // come back to finish
 export async function getFeaturedGamesController(request: Request, response: Response): Promise<Response> {
     try {
-        // just an arbitrary value, maybe comeback and change to something else
+        // cap is manually set here
         let cap:number = 5
         const featuredGames = await selectFeaturedGames(cap)
         return response.json({
@@ -176,3 +177,31 @@ export async function getFeaturedGamesController(request: Request, response: Res
     }
 }
 
+export async function getGamesByFavoriteProfileId(request: Request, response: Response): Promise<Response> {
+
+    try {
+        // validate request
+        const validationResult = FavoriteSchema.pick({favoriteProfileId: true}).safeParse(request.params)
+
+        // if validation is not successful, tell the client
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        // destructure to access data in request
+        const {favoriteProfileId} = validationResult.data
+        const favoriteGames = await selectFavoriteGames(favoriteProfileId)
+        return response.json({
+            status: 200,
+            message: 'successfully selected favorite games for a profile',
+            data: favoriteGames })
+
+    } catch(error) {
+        console.error(error)
+        return response.json({
+            status: 500,
+            message: error.message,
+            data: null
+        })
+    }
+}

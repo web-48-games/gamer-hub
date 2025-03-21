@@ -59,3 +59,20 @@ export async function selectGamesByGameYearPublished(year: number): Promise<Game
 
     return GameSchema.array().parse(rowList)
 }
+
+export async function selectFavoriteGames(favoriteProfileId: string) : Promise<Game[]> {
+    const rowList = <Game[]>await sql`SELECT game_id,
+                                             game_description,
+                                             game_genre,
+                                             game_image_url,
+                                             game_max_players,
+                                             game_name,
+                                             game_year_published
+                                      FROM game
+                                               INNER JOIN
+                                           (SELECT favorite_profile_id, favorite_game_id
+                                            FROM favorite
+                                            WHERE favorite_profile_id = ${favoriteProfileId})
+                                           ON game_id = favorite_game_id`
+    return GameSchema.array().parse(rowList)
+}

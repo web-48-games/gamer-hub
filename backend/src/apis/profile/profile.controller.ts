@@ -94,7 +94,6 @@ export async function putProfileController(request: Request, response: Response)
         //update the profile with new data
         profile.profileAboutMe = profileAboutMe
         profile.profileAvatarUrl = profileAvatarUrl
-        profile.profileCreationDate = profileCreationDate
         profile.profileName = profileName
 
         //update profile with new data above into the database
@@ -137,27 +136,6 @@ export async function deleteProfileByProfileIdController(request: Request, respo
             message: result,
             data: null
         })
-
-    } catch(error) {
-        console.error(error)
-        return response.json({status: 500, message: error.message, data: null})
-    }
-}
-
-export async function getMeetupsByProfileIdController(request: Request, response: Response) : Promise<Response> {
-    try {
-        const validationResult = PublicProfileSchema.pick({profileId: true}).safeParse(request.params)
-
-        if (!validationResult.success) {
-            return zodErrorResponse(response, validationResult.error)
-        }
-        const {profileId} = validationResult.data
-
-        // come back to this, incomplete and probably wrong
-        // const host = await selectMeetupByProfileId(profileId)
-        // const players = await selectMeetupByRsvpId(RsvpId)
-
-        // return response.json({status: 200, message: null, data})
 
     } catch(error) {
         console.error(error)

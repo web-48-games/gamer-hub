@@ -12,7 +12,6 @@ const basePath = '/apis/favorites' as const
 
 const router = Router()
 
-// come back to finish this off later
 router.route('/')
     .post(isLoggedInController, postFavoriteController)
 router.route('/profile-id/:favoriteProfileId')

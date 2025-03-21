@@ -18,7 +18,7 @@ const rowlist = await sql`SELECT profile_id, profile_about_me, profile_activatio
 }
 export async function updateProfile(profile: PrivateProfile): Promise<string> {
     const {profileId, profileAboutMe, profileActivationToken, profileAvatarUrl, profileCreationDate, profileEmail, profileHash, profileName} = profile
-    await sql`UPDATE profile SET profile_about_me=${profileAboutMe}, profile_activation_token=${profileActivationToken}, profile_avatar_url=${profileAvatarUrl}, profile_creation_date=${profileCreationDate}, profile_email=${profileEmail}, profile_hash=${profileHash}, profile_name=${profileName} WHERE profile_id = ${profileId}`
+    await sql`UPDATE profile SET profile_about_me=${profileAboutMe}, profile_avatar_url=${profileAvatarUrl}, profile_email=${profileEmail}, profile_hash=${profileHash}, profile_name=${profileName} WHERE profile_id = ${profileId}`
     return 'Profile updated successfully'
 }
 

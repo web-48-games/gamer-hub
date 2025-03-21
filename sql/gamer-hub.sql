@@ -18,11 +18,11 @@ CREATE TABLE IF NOT EXISTS profile(
 
 CREATE TABLE IF NOT EXISTS game(
                                game_id UUID PRIMARY KEY,
-                               game_description VARCHAR(512),
-                               game_genre VARCHAR(32),
-                               game_image_url VARCHAR(128),
+                               game_description TEXT,
+                               game_genre VARCHAR[],
+                               game_image_url VARCHAR(512),
                                game_max_players INT,
-                               game_name VARCHAR(32),
+                               game_name VARCHAR,
                                game_year_published TIMESTAMPTZ
 );
 

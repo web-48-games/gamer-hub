@@ -108,6 +108,7 @@ export async function getMeetupByMeetupIdController(request: Request, response: 
     }
 }
 
+// get all meetups associated with a profile
 export async function getMeetupsByRsvpProfileId(request: Request, response: Response): Promise<Response> {
     try {
         // validate request

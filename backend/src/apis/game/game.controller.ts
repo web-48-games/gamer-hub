@@ -158,7 +158,7 @@ export async function getGamesByYearPublished(request: Request, response: Respon
 // come back to finish
 export async function getFeaturedGamesController(request: Request, response: Response): Promise<Response> {
     try {
-        // just an arbitrary value, maybe comeback and change to something else
+        // cap is manually set here
         let cap:number = 5
         const featuredGames = await selectFeaturedGames(cap)
         return response.json({

@@ -2,7 +2,7 @@ import {RsvpSchema} from "./rsvp.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {Request, Response} from "express";
 import {Status} from "../../utils/interfaces/Status";
-import {insertRsvp, selectRsvpsByRsvpProfileId} from "./rsvp.model";
+import {insertRsvp, selectRsvpsByRsvpMeetupId, selectRsvpsByRsvpProfileId} from "./rsvp.model";
 
 
 export async function postRsvpcontroller(request: Request, response: Response): Promise<Response> {
@@ -55,7 +55,7 @@ export async function getRsvpByRsvpMeetupIdController(request: Request, response
         }
         const {rsvpMeetupId} = validationResult.data
 
-        const data = await selectRsvpsByRsvpProfileId(rsvpMeetupId)
+        const data = await selectRsvpsByRsvpMeetupId(rsvpMeetupId)
 
         const status: Status = {status: 200, data, message: null}
         return response.json(status)

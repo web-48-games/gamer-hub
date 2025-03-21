@@ -12,6 +12,7 @@ import {messageRoute} from "./apis/message/message.route";
 import {meetUpRoute} from "./apis/meet-up/meet-up.route";
 import {profileRoute} from "./apis/profile/profile.route";
 import {favoriteRouter} from "./apis/favorite/favorite.route";
+import {rsvpRoute} from "./apis/rsvp/rsvp.route";
 
 
 // The following class creates the app and instantiates the server
@@ -57,6 +58,7 @@ export class App {
         this.app.use(meetUpRoute.basePath, meetUpRoute.router)
         this.app.use(profileRoute.basePath, profileRoute.router)
         this.app.use(favoriteRouter.basePath, favoriteRouter.router)
+        this.app.use (rsvpRoute.basePath, rsvpRoute.router)
     }
 
     // starts the server and tells the terminal to post a message that the server is running and on what port

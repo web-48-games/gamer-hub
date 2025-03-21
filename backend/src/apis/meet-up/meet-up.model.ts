@@ -41,3 +41,25 @@ export async function deleteMeetupByMeetupId(meetupId: string): Promise<string> 
 
     return 'Meetup successfully deleted'
 }
+
+export async function selectMeetupsByRsvpProfileId(rsvpProfileId: string) : Promise<Meetup[]> {
+    const rowList = <Meetup[]>await sql`
+        SELECT
+            meetup_id,
+            meetup_game_id,
+            meetup_host_profile_id,
+            meetup_address,
+            meetup_created_at,
+            meetup_description,
+            meetup_duration,
+            meetup_lat,
+            meetup_long,
+            meetup_start_time
+        FROM meetup
+        INNER JOIN 
+        rsvp
+        ON meetup_id = rsvp_meetup_id
+        WHERE rsvp_profile_id = ${rsvpProfileId} OR rsvp_profile_id = meetup_host_profile_id`
+
+    return MeetUpSchema.array().parse(rowList)
+}

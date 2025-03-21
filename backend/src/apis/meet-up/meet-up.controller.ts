@@ -1,9 +1,17 @@
 import {MeetUpSchema} from "./meet-up.validator";
 import {zodErrorResponse} from "../../utils/response.utils";
-import {deleteMeetupByMeetupId, insertMeetup, Meetup, selectMeetupByMeetupId} from "./meet-up.model";
+import {
+    deleteMeetupByMeetupId,
+    insertMeetup,
+    Meetup,
+    selectMeetupByMeetupId,
+    selectMeetupsByRsvpProfileId
+} from "./meet-up.model";
 import {Request, Response} from "express";
 import {PublicProfile} from "../profile/profile.model";
 import {z} from "zod";
+import {FavoriteSchema} from "../favorite/favorite.validator";
+import {RsvpSchema} from "../rsvp/rsvp.validator";
 // meet-up adding social functions
 
 //
@@ -96,6 +104,35 @@ export async function getMeetupByMeetupIdController(request: Request, response: 
             status: 500,
             message: error.message,
             data: []
+        })
+    }
+}
+
+export async function getMeetupsByRsvpProfileId(request: Request, response: Response): Promise<Response> {
+    try {
+        // validate request
+        const validationResult = RsvpSchema.pick({rsvpProfileId: true}).safeParse(request.params)
+
+        // if validation is not successful, tell the client
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        const {rsvpProfileId} = validationResult.data
+        const meetups = await selectMeetupsByRsvpProfileId(rsvpProfileId)
+
+        return response.json({
+            status: 200,
+            message: 'meetups retrieved',
+            data: meetups
+        })
+
+    } catch(error){
+        console.error(error);
+        return response.json({
+            status: 500,
+            message: error.message,
+            data: null
         })
     }
 }

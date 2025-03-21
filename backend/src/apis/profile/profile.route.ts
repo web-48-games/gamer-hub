@@ -23,7 +23,5 @@ router.route('/id/:profileId')
     .get(getPublicProfileByProfileIdController)
     .put(isLoggedInController, putProfileController)
     .delete(deleteProfileByProfileIdController)
-// router.route('/meetups/:profileId').get(getMeetupsByProfileIdController)
-
 
 export const profileRoute = {basePath, router}

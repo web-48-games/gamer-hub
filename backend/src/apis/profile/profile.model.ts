@@ -65,6 +65,9 @@ export async function deleteProfileByProfileId(profileId: string): Promise<strin
     return 'Profile successfully deleted'
 }
 
+// select profiles by rsvpMeetUpId
+// sql statement explanation:
+// select all public profiles that is the host (first inner join) or the rsvp'd members of the meetup (second inner join) and check/filter for single meetup via provided meetupId in parameter of function
 export async function selectProfilesByRsvpMeetupId(rsvpMeetupId: string): Promise<PublicProfile[]> {
     const rowList = <PublicProfile[]>await sql`
         SELECT
@@ -74,11 +77,9 @@ export async function selectProfilesByRsvpMeetupId(rsvpMeetupId: string): Promis
             profile_creation_date, 
             profile_name 
         FROM profile
-        INNER JOIN
-        rsvp
-        ON profile_id = rsvp_profile_id
-        WHERE 
-                    
+        INNER JOIN meetup m ON profile_id = m.meetup_host_profile_id
+        INNER JOIN rsvp r ON profile_id = r.rsvp_profile_id
+        WHERE m.meetup_id = ${rsvpMeetupId} OR r.rsvp_meetup_id = ${rsvpMeetupId}
         `
-    return
+    return PublicProfileSchema.array().parse(rowList)
 }

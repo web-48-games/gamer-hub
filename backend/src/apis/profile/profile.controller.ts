@@ -9,6 +9,7 @@ import {
     selectPublicProfileByProfileName, updateProfile
 } from "./profile.model";
 import {z} from "zod";
+import {RsvpSchema} from "../rsvp/rsvp.validator";
 
 
 export async function getPublicProfileByProfileNameController(request: Request, response: Response): Promise<Response> {
@@ -140,5 +141,31 @@ export async function deleteProfileByProfileIdController(request: Request, respo
     } catch(error) {
         console.error(error)
         return response.json({status: 500, message: error.message, data: null})
+    }
+}
+
+export async function getProfilesByRsvpMeetupId(request: Request, response: Response): Promise<Response> {
+    try {
+        const validationResult = RsvpSchema.pick({rsvpMeetupId: true}).safeParse(request.params)
+
+        if(!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        const {rsvpMeetupId} = validationResult.data
+        const profiles = await selectProfilesByRsvpMeetupId(rsvpMeetupId)
+
+        return response.json({
+            status: 200,
+            message: 'profiles retrieved',
+            data: profiles
+        })
+    } catch(error) {
+        console.error(error)
+        return response.json({
+            status: 500,
+            message: error.message,
+            data: null
+        })
     }
 }

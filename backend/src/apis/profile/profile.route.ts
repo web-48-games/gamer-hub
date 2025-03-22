@@ -2,7 +2,7 @@
 import {Router} from 'express'
 import {
     deleteProfileByProfileIdController,
-    getMeetupsByProfileIdController,
+    getMeetupsByProfileIdController, getProfilesByRsvpMeetupId,
     getPublicProfileByProfileIdController,
     getPublicProfileByProfileNameController,
     putProfileController
@@ -23,5 +23,7 @@ router.route('/id/:profileId')
     .get(getPublicProfileByProfileIdController)
     .put(isLoggedInController, putProfileController)
     .delete(deleteProfileByProfileIdController)
+router.route('/rsvpMeetupId/:rsvpMeetupId')
+    .get(getProfilesByRsvpMeetupId)
 
 export const profileRoute = {basePath, router}

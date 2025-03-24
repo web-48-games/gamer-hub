@@ -4,7 +4,7 @@ import {Request, Response} from "express";
 import {
     deleteProfileByProfileId,
     PrivateProfile, PublicProfile,
-    selectPrivateProfileByProfileId,
+    selectPrivateProfileByProfileId, selectProfilesByRsvpMeetupId,
     selectPublicProfileByProfileId,
     selectPublicProfileByProfileName, updateProfile
 } from "./profile.model";

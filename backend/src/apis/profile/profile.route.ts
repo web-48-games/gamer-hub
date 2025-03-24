@@ -2,7 +2,7 @@
 import {Router} from 'express'
 import {
     deleteProfileByProfileIdController,
-    getMeetupsByProfileIdController, getProfilesByRsvpMeetupId,
+    getProfilesByRsvpMeetupId,
     getPublicProfileByProfileIdController,
     getPublicProfileByProfileNameController,
     putProfileController

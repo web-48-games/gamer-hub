@@ -16,7 +16,8 @@ import {
     deleteMessageByMessageIdController,
     getAllMessagesController,
     updateMessageByMessageIdController,
-    getMessageByMessageMeetupId, getMessageByMessageProfileId
+    getMessagesByMessageMeetupId,
+    getMessagesByMessageProfileId
 } from "./message.controller";
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 
@@ -35,9 +36,9 @@ router.route('/messageId/:messageId')
     .delete(isLoggedInController,deleteMessageByMessageIdController)
     .put(isLoggedInController,updateMessageByMessageIdController)
 router.route('/messageMeetupId/:messageMeetupId')
-    .get(getMessageByMessageMeetupId)
+    .get(getMessagesByMessageMeetupId)
 router.route('/messageProfileId/:messageProfileId')
-    .get(getMessageByMessageProfileId)
+    .get(getMessagesByMessageProfileId)
 
 //Authenticated Routes
 export const messageRoute = {basePath, router}

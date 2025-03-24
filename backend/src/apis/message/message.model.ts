@@ -32,21 +32,17 @@ export async function selectMessageByMessageId(messageId: string): Promise<Messa
 }
 
 //function to get message from message table by messageMeetupId
-export async function selectMessageByMeetupId(meetupId: string): Promise<Message | null> {
-    const rowList = <Message[]>await sql`SELECT message_id, message_profile_id, message_meetup_id, message_content, message_timestamp FROM message WHERE message_id = ${meetupId}`
+export async function selectMessagesByMeetupId(meetupId: string): Promise<Message[]> {
+    const rowList = <Message[]>await sql`SELECT message_id, message_profile_id, message_meetup_id, message_content, message_timestamp FROM message WHERE message_meetup_id = ${meetupId}`
 
-    const result = MessageSchema.array().max(1).parse(rowList)
-
-    return result.length === 0 ? null : result[0]
+    return MessageSchema.array().parse(rowList)
 }
 
 //function to get message from message table by messageMeetupId
-export async function selectMessageByProfileId(profileId: string): Promise<Message | null> {
+export async function selectMessagesByProfileId(profileId: string): Promise<Message[]> {
     const rowList = <Message[]>await sql`SELECT message_id, message_profile_id, message_meetup_id, message_content, message_timestamp FROM message WHERE message_profile_id = ${profileId}`
 
-    const result = MessageSchema.array().max(1).parse(rowList)
-
-    return result.length === 0 ? null : result[0]
+    return MessageSchema.array().parse(rowList)
 }
 
 //function to update message in message table

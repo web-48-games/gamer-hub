@@ -7,8 +7,11 @@ import {
     deleteMessageByMessageId,
     insertMessage,
     Message,
-    selectAllMessages, selectMessageByMeetupId, selectMessagebyMeetupId,
-    selectMessageByMessageId, selectMessageByProfileId, updateMessage
+    selectAllMessages,
+    selectMessageByMessageId,
+    selectMessagesByMeetupId,
+    selectMessagesByProfileId,
+    updateMessage
 } from "./message.model";
 import {Status} from "../../utils/interfaces/Status";
 import {PublicProfile} from "../profile/profile.model";
@@ -72,7 +75,7 @@ export async function getAllMessagesController(request: Request, response: Respo
 }
 
 //function to get messageId by messageMeetupId
-export async function getMessageByMessageMeetupId (request: Request, response: Response): Promise<Response> {
+export async function getMessagesByMessageMeetupId (request: Request, response: Response): Promise<Response> {
     try {
 
     const validationResult = z.string().uuid({message: 'please provide a valid messageMeetupId'}).safeParse(request.params.messageMeetupId)
@@ -83,7 +86,7 @@ export async function getMessageByMessageMeetupId (request: Request, response: R
 
     const messageMeetupId = validationResult.data
 
-    const data = await selectMessageByMeetupId(messageMeetupId)
+    const data = await selectMessagesByMeetupId(messageMeetupId)
 
     return response.json({status: 200, message: 'Message Successfully Found', data: data})
 
@@ -98,7 +101,7 @@ export async function getMessageByMessageMeetupId (request: Request, response: R
 }
 
 //function to get messageId by messageProfileId
-export async function getMessageByMessageProfileId (request: Request, response: Response): Promise<Response> {
+export async function getMessagesByMessageProfileId (request: Request, response: Response): Promise<Response> {
     try {
 
         const validationResult = z.string().uuid({message: 'please provide a valid messageProfileId'}).safeParse(request.params.messageProfileId)
@@ -109,7 +112,7 @@ export async function getMessageByMessageProfileId (request: Request, response: 
 
         const messageProfileId = validationResult.data
 
-        const data = await selectMessageByProfileId(messageProfileId)
+        const data = await selectMessagesByProfileId(messageProfileId)
 
         return response.json({status: 200, message: 'Message Successfully Found', data: data})
 

@@ -5,24 +5,33 @@ export const ProfileSchema = z.object({
         invalid_type_error: 'Please provide a valid profileId'
     })
         .uuid({ message: 'please provide a valid profileId' }),
-    profileAbout: z.string({
-        required_error: 'profile about is a required field.',
-        invalid_type_error: 'please provide a valid profile about'
+    profileAboutMe: z.string({
+        required_error: 'profile about me is a required field.',
+        invalid_type_error: 'please provide a valid profile about me'
     })
         .max(512, { message: 'profile about length is to long' })
         .nullable(),
-    profileImageUrl: z.string({
+    profileAvatarUrl: z.string({
         required_error: 'profileImage is required',
         invalid_type_error: 'please provide a valid profileImageUrl'
     })
         .trim()
-        .url({ message: 'please provide a valid profile image url' })
-        .max(255, { message: 'profile image url is to long' })
+        .url({ message: 'please provide a valid image url' })
+        .max(255, { message: 'profile avtar url is to long' })
         .nullable(),
-    profileName: z.string()
+    profileName: z.string({
+        required_error: 'profileName is required',
+        invalid_type_error: 'please provide a valid profileName'
+    })
         .trim()
-        .min(1, { message: 'please provide a valid profile name (min 1 characters)' })
-        .max(32, { message: 'please provide a valid profile name (max 32 characters)' })
+        .min(1, { message: 'please provide a valid profileName (min 1 characters)' })
+        .max(32, { message: 'please provide a valid profileName (max 32 characters)' }),
+    profileCreationDate: z.coerce.date({
+        required_error: 'profileCreationDate is required',
+        invalid_type_error: 'please provide a valid profileCreationDate'
+
+    })
+        .nullable()
 })
 
 export type Profile = z.infer<typeof ProfileSchema>

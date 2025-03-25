@@ -14,14 +14,14 @@ export async function insertRsvp(rsvp: Rsvp):Promise<string> {
     return 'Rsvp inserted'
 }
 
-export async function selectRsvpsByRsvpProfileId(rsvpProfileId: string):Promise<Rsvp | null> {
+export async function selectRsvpsByRsvpProfileId(rsvpProfileId: string):Promise<Rsvp[]> {
     const rowList = <Rsvp[]>await sql` SELECT rsvp_profile_id, rsvp_meetup_id, rsvp_at FROM rsvp WHERE rsvp_profile_id = ${rsvpProfileId}`
 
 
     return RsvpSchema.array().parse(rowList)
 }
 
-export async function selectRsvpsByRsvpMeetupId(rsvpMeetupId: string):Promise<Rsvp | null> {
+export async function selectRsvpsByRsvpMeetupId(rsvpMeetupId: string):Promise<Rsvp[]> {
     const rowList = <Rsvp[]>await sql`SELECT rsvp_profile_id, rsvp_meetup_id, rsvp_at FROM rsvp WHERE rsvp_meetup_id =  ${rsvpMeetupId}`
 
     return RsvpSchema.array().parse(rowList)

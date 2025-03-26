@@ -4,11 +4,12 @@ import {SignUpFormModal} from "@/app/sign-in/sign-in-form/sign-up-form-modal/sig
 import { SignIn, SignInProfileSchema } from '@/utils/models/sign-in/sign-in.model'
 import { useForm } from 'react-hook-form'
 import {zodResolver} from "@hookform/resolvers/zod";
-import { DisplayError } from '@/components/display-error'
-import { DisplayStatus } from '@/components/display-status'
+
 import { useState } from 'react'
 import { Status } from '@/utils/interfaces/Status'
 import { postSignIn } from '@/utils/models/sign-in/sign-in.action'
+import { DisplayError } from "@/app/components/display-error";
+import { DisplayStatus } from "@/app/components/display-status";
 
 export function SignInForm() {
     const [status, setStatus] = useState<Status|null>(null)

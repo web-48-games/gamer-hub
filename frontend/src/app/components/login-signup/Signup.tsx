@@ -7,7 +7,12 @@ import React, { useState } from "react";
 import { DisplayStatus } from "../display-status";
 import { DisplayError } from "../display-error";
 import { Status } from "@/utils/interfaces/Status";
-import { SignUp } from "@/utils/models/sign-up/sign-up.model";
+import {SignUp, SignUpSchema} from "@/utils/models/sign-up/sign-up.model";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {postSignUp} from "@/utils/models/sign-up/sign-up.action";
+import {v7 as uuidv7} from 'uuid'
+import {Profile} from "@/utils/models/profile/profile.model";
 
 type SignupProps = {
     toggleFunction: () => void
@@ -18,11 +23,48 @@ export function Signup({toggleFunction, closeModal}: SignupProps) {
 
     const [status, setStatus] = useState<Status | null>(null)
 
+
     const defaultValues : SignUp = {
-        profileName: '',
+        profileId: '',
+        profileAboutMe: '',
         profileEmail: '',
+        profileName: '',
         profilePassword: '',
         profilePasswordConfirm: ''
+    }
+
+    // get access to return values from react hook form and provide validation
+    const {register, handleSubmit, reset, formState:{errors}} = useForm<SignUp>({
+        resolver: zodResolver(SignUpSchema),
+        defaultValues,
+        mode: 'onBlur'
+    })
+
+    const fireServerAction = async (data: SignUp) => {
+        try {
+            // call to postSignUp server action
+            const signup: SignUp = {
+                profileId: uuidv7(),
+                profileAboutMe: '',
+                profileEmail: '',
+                profileName: '',
+                profilePassword: '',
+                profilePasswordConfirm: ''
+            }
+
+            const response = await postSignUp(data)
+            if (response.status === 200) {
+                reset()
+            }
+            // use setStatus to display status from express
+            setStatus(response)
+        } catch(error) {
+            setStatus({
+                status: 500,
+                message: 'sign up request failed try again',
+                data: undefined
+            })
+        }
     }
 
     return (
@@ -30,7 +72,7 @@ export function Signup({toggleFunction, closeModal}: SignupProps) {
             <ModalContainer onClose={closeModal}>
                 <TitleComponent mode="Sign-up!" />
 
-                <form className="space-y-4 mt-4">
+                <form className="space-y-4 mt-4" onSubmit={handleSubmit(fireServerAction)}>
                     <InputField inputProps={{
                         name: "profileName",
                         type: "text",

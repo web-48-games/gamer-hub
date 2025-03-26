@@ -7,14 +7,7 @@ export const SignUpSchema = z.object({
         invalid_type_error: 'Please provide valid profileId',
     })
         .uuid({ message: 'please provide a valid profileId' }),
-    profileAboutMe: z.string({
-        required_error: 'profile about me is a required field.',
-        invalid_type_error: 'please provide a valid profile about me'
-    })
-        .max(512, { message: 'profile about length is to long' })
-        .nullable(),
     profileName: z.string({
-
         required_error: 'profileName is required',
         invalid_type_error: 'Please provide a valid profileName',
     })

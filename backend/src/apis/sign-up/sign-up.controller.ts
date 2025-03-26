@@ -47,8 +47,11 @@ export async function signUpController(request: Request, response: Response) {
 
         return response.json({data: null, message, status:200})
 
-    } catch (error) {
+    } catch (error: any) {
         console.error(error)
+        if (error.message === 'Forbidden') {
+            return response.json({status: 200, message: 'Bypassing Email Validation'})
+        }
         return serverErrorResponse(response)
     }
 

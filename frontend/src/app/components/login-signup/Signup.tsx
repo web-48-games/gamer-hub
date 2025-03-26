@@ -25,8 +25,7 @@ export function Signup({toggleFunction, closeModal}: SignupProps) {
 
 
     const defaultValues : SignUp = {
-        profileId: '',
-        profileAboutMe: '',
+        profileId: uuidv7(),
         profileEmail: '',
         profileName: '',
         profilePassword: '',
@@ -43,14 +42,7 @@ export function Signup({toggleFunction, closeModal}: SignupProps) {
     const fireServerAction = async (data: SignUp) => {
         try {
             // call to postSignUp server action
-            const signup: SignUp = {
-                profileId: uuidv7(),
-                profileAboutMe: '',
-                profileEmail: '',
-                profileName: '',
-                profilePassword: '',
-                profilePasswordConfirm: ''
-            }
+
 
             const response = await postSignUp(data)
             if (response.status === 200) {

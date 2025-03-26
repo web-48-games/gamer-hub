@@ -1,9 +1,9 @@
-import {CreateTitle} from "@/app/create-session/CreateTitle";
+import {CreateTitle} from "@/app/create-meetup/CreateTitle";
 import {InputField} from "@/app/Components/login-signup/InputField";
 import React from "react";
 import {ActionButton} from "@/app/Components/login-signup/ActionButton";
 
-export function CreateSession() {
+export function CreateMeetup() {
     // const handleSubmit = (e: React.FormEvent) => {
     //     e.preventDefault()
     //     // add more create session logic here if needed

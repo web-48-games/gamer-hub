@@ -3,7 +3,10 @@ import {ActionButton} from "@/app/Components/login-signup/ActionButton";
 import {ToggleLink} from "@/app/Components/login-signup/ToggleLink";
 import {InputField} from "@/app/Components/login-signup/InputField";
 import {ModalContainer} from "@/app/Components/login-signup/ModalContainer";
-import React from "react";
+import React, { useState } from "react";
+import { DisplayStatus } from "../display-status";
+import { DisplayError } from "../display-error";
+import { Status } from "@/utils/interfaces/Status";
 
 type SignupProps = {
     toggleFunction: () => void
@@ -11,6 +14,15 @@ type SignupProps = {
 }
 
 export function Signup({toggleFunction, closeModal}: SignupProps) {
+
+    const [status, setStatus] = useState<Status | null>(null)
+
+    const defaultValues : SignUp = {
+        profileName: '',
+        profileEmail: '',
+        profilePassword: ''
+    }
+
     return (
         <>
             <ModalContainer onClose={closeModal}>
@@ -18,25 +30,31 @@ export function Signup({toggleFunction, closeModal}: SignupProps) {
 
                 <form className="space-y-4 mt-4">
                     <InputField inputProps={{
-                        name: "username",
+                        name: "profileName",
                         type: "text",
-                        id: "username",
-                        labelText: "Username:"
+                        id: "profileName",
+                        labelText: "Name:",
+                        register: register
                     }} />
+                    <DisplayError error={errors?.profileName?.message} />
 
                     <InputField inputProps={{
-                        name: "email",
+                        name: "profileEmail",
                         type: "email",
-                        id: "email",
-                        labelText: "Email:"
+                        id: "profileEmail",
+                        labelText: "Email:",
+                        register: register
                     }} />
+                    <DisplayError error={errors?.profileEmail?.message} />
 
                     <InputField inputProps={{
-                        name: "password",
+                        name: "profilePassword",
                         type: "password",
-                        id: "password",
-                        labelText: "Create a Password:"
+                        id: "profilePassword",
+                        labelText: "Create a Password:",
+                        register: register
                     }} />
+                    <DisplayError error={errors?.profilePassword?.message} />
 
                     <div className="mt-4">
                         <ToggleLink mode="signup" toggleFunction={toggleFunction} />
@@ -45,6 +63,7 @@ export function Signup({toggleFunction, closeModal}: SignupProps) {
                     <div className="mt-4">
                         <ActionButton buttonText="Sign Up" />
                     </div>
+                    <DisplayStatus status={status} />
                 </form>
             </ModalContainer>
         </>

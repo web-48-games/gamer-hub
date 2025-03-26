@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import { DisplayStatus } from "../display-status";
 import { DisplayError } from "../display-error";
 import { Status } from "@/utils/interfaces/Status";
+import { SignUp } from "@/utils/models/sign-up/sign-up.model";
 
 type SignupProps = {
     toggleFunction: () => void
@@ -20,7 +21,8 @@ export function Signup({toggleFunction, closeModal}: SignupProps) {
     const defaultValues : SignUp = {
         profileName: '',
         profileEmail: '',
-        profilePassword: ''
+        profilePassword: '',
+        profilePasswordConfirm: ''
     }
 
     return (
@@ -55,6 +57,15 @@ export function Signup({toggleFunction, closeModal}: SignupProps) {
                         register: register
                     }} />
                     <DisplayError error={errors?.profilePassword?.message} />
+
+                    <InputField inputProps={{
+                        name: "profilePasswordConfirm",
+                        type: "password",
+                        id: "profilePasswordConfirm",
+                        labelText: "Confirm Password:",
+                        register: register
+                    }} />
+                    <DisplayError error={errors?.profilePasswordConfirm?.message} />
 
                     <div className="mt-4">
                         <ToggleLink mode="signup" toggleFunction={toggleFunction} />

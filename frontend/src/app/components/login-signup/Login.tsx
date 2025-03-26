@@ -3,7 +3,14 @@ import {ActionButton} from "@/app/Components/login-signup/ActionButton";
 import {ToggleLink} from "@/app/Components/login-signup/ToggleLink";
 import {InputField} from "@/app/Components/login-signup/InputField";
 import {ModalContainer} from "@/app/Components/login-signup/ModalContainer";
-import React from "react";
+import React, {useState} from "react";
+import {Status} from "@/utils/interfaces/Status";
+import {SignIn, SignInProfileSchema} from "@/utils/models/sign-in/sign-in.model";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {postSignIn} from "@/utils/models/sign-in/sign-in.action";
+import {DisplayError} from "@/app/components/display-error";
+import {DisplayStatus} from "@/app/components/display-status";
 
 type LoginProps = {
     toggleFunction: () => void
@@ -11,9 +18,40 @@ type LoginProps = {
 }
 
 export function Login({toggleFunction, closeModal}: LoginProps) {
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        // add more login logic here
+    const [status, setStatus] = useState<Status|null>(null)
+
+    // define my default values
+    const defaultValues : SignIn = {
+        profileEmail: '',
+        profilePassword: ''
+    }
+    // get access to return values from react hook form and provide validation
+    const {register, handleSubmit, reset, formState:{errors}} = useForm<SignIn>({
+        resolver: zodResolver(SignInProfileSchema),
+        defaultValues,
+        mode:'onBlur'
+    })
+
+    // register form fields with react hook form
+    // create a place to display errors
+    // create a place to display status
+
+
+    // define what happens onSubmit
+    const fireServerAction = async (data: SignIn) => {
+        try {
+            // call to the postSignIn server action
+            const response = await postSignIn(data)
+            if (response.status === 200) {
+                // if status object returned from express is 200 resetForm
+                reset()
+            }
+            // use setStatus to display status from express
+            setStatus(response)
+        } catch (error) {
+            // if an error occurs let user know to try later
+            setStatus({status: 500, message: 'sign in request failed try again', data:undefined})
+        }
     }
 
     return (
@@ -21,20 +59,24 @@ export function Login({toggleFunction, closeModal}: LoginProps) {
             <ModalContainer onClose={closeModal}>
                 <TitleComponent mode="Welcome!" />
 
-                <form className="space-y-4 mt-4" onSubmit={handleSubmit}>
+                <form className="space-y-4 mt-4" onSubmit={handleSubmit(fireServerAction)}>
                     <InputField inputProps={{
-                        name: "username",
+                        name: "profileEmail",
                         type: "text",
-                        id: "username",
-                        labelText: "Username or Email:"
+                        id: "profileEmail",
+                        labelText: "Email:",
+                        register: register
                     }} />
+                    <DisplayError error={errors?.profileEmail?.message} />
 
                     <InputField inputProps={{
-                        name: "password",
+                        name: "profilePassword",
                         type: "password",
-                        id: "password",
-                        labelText: "Password:"
+                        id: "profilePassword",
+                        labelText: "Password:",
+                        register: register
                     }} />
+                    <DisplayError error={errors?.profilePassword?.message} />
 
                     <div className="mt-4">
                         <ToggleLink mode="login" toggleFunction={toggleFunction} />
@@ -43,6 +85,7 @@ export function Login({toggleFunction, closeModal}: LoginProps) {
                     <div className="mt-4">
                         <ActionButton buttonText="Log In" />
                     </div>
+                    <DisplayStatus status={status} />
                 </form>
             </ModalContainer>
         </>

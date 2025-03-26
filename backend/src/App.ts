@@ -13,7 +13,7 @@ import {meetUpRoute} from "./apis/meet-up/meet-up.route";
 import {profileRoute} from "./apis/profile/profile.route";
 import {favoriteRouter} from "./apis/favorite/favorite.route";
 import {rsvpRoute} from "./apis/rsvp/rsvp.route";
-
+import helmet from 'helmet'
 
 // The following class creates the app and instantiates the server
 export class App {
@@ -47,6 +47,7 @@ export class App {
             secret: process.env.SESSION_SECRET as string,
             resave: false
         }))
+        this.app.use(helmet())
     }
     // private method for setting up routes in their basic sense (ie. any route that performs an action on profiles starts with /profiles)
     private routes (): void {

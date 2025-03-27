@@ -121,6 +121,7 @@ export async function getGamesByGenre(request: Request, response: Response): Pro
     }
 }
 
+// maybe come back later
 export async function getGamesByYearPublished(request: Request, response: Response): Promise<Response> {
     try {
         // gives safeparse an object instead of the string that is gameYearPublished

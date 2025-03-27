@@ -223,3 +223,30 @@ export async function deleteMessageByMessageIdController (request: Request, resp
             message: error.message, data: []})
     }
 }
+
+export async function getMessagebyMessageId(request: Request, response: Response): Promise<Response> {
+    try {
+        const validationResult = z.string().uuid({message: 'Please provide a valid messageId or null'}).safeParse(request.params.messageId)
+
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        const messageId = validationResult.data
+
+        const result = await selectMessageByMessageId(messageId)
+
+        return response.json({
+            status: 200,
+            message: 'message retrieved',
+            data: result
+        })
+
+    } catch(error) {
+        console.error(error)
+        return response.json({
+            status: 500,
+            message: 'Internal server error',
+            data: null})
+    }
+}

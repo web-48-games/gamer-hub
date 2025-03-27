@@ -17,7 +17,7 @@ import {
     getAllMessagesController,
     updateMessageByMessageIdController,
     getMessagesByMessageMeetupId,
-    getMessagesByMessageProfileId
+    getMessagesByMessageProfileId, getMessagebyMessageId
 } from "./message.controller";
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 
@@ -33,6 +33,7 @@ router.route('/')
     .post(postMessageController)
     .get(getAllMessagesController)
 router.route('/messageId/:messageId')
+    .get(getMessagebyMessageId)
     .delete(isLoggedInController,deleteMessageByMessageIdController)
     .put(isLoggedInController,updateMessageByMessageIdController)
 router.route('/messageMeetupId/:messageMeetupId')

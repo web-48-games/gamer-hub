@@ -2,7 +2,7 @@ import {GameSchema} from "./game.validator";
 import {Request, Response} from "express";
 import {zodErrorResponse} from "../../utils/response.utils";
 import {
-    Game, insertGame, selectFavoriteGames,
+    Game, insertGame, selectAllGenres, selectFavoriteGames,
     selectFeaturedGames,
     selectGameByGameId,
     selectGameByGameName,
@@ -195,6 +195,26 @@ export async function getGamesByFavoriteProfileId(request: Request, response: Re
             status: 200,
             message: 'successfully selected favorite games for a profile',
             data: favoriteGames })
+
+    } catch(error) {
+        console.error(error)
+        return response.json({
+            status: 500,
+            message: error.message,
+            data: null
+        })
+    }
+}
+
+export async function getGameGenres(request: Request, response: Response): Promise<Response> {
+    try {
+        const allGenres = await selectAllGenres()
+        const genres: string[] = allGenres.map(genre => genre.unnest)
+        return response.json({
+            status: 200,
+            message: 'All Genres found successfully',
+            data: genres
+        })
 
     } catch(error) {
         console.error(error)

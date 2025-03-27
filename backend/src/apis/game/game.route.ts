@@ -2,7 +2,7 @@ import {Router} from "express";
 import {
     getFeaturedGamesController,
     getGameByGameIdController,
-    getGameByGameNameController, getGamesByFavoriteProfileId,
+    getGameByGameNameController, getGameGenres, getGamesByFavoriteProfileId,
     getGamesByGenre,
     getGamesByYearPublished,
     postGamesController
@@ -21,6 +21,7 @@ router.route('/genre/:gameGenre').get(getGamesByGenre)
 router.route('/year/:gameYearPublished').get(getGamesByYearPublished)
 router.route('/featured').get(getFeaturedGamesController)
 router.route('/favorites/:favoriteProfileId').get(getGamesByFavoriteProfileId)
+router.route('/allGenres/').get(getGameGenres)
 
 // Authenticated routes
 export const gameRoute = { basePath, router }

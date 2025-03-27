@@ -76,3 +76,7 @@ export async function selectFavoriteGames(favoriteProfileId: string) : Promise<G
                                            ON game_id = favorite_game_id`
     return GameSchema.array().parse(rowList)
 }
+
+export async function selectAllGenres() : Promise<[]> {
+    return <[]>await sql`SELECT DISTINCT (unnest(game.game_genre)) FROM game`
+}

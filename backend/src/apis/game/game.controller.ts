@@ -102,16 +102,7 @@ export async function getGameByGameNameController(request: Request, response: Re
 
 export async function getGamesByGenre(request: Request, response: Response): Promise<Response> {
     try {
-        let genres = []
-        if (!Array.isArray(request.query.gameGenre)) {
-            genres.push(request.query.gameGenre)
-        } else {
-            genres = request.query.gameGenre
-        }
-
-
-
-        const validationResult = z.string({message: 'please provide valid gameGenre'}).min(1, {message: 'Game genre must be at least one character.'}).max(64, {message: 'Game genre cannot exceed 64 characters.'}).array().safeParse(genres)
+        const validationResult = z.string({message: 'please provide valid gameGenre'}).min(1, {message: 'Game genre must be at least one character.'}).max(64, {message: 'Game genre cannot exceed 64 characters.'}).safeParse(request.params.gameGenre)
 
         if (!validationResult.success) {
             return zodErrorResponse(response, validationResult.error)
@@ -122,7 +113,7 @@ export async function getGamesByGenre(request: Request, response: Response): Pro
 
         const gamesData = await selectGamesByGenre(gameGenres)
 
-        return response.json({ status: 200, message: null, data: gamesData })
+        return response.json({ status: 200, message: 'Number of games found ' + gamesData.length, data: gamesData })
 
     } catch(error) {
         console.error(error)

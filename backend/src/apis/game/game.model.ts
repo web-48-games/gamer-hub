@@ -22,8 +22,8 @@ export async function selectGameByGameId(gameId: string): Promise<Game | null> {
     return result.length === 1 ? result[0] : null
 }
 
-export async function selectGamesByGenre(gameGenre: string[]): Promise<Game[]> {
-    const rowList = <Game[]>await sql`SELECT game_id, game_description, game_genre, game_image_url, game_max_players, game_name, game_year_published FROM game WHERE game_genre=${gameGenre}`
+export async function selectGamesByGenre(gameGenre: string): Promise<Game[]> {
+    const rowList = <Game[]>await sql`SELECT game_id, game_description, game_genre, game_image_url, game_max_players, game_name, game_year_published FROM game WHERE ${gameGenre}= ANY(game_genre)`
 
     return GameSchema.array().parse(rowList)
 }

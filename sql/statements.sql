@@ -1,0 +1,1 @@
+SELECT DISTINCT (unnest(game.game_genre)) FROM game;

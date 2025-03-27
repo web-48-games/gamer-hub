@@ -11,7 +11,7 @@ export type SessionCardProps = {
     time: string;
 }
 
-export function SessionCard({ id, hostName, hostAvatar, gameName, date, time }: SessionCardProps) {
+export function MeetupCard({ id, hostName, hostAvatar, gameName, date, time }: SessionCardProps) {
     return (
         <div className="flex my-4 rounded-lg overflow-hidden bg-cyan-50 shadow-md">
             <div className="w-24 h-24 bg-cyan-100 flex items-center justify-center">
@@ -32,7 +32,7 @@ export function SessionCard({ id, hostName, hostAvatar, gameName, date, time }: 
                 <div>Game: {gameName}</div>
                 <div>Join us on {date} @ {time}</div>
                 <div className="text-right">
-                    <Link href={`/sessions/${id}`} className="text-sm text-gray-600">
+                    <Link href={`/meetups/${id}`} className="text-sm text-gray-600">
                         View Session
                     </Link>
                 </div>

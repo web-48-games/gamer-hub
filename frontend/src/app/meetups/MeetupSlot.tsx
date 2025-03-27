@@ -11,7 +11,7 @@ type SessionSlotProps = {
     onJoin?: () => void;
 }
 
-export function SessionSlot({ isFilled, playerName, playerAvatar, playerAbout, onJoin }: SessionSlotProps) {
+export function MeetupSlot({ isFilled, playerName, playerAvatar, playerAbout, onJoin }: SessionSlotProps) {
     return (
         <div className="flex my-2 rounded-lg overflow-hidden bg-cyan-50 shadow-sm">
             <div className="w-16 h-16 bg-cyan-100 flex items-center justify-center">

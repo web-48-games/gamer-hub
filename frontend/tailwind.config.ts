@@ -11,13 +11,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        sandyBrown: "#F4A261",
-        brownAccent: "#391C04",
-        mint: "#8BD0AD",
-        blueAccent: "#f0f9ff",
-        floralWhite: "#FBF0DA",
-        charcoal: "#264653",
-        burntSienna: "#EB866F"
+       redBrown: "#471D18",
+       sandyYellow: "#F8D896",
+       turquoise: "#30D5C8"
       },
     },
   },

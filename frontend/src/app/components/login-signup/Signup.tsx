@@ -4,8 +4,9 @@ import {ToggleLink} from "@/app/Components/login-signup/ToggleLink";
 import {InputField} from "@/app/Components/login-signup/InputField";
 import {ModalContainer} from "@/app/Components/login-signup/ModalContainer";
 import React, { useState } from "react";
-import { DisplayStatus } from "../display-status";
-import { DisplayError } from "../display-error";
+import { DisplayStatus } from "@/app/components/display-status";
+
+import {DisplayError} from "@/app/components/display-error";
 import { Status } from "@/utils/interfaces/Status";
 import {SignUp, SignUpSchema} from "@/utils/models/sign-up/sign-up.model";
 import { useForm } from "react-hook-form";

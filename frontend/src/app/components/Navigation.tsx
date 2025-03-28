@@ -28,10 +28,10 @@ export function Navigation() {
 
             <NavbarCollapse className={"order-4 md:order-2 mx-auto"}>
 
-                <NavbarLink className={"mt-3 text-[1rem] text-white"} href="/">Home</NavbarLink>
-                <NavbarLink className={"mt-3 text-[1rem] text-white"} href="/games">Games</NavbarLink>
-                <NavbarLink className={"mt-3 text-[1rem] text-white"} href="/sessions">Sessions</NavbarLink>
-                <NavbarLink className={"mt-3 text-[1rem] text-white"} href="/profile">Profile Page</NavbarLink>
+                <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/">Home</NavbarLink>
+                <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/games">Games</NavbarLink>
+                <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/meetups">Meetups</NavbarLink>
+                <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/profile">Profile Page</NavbarLink>
 
             </NavbarCollapse>
 

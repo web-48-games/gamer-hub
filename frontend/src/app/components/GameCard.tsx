@@ -10,8 +10,8 @@ export function GameCard(props: GameCardProps) {
 
     return (
         <>
-            <div className={"m-10 sm:m-20 md:max-w-lg bg-blue-100 border-2 border-charcoal p-6 rounded-lg"}>
-                <div className={"flex flex-col flex-wrap items-center sm:flex-row p-4 bg-white"}>
+            <div className={"m-10 sm:m-20 md:max-w-lg bg-redBrown border-2 border-charcoal p-6 rounded-lg"}>
+                <div className={"flex flex-col flex-wrap items-center sm:flex-row p-4 bg-sandyYellow"}>
                     <div>
                         <img className={"w-full"} src={gameImageUrl} alt="Wingspan Placeholder"/>
                     </div>

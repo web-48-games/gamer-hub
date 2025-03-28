@@ -13,7 +13,7 @@ import {z} from "zod";
 import {FavoriteSchema} from "../favorite/favorite.validator";
 import {RsvpSchema} from "../rsvp/rsvp.validator";
 // meet-up adding social functions
-
+//meetup by category,
 //
 export async function postMeetupController(request: Request, response: Response):Promise<Response> {
     try {

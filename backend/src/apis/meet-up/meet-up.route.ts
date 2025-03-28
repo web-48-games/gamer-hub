@@ -12,8 +12,9 @@ const basePath = '/apis/meetups' as const
 const router = Router()
 
 router.route('/').post(postMeetupController)
-router.route('/:meetupId').delete(isLoggedInController, deleteMeetupByMeetupIdController)
-router.route('/meetupId/:meetupId').get(getMeetupByMeetupIdController)
+router.route('/:meetupId')
+    .delete(isLoggedInController, deleteMeetupByMeetupIdController)
+    .get(getMeetupByMeetupIdController)
 router.route('/profileId/:rsvpProfileId')
     .get(getMeetupsByRsvpProfileId)
 

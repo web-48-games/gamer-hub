@@ -1,11 +1,11 @@
 'use server'
 
 import { Status } from '@/utils/interfaces/Status'
-import { Meetup, MeetUpSchema } from "@/utils/models/meetups/meetup.model";
+import {Meetup, MeetUpSchema, PostMeetup} from "@/utils/models/meetups/meetup.model";
 import {setHeaders} from "@/utils/set-headers.utils";
 
-export async function postMeetup (meetup: Meetup) : Promise<Status> {
-    console.log(meetup)
+export async function postMeetup (meetup: PostMeetup) : Promise<Status> {
+
     return fetch (
         `${process.env.PUBLIC_API_URL}/apis/meetups/`,
         {

@@ -1,8 +1,11 @@
+'use server'
+
 // app/meetups/[id]/page.tsx
-"use client"
 import React from 'react';
 import { MeetupSlot } from '../MeetupSlot';
 import { Message } from '../Message';
+import {fetchMeetupByMeetupId} from "@/utils/models/meetups/meetup.action";
+import {fetchGameByGameId} from "@/utils/models/game/game.action";
 
 // Mock data for testing
 const mockMeetupInfo = {
@@ -38,26 +41,33 @@ const mockMeetupInfo = {
     ]
 };
 
-export default function meetupInfoPage({ params }: { params: { id: string } }) {
+export default async function meetupInfoPage({ params }: { params: { id: string } }) {
     // extracting id from the url of the page
     const meetupId = params.id;
+
+    const meetup = await fetchMeetupByMeetupId(meetupId)
+    const game = await fetchGameByGameId(meetup.meetupGameId)
+    const rsvp = await fetch
+
+    console.log(game)
+
     // when backend is implemented, fetch the meetup data based on the ID
-    const meetup = mockMeetupInfo;
+    const meetupDummyData = mockMeetupInfo;
 
     // calculate empty slots
-    const emptySlots = Array(meetup.capacity - meetup.joined.length).fill(null);
+    const emptySlots = Array(meetupDummyData.capacity - meetupDummyData.joined.length).fill(null);
 
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-2xl font-bold text-center mb-6">
-                #{meetupId} For {meetup.gameName}
+                #{meetupId} For {game.gameName}
             </h1>
 
             <div className="max-w-md mx-auto">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 mb-8">
                     <div>
                         <h2 className="text-xl font-semibold mb-4 text-center">JOINED</h2>
-                        {meetup.joined.map((player, index) => (
+                        {meetupDummyData.joined.map((player, index) => (
                             <MeetupSlot
                                 key={index}
                                 isFilled={true}
@@ -70,13 +80,13 @@ export default function meetupInfoPage({ params }: { params: { id: string } }) {
 
                     <div>
                         <h2 className="text-xl font-semibold mb-4 text-center">AVAILABLE</h2>
-                        {emptySlots.map((_, index) => (
-                            <MeetupSlot
-                                key={index}
-                                isFilled={false}
-                                onJoin={() => console.log('Join clicked. Replace later with feature to actually have player occupy the slot')}
-                            />
-                        ))}
+                        {/*{emptySlots.map((_, index) => (*/}
+                        {/*    <MeetupSlot*/}
+                        {/*        key={index}*/}
+                        {/*        isFilled={false}*/}
+                        {/*        onJoin={() => console.log('Join clicked. Replace later with feature to actually have player occupy the slot')}*/}
+                        {/*    />*/}
+                        {/*))}*/}
                     </div>
                 </div>
 
@@ -87,7 +97,7 @@ export default function meetupInfoPage({ params }: { params: { id: string } }) {
                     </button>
 
                     <div className="bg-pink-50 p-4 rounded-lg">
-                        {meetup.messages.map((message, index) => (
+                        {meetupDummyData.messages.map((message, index) => (
                             <Message
                                 key={index}
                                 senderName={message.senderName}

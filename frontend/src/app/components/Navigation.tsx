@@ -22,7 +22,7 @@ export function Navigation() {
                 <span className="self-center whitespace-nowrap text-xl font-semibold text-white dark:text-white">A Game Away</span>
             </NavbarBrand>
             <div className="flex order-2 md:order-3 ml-4 ">
-                <Button onClick={handleAuthButtonClick} className="bg-turquoise text-charcoal hover:!text-floralWhite">Login/Sign Up</Button>
+                <Button onClick={handleAuthButtonClick} className="bg-turquoise">Login/Sign Up</Button>
                 <NavbarToggle />
             </div>
 

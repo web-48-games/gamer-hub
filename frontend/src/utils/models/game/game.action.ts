@@ -2,7 +2,7 @@
 
 import { Game, GameSchema } from '@/utils/models/game/game.model'
 
-export async function fetchGameByGameId(gameId: string) : Promise<Game> {
+export async function fetchGameByGameId(gameId: string) : Promise<Game | null> {
      const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/games/gameId/${gameId}`,
          {
              method: 'get',
@@ -15,7 +15,7 @@ export async function fetchGameByGameId(gameId: string) : Promise<Game> {
          }
          return response.json()
      })
-    return GameSchema.parse(data)
+    return GameSchema.nullable().parse(data)
 }
 
 export async function fetchGameByGameName(gameName: string) : Promise<Game> {

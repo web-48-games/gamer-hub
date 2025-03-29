@@ -138,6 +138,7 @@ export async function getMeetupsByRsvpProfileId(request: Request, response: Resp
     }
 }
 
+// working as intended, tested
 export async function getCurrentMeetups(request: Request, response: Response): Promise<Response> {
     try {
         const currentMeetups = await selectCurrentMeetups()

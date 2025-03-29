@@ -4,12 +4,12 @@ import {
     deleteMeetupByMeetupId,
     insertMeetup,
     Meetup, selectCurrentMeetups,
-    selectMeetupByMeetupId,
+    selectMeetupByMeetupId, selectMeetupsByGame,
     selectMeetupsByRsvpProfileId
 } from "./meet-up.model";
 import {Request, Response} from "express";
 import {PublicProfile} from "../profile/profile.model";
-import {z} from "zod";
+import {z, ZodObject} from "zod";
 import {FavoriteSchema} from "../favorite/favorite.validator";
 import {RsvpSchema} from "../rsvp/rsvp.validator";
 
@@ -23,9 +23,9 @@ export async function postMeetupController(request: Request, response: Response)
             return zodErrorResponse(response, validationResult.error)
         }
 
-        const {meetupId, meetupGameId, meetupHostProfileId, meetupAddress, meetupCreatedAt, meetupDescription, meetupDuration, meetupLat, meetupLong, meetupStartTime} = validationResult.data
+        const {meetupId, meetupGameId, meetupHostProfileId, meetupAddress, meetupCapacity, meetupCreatedAt, meetupDescription, meetupDuration, meetupLat, meetupLong, meetupName, meetupStartTime} = validationResult.data
 
-        const meetup = {meetupId, meetupGameId, meetupHostProfileId, meetupAddress, meetupCreatedAt, meetupDescription, meetupDuration, meetupLat, meetupLong, meetupStartTime}
+        const meetup = {meetupId, meetupGameId, meetupHostProfileId, meetupAddress, meetupCapacity, meetupCreatedAt, meetupDescription, meetupDuration, meetupLat, meetupLong, meetupName, meetupStartTime}
 
         const uploadMeetup = await insertMeetup(meetup)
 
@@ -144,6 +144,30 @@ export async function getCurrentMeetups(request: Request, response: Response): P
             status: 200,
             message: 'current meetups retrieved',
             data: currentMeetups
+        })
+    } catch(error) {
+        console.error(error)
+        return response.json({
+            status: 500,
+            message: error.message,
+            data: null
+        })
+    }
+}
+
+export async function getMeetupsByGame(request: Request, response: Response): Promise<Response> {
+    try {
+        const validationResult = MeetUpSchema.pick({meetupGameId: true}).safeParse(request.params)
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+        const {meetupGameId} = validationResult.data
+        const meetups = await selectMeetupsByGame(meetupGameId)
+
+        return response.json({
+            status: 200,
+            message: 'meetups from gameId retrieved',
+            data: meetups
         })
     } catch(error) {
         console.error(error)

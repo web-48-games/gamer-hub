@@ -11,7 +11,7 @@ export const MeetUpSchema = z.object({
     meetupDuration: z.coerce.number({message: 'please provide valid time of meetup duration in hours'}),
     meetupLat: z.coerce.number({message: 'please provide valid meetup latitude coordinates for meetup location'}).nullable(),
     meetupLong: z.coerce.number({message: 'please provide valid meetup longitude coordinates for meetup location'}).nullable(),
-    meetupName: z.string({message: 'please provide a name'}).min(1, {message: 'meetupName must contain at least 1 character'}).max(60, {message: 'meetupName cannot exceed 60 characters'}),
+    meetupName: z.string({message: 'please provide a name'}).min(1, {message: 'meetupName must contain at least 1 character'}).max(60, {message: 'meetupName cannot exceed 60 characters'}).nullable(),
     meetupStartTime: z.coerce.date({message: 'please provide valid timestamp of meetup Start time'})
 })
 export const postMeetupSchema = MeetUpSchema.extend({meetupStartTime: z.string({required_error: 'Start time is required'}).datetime({message: 'please provide valid timestamp of meetup Start time'}), meetupLat: z.coerce.number({message: 'please provide valid meetup latitude coordinates for meetup location'}).nullable(),

@@ -11,6 +11,6 @@ export const MeetUpSchema = z.object({
     meetupDuration: z.coerce.number({message: 'please provide valid time of meetup duration in hours'}),
     meetupLat: z.coerce.number({message: 'please provide valid meetup latitude coordinates for meetup location'}),
     meetupLong: z.coerce.number({message: 'please provide valid meetup longitude coordinates for meetup location'}),
-    meetupName: z.string({message: 'please provide a name'}).min(1, {message: 'meetupName must contain at least 1 character'}).max(60, {message: 'meetupName cannot exceed 60 characters'}),
+    meetupName: z.string({message: 'please provide a meetup name'}).min(1, {message: 'meetupName must contain at least 1 character'}).max(60, {message: 'meetupName cannot exceed 60 characters'}).nullable(),
     meetupStartTime: z.coerce.date({message: 'please provide valid timestamp of meetup Start time'})
 })

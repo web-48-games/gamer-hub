@@ -2,7 +2,7 @@ import {Router} from "express";
 import {
     postMeetupController,
     deleteMeetupByMeetupIdController,
-    getMeetupByMeetupIdController, getMeetupsByRsvpProfileId, getCurrentMeetups
+    getMeetupByMeetupIdController, getMeetupsByRsvpProfileId, getCurrentMeetups, getMeetupsByGame
 } from "./meet-up.controller";
 import {isLoggedInController} from "../../utils/controllers/isLoggedIn.controller";
 
@@ -19,5 +19,7 @@ router.route('/:meetupId')
     .get(getMeetupByMeetupIdController)
 router.route('/profileId/:rsvpProfileId')
     .get(getMeetupsByRsvpProfileId)
+router.route('/:meetupGameId')
+    .get(getMeetupsByGame)
 
 export const meetUpRoute = {basePath, router}

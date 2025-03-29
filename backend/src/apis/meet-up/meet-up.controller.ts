@@ -138,3 +138,21 @@ export async function getMeetupsByRsvpProfileId(request: Request, response: Resp
     }
 }
 
+export async function getCurrentMeetups(request: Request, response: Response): Promise<Response> {
+    try {
+        const validationResult
+        const currentMeetups = await selectCurrentMeetups()
+        return response.json({
+            status: 200,
+            message: 'current meetups retrieved',
+            data: currentMeetups
+        })
+    } catch(error) {
+        console.error(error)
+        return response.json({
+            status: 500,
+            message: error.message,
+            data: null
+        })
+    }
+}

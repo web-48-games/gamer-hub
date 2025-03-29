@@ -23,8 +23,10 @@ export default function RootLayout(props : RootLayoutProps) {
         <body>
 
         <Navigation />
-        {children}
+        <div className="min-h-screen flex flex-col">
+            <main className="flex-1">{children}</main>
         <FooterComponent />
+        </div>
 
         </body>
         </html>

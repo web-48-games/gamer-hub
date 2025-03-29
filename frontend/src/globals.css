@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*@font-face {*/
+/*    font-family: '';*/
+/*    src: local("Raleway-VariableFont-wght"),*/
+/*    url('./public/fonts/Raleway-VariableFont-wght.ttf') format("truetype");*/
+/*}*/

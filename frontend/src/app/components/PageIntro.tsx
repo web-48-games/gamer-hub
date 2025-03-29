@@ -3,19 +3,19 @@ import React from 'react';
 export function PageIntro() {
     return (
         <>
-            {/*<section>*/}
-            {/*    <div>*/}
-            {/*        <div className="relative overflow-hidden h-[15rem] w-full">*/}
-            {/*            <img className="size-full absolute object-cover object-center blur-[4px]"*/}
-            {/*                 src="/play-and-explore-placeholder.jpg" alt=""/>*/}
-            {/*            <div className="size-full bg-black opacity-25"></div>*/}
+            <section>
+                <div>
+                    <div className="relative overflow-hidden h-[30rem] w-full">
+                        <img className="size-full absolute object-cover object-center blur-[2px]"
+                             src="/sandia-river.jpg" alt=""/>
+                        <div className="size-full bg-black opacity-25"></div>
 
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</section>*/}
+                    </div>
+                </div>
+            </section>
 
 
-            <section className="p-40 mb-10 bg-lightYellow shadow-lg shadow-redBrown text-center font-semibold">
+            <section className="p-40 my-10 bg-lightYellow shadow-lg shadow-redBrown text-center font-semibold">
                 <h1 className="pb-4 text-[2.75rem] md:text-[5rem] font-normal text-redBrown">Welcome to A Game Away</h1>
                 <p className="text-[1.75rem] md:text-[3rem] font-normal text-redBrown">Find your table, adventures await!</p>
             </section>

@@ -39,7 +39,7 @@ export default function () {
                     }]}/>
             </section>
             <hr className="border-b border-gray-300 border-2"/>
-            <section className="mx-auto container relative">
+            <section className="mx-auto mt-6 container relative">
                 <div className={"flex"}>
                     <div className="w-64 shrink-0 hidden md:block">
                         <FilterMenu/>

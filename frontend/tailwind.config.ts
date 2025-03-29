@@ -6,7 +6,6 @@ const config: Config = {
   content: [
     content(),
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
-
   ],
   theme: {
     extend: {
@@ -19,6 +18,12 @@ const config: Config = {
       },
     },
   },
+  // theme: {
+  //     extend: {
+  //         fontFamily: {
+  //         }
+  //     }
+  // },
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),

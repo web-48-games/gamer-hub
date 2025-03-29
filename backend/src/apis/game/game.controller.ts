@@ -124,29 +124,14 @@ export async function getGamesByGenre(request: Request, response: Response): Pro
 // maybe come back later
 export async function getGamesByYearPublished(request: Request, response: Response): Promise<Response> {
     try {
-        // gives safeparse an object instead of the string that is gameYearPublished
-        const yearParam = request.params.gameYearPublished
-        const validateThisData = { gameYearPublished: yearParam }
-        const validationResult = GameSchema.pick({gameYearPublished: true}).safeParse(validateThisData)
+        const validationResult = GameSchema.pick({gameYearPublished: true}).safeParse(request.params)
 
         if (!validationResult.success) {
             return zodErrorResponse(response, validationResult.error)
         }
-        // extract validated Date then year for further validation below
-        const date = validationResult.data.gameYearPublished
-        const year = date.getFullYear()
-
-        // year must be between oldest and newest games on boardgamegeek
-        if (year < -3500 || year > 2025) {
-            return response.json({
-                status: 400,
-                data: null,
-                message: "Year must be between -3500 and 2025"
-            });
-        }
-
+        const {gameYearPublished} = validationResult.data
         // year is good to use for our model method
-        const gamesData = await selectGamesByGameYearPublished(year)
+        const gamesData = await selectGamesByGameYearPublished(gameYearPublished)
 
         return response.json({ status: 200, message: null, data: gamesData})
 

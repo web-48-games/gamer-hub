@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS game(
                                game_image_url VARCHAR(512),
                                game_max_players INT,
                                game_name VARCHAR,
-                               game_year_published TIMESTAMPTZ
+                               game_year_published INT
 );
 
 

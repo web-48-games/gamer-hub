@@ -33,7 +33,6 @@ function dataDownloader() : Promise<any> {
                 if(XMLValidator.validate(data)){
                     const parser = new XMLParser();
                     let jsonObj = parser.parse(data);
-
                     for (let currentGame of jsonObj.boardgames.boardgame) {
                         let game: Game = {
                             gameId: uuidv7(),
@@ -44,7 +43,6 @@ function dataDownloader() : Promise<any> {
                             gameName: Array.isArray(currentGame.name) ? currentGame.name[0] : currentGame.name,
                             gameYearPublished: currentGame.yearpublished
                         }
-                        // console.log(game)
                         const validateGame = GameSchema.safeParse(game)
 
                         if (validateGame.success) {

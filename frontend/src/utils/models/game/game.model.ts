@@ -8,7 +8,7 @@ export const GameSchema = z.object({
     gameImageUrl: z.string().max(512, {message: 'please provide valid gameImageUrl'}),
     gameMaxPlayers: z.number({message: 'please provide a valid number of gameMaxPlayers'}),
     gameName: z.string().max(64, {message: 'please provide valid gameGenre max(64 chars)'}),
-    gameYearPublished: z.coerce.date({message: 'please provide valid gameYear Published'})
+    gameYearPublished: z.coerce.number({message: 'please provide valid number of gameYearPublished'})
 })
 
 export type Game = z.infer<typeof GameSchema>

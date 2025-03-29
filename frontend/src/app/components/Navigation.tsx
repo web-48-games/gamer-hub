@@ -1,7 +1,6 @@
 "use client"
 
 import { Button, Navbar, NavbarBrand, NavbarCollapse, NavbarLink, NavbarToggle } from "flowbite-react";
-import {Searchbar} from "@/app/components/Searchbar";
 import React, { useRef } from 'react'
 import { AuthModalContainer } from "@/app/components/login-signup/AuthModalContainer";
 
@@ -16,22 +15,22 @@ export function Navigation() {
 
 
     return (
-        <Navbar fluid rounded className="border-b-2 border-b-charcoal bg-redBrown">
+        <Navbar fluid rounded className="bg-redBrown">
             <NavbarBrand href="/" className={"order-1"}>
                 <img src="/favicon.ico" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
-                <span className="self-center whitespace-nowrap text-xl font-semibold text-white dark:text-white">A Game Away</span>
+                <span className="self-center whitespace-nowrap text-[2rem] font-light text-white">A Game Away</span>
             </NavbarBrand>
             <div className="flex order-2 md:order-3 ml-4 ">
-                <Button onClick={handleAuthButtonClick} className="bg-turquoise">Login/Sign Up</Button>
+                <Button onClick={handleAuthButtonClick} className="bg-turquoise text-black">Login/Sign Up</Button>
                 <NavbarToggle />
             </div>
 
             <NavbarCollapse className={"order-4 md:order-2 mx-auto"}>
 
-                <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/">Home</NavbarLink>
-                <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/games">Games</NavbarLink>
-                <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/meetups">Meetups</NavbarLink>
-                <NavbarLink className={"mt-3 text-[1rem] text-brownAccent hover:!text-floralWhite"} href="/profile">Profile Page</NavbarLink>
+                <NavbarLink className={"mt-3 text-[1.5rem] font-light text-white"} href="/">Home</NavbarLink>
+                <NavbarLink className={"mt-3 text-[1.5rem] font-light text-white"} href="/games">Games</NavbarLink>
+                <NavbarLink className={"mt-3 text-[1.5rem] font-light text-white"} href="/meetups">Meetups</NavbarLink>
+                <NavbarLink className={"mt-3 text-[1.5rem] font-light text-white"} href="/profile">Profile Page</NavbarLink>
 
             </NavbarCollapse>
 

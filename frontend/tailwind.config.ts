@@ -11,9 +11,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-       redBrown: "#471D18",
-       sandyYellow: "#F8D896",
-       turquoise: "#30D5C8"
+       redBrown: "#321E1B",
+       lightYellow: "#f8d896",
+       darkYellow: "#D78F00",
+       turquoise: "#30D5C8",
+        lightTurquoise: "#65E8DE",
+        darkTurquoise: "#173D38"
       },
     },
   },

@@ -32,7 +32,7 @@ export default function MeetupsPage() {
             <div className="flex justify-center gap-4 mb-8">
                 <Link
                     href="/create-meetup" // Link this correctly later to create meetups page
-                    className="px-6 py-3 bg-green-400 rounded-lg font-medium hover:bg-green-500 transition"
+                    className="px-6 py-3 text-redBrown bg-lightRed rounded-lg font-medium transition"
                 >
                     Create Meetup
                 </Link>

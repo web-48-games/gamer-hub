@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS profile;
 
 CREATE TABLE IF NOT EXISTS profile(
                                   profile_id UUID PRIMARY KEY,
-                                  profile_about_me CHAR(500),
+                                  profile_about_me VARCHAR(500),
                                   profile_activation_token CHAR(32),
                                   profile_avatar_url VARCHAR(128),
                                   profile_creation_date TIMESTAMPTZ,
@@ -42,11 +42,13 @@ CREATE TABLE IF NOT EXISTS meetup(
                                  meetup_game_id UUID NOT NULL,
                                  meetup_host_profile_id UUID NOT NULL,
                                  meetup_address VARCHAR NOT NULL,
+                                 meetup_capacity INT,
                                  meetup_created_at TIMESTAMPTZ,
                                  meetup_description VARCHAR(512),
                                  meetup_duration DECIMAL,
                                  meetup_lat FLOAT,
                                  meetup_long FLOAT,
+                                 meetup_name VARCHAR(60),
                                  meetup_start_time TIMESTAMPTZ,
     FOREIGN KEY (meetup_game_id) REFERENCES game(game_id),
     FOREIGN KEY (meetup_host_profile_id) REFERENCES profile(profile_id)

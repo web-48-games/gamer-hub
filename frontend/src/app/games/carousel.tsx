@@ -139,13 +139,13 @@ const CarouselControl = ({
                          }: CarouselControlProps) => {
     return (
         <button
-            className={`z-20 w-10 h-10 flex items-center mx-2 justify-center bg-lightTurquoise dark:bg-neutral-800 border-3 border-transparent rounded-full focus:border-[#6D64F7] focus:outline-none hover:-translate-y-0.5 active:translate-y-0.5 transition duration-200 ${
+            className={`z-20 w-10 h-10 flex items-center mx-2 justify-center bg-lightRed dark:bg-neutral-800 border-3 border-transparent rounded-full focus:border-[#6D64F7] focus:outline-none hover:-translate-y-0.5 active:translate-y-0.5 transition duration-200 ${
                 type === "previous" ? "rotate-180" : ""
             }`}
             title={title}
             onClick={handleClick}
         >
-            <IconArrowNarrowRight className="text-darkTurquoise dark:text-neutral-200" />
+            <IconArrowNarrowRight className="text-redBrown dark:text-neutral-200" />
         </button>
     );
 };

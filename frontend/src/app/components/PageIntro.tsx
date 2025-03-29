@@ -15,22 +15,23 @@ export function PageIntro() {
             {/*</section>*/}
 
 
-            <section className="p-40 bg-lightYellow text-center font-semibold">
-                <h1 className="pb-4 text-[4.5rem] text-redBrown">Welcome to A Game Away</h1>
-                <p className="text-[2.5rem] text-redBrown">Find your table, adventures await!</p>
+            <section className="p-40 mb-10 bg-lightYellow shadow-lg shadow-redBrown text-center font-semibold">
+                <h1 className="pb-4 text-[2.75rem] md:text-[5rem] font-normal text-redBrown">Welcome to A Game Away</h1>
+                <p className="text-[1.75rem] md:text-[3rem] font-normal text-redBrown">Find your table, adventures await!</p>
             </section>
 
-            <section className="container mx-auto mt-8 p-6 grid grid-cols-1 md:grid-cols-2 gap-4 rounded-[1rem] bg-lightYellow">
-                <h1 className="text-[4rem] text-charcoal">Play & Explore!</h1>
-                <div className="relative overflow-hidden rounded-full">
-                    <img src="/play-and-explore-placeholder.jpg" alt="Play"/>
+            <section className="container mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-4 items-center rounded-[1rem] border-b-redBrown shadow-lg shadow-redBrown bg-paleRed">
+                <h1 className="text-[4rem] font-thin text-redBrown">Play & Explore!</h1>
+                <div className="relative overflow-hidden rounded-[2.5rem] w-[30rem] h-[20rem]">
+                    <img src="/play-and-explore-placeholder.jpg" alt="Play" className="absoltue object-cover object-center size-full" />
                 </div>
             </section>
-            <section className="container m-8 mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-4 rounded-[1rem] bg-lightYellow text-redBrown">
-                <div className="relative overflow-hidden rounded-full">
-                    <img src="/play-and-explore-placeholder.jpg" alt="Play"/>
+            <section className="container my-10 mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-4 items-center rounded-[1rem] border-b-redBrown shadow-lg shadow-redBrown bg-paleRed">
+                <div className="relative overflow-hidden rounded-[2.5rem] w-[30rem] h-[20rem]">
+                    <img src="/play-and-explore-placeholder.jpg" alt="Play"
+                         className="absoltue object-cover object-center size-full"/>
                 </div>
-                <h1 className="text-[4rem] text-charcoal">Connect & Make Memories!</h1>
+                <h1 className="text-[4rem] font-thin">Connect & Make Memories!</h1>
             </section>
         </>
     )

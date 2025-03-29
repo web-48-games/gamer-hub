@@ -12,11 +12,10 @@ const config: Config = {
     extend: {
       colors: {
        redBrown: "#321E1B",
-       lightYellow: "#f8d896",
-       darkYellow: "#D78F00",
-       turquoise: "#30D5C8",
-        lightTurquoise: "#65E8DE",
-        darkTurquoise: "#173D38"
+       lightYellow: "#FFD073",
+          lightRed: "#EAC0C0",
+          paleRed: "#FFDCD6"
+
       },
     },
   },

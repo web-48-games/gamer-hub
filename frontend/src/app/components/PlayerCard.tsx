@@ -17,7 +17,7 @@ export function PlayerCard(props: PlayerCardProps) {
     return (
         <>
             <div
-                className="m-20 w-full md:max-w-xl bg-lightYellow border-2 border-redBrown rounded-lg shadow-md dark:text-white dark:bg-redBrown dark:border-gray-500 p-8">
+                className="m-20 w-full md:max-w-xl bg-lightYellow border-b-2 border-redBrown shadow-lg shadow-redBrown rounded-lg shadow-md dark:text-white dark:bg-redBrown dark:border-gray-500 p-8">
                 <div className="p-4 pt-4 bg-white border border-redBrown shadow-sm rounded-lg w-full">
                     <div className="flex">
                         {/* Left side - Profile info */}

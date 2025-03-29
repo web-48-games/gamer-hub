@@ -18,7 +18,7 @@ export function FilterMenu() {
             </button>
 
             {/*smooth transitions*/}
-            <section className={`bg-lightTurquoise border-2 border-solid border-black rounded fixed p-4 md:sticky left-0 top-0 md:top-24 md:m-6 h-screen md:h-auto transition-all duration-300 z-10
+            <section className={`bg-paleRed border-[.25rem] border-solid rounded-[1rem] border-redBrown fixed p-4 md:sticky left-0 top-0 md:top-24 md:m-6 h-screen md:h-auto transition-all duration-300 z-10
             ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
             w-64 md:w-auto overflow-y-auto`}>
                 <h2 className={"text-2xl font-bold p-1 my-1"}>Filter</h2>

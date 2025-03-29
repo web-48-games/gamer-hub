@@ -3,7 +3,7 @@ import {zodErrorResponse} from "../../utils/response.utils";
 import {
     deleteMeetupByMeetupId,
     insertMeetup,
-    Meetup,
+    Meetup, selectCurrentMeetups,
     selectMeetupByMeetupId,
     selectMeetupsByRsvpProfileId
 } from "./meet-up.model";
@@ -12,9 +12,8 @@ import {PublicProfile} from "../profile/profile.model";
 import {z} from "zod";
 import {FavoriteSchema} from "../favorite/favorite.validator";
 import {RsvpSchema} from "../rsvp/rsvp.validator";
-// meet-up adding social functions
-//meetup by category,
-//
+
+
 export async function postMeetupController(request: Request, response: Response):Promise<Response> {
     try {
         //validation request with meetup schema
@@ -140,7 +139,6 @@ export async function getMeetupsByRsvpProfileId(request: Request, response: Resp
 
 export async function getCurrentMeetups(request: Request, response: Response): Promise<Response> {
     try {
-        const validationResult
         const currentMeetups = await selectCurrentMeetups()
         return response.json({
             status: 200,

@@ -63,3 +63,22 @@ export async function selectMeetupsByRsvpProfileId(rsvpProfileId: string) : Prom
 
     return MeetUpSchema.array().parse(rowList)
 }
+
+export async function selectCurrentMeetups() : Promise<Meetup[]> {
+    const rowList = <Meetup[]>await sql`
+        SELECT
+            meetup_id,
+            meetup_game_id,
+            meetup_host_profile_id,
+            meetup_address,
+            meetup_created_at,
+            meetup_description,
+            meetup_duration,
+            meetup_lat,
+            meetup_long,
+            meetup_start_time
+        FROM meetup
+        WHERE meetup_start_time >= CURRENT_DATE`
+
+    return MeetUpSchema.array().parse(rowList)
+}

@@ -65,12 +65,32 @@ export async function selectMeetupsByGame(meetupGameId: string) : Promise<Meetup
         SELECT
             meetup_id, meetup_game_id, meetup_host_profile_id, meetup_address, meetup_capacity, meetup_created_at, meetup_description, meetup_duration, meetup_lat, meetup_long, meetup_name, meetup_start_time
         FROM meetup
-        JOIN
+        INNER JOIN
         game
         ON meetup_game_id = game.game_id
         WHERE meetup_game_id = ${meetupGameId} AND meetup_game_id = game.game_id
         `
     console.log('what is rowlist?: ', rowList)
+    return MeetUpSchema.array().parse(rowList)
+}
+
+export async function selectMeetupsByCapacity(meetupCapacity: number) : Promise<Meetup[]> {
+    const rowList = <Meetup[]>await sql`
+        SELECT
+            meetup_id, meetup_game_id, meetup_host_profile_id, meetup_address, meetup_capacity, meetup_created_at, meetup_description, meetup_duration, meetup_lat, meetup_long, meetup_name, meetup_start_time
+        FROM meetup
+        WHERE meetup_capacity = ${meetupCapacity}`
+    return MeetUpSchema.array().parse(rowList)
+}
+
+export async function selectMeetupsByGenre(gameGenre: string) : Promise<Meetup[]> {
+    const rowList = <Meetup[]>await sql`
+        SELECT
+            meetup_id, meetup_game_id, meetup_host_profile_id, meetup_address, meetup_capacity, meetup_created_at, meetup_description, meetup_duration, meetup_lat, meetup_long, meetup_name, meetup_start_time
+        FROM meetup
+        JOIN game
+        ON meetup_game_id = game.game_id
+        WHERE ${gameGenre} = ANY(game.game_genre)`
     return MeetUpSchema.array().parse(rowList)
 }
 

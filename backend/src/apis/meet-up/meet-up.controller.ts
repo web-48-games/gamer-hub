@@ -4,7 +4,7 @@ import {
     deleteMeetupByMeetupId,
     insertMeetup,
     Meetup, selectCurrentMeetups,
-    selectMeetupByMeetupId, selectMeetupsByGame,
+    selectMeetupByMeetupId, selectMeetupsByCapacity, selectMeetupsByGame, selectMeetupsByGenre,
     selectMeetupsByRsvpProfileId
 } from "./meet-up.model";
 import {Request, Response} from "express";
@@ -12,6 +12,7 @@ import {PublicProfile} from "../profile/profile.model";
 import {z, ZodObject} from "zod";
 import {FavoriteSchema} from "../favorite/favorite.validator";
 import {RsvpSchema} from "../rsvp/rsvp.validator";
+import {GameSchema} from "../game/game.validator";
 
 
 export async function postMeetupController(request: Request, response: Response):Promise<Response> {
@@ -155,6 +156,7 @@ export async function getCurrentMeetups(request: Request, response: Response): P
     }
 }
 
+// tested.
 export async function getMeetupsByGame(request: Request, response: Response): Promise<Response> {
     try {
         const validationResult = MeetUpSchema.pick({meetupGameId: true}).safeParse(request.params)
@@ -171,6 +173,63 @@ export async function getMeetupsByGame(request: Request, response: Response): Pr
         })
     } catch(error) {
         console.error(error)
+        return response.json({
+            status: 500,
+            message: error.message,
+            data: null
+        })
+    }
+}
+
+//tested.
+export async function getMeetupsByCapacity(request: Request, response: Response): Promise<Response> {
+    try {
+        const validationResult = MeetUpSchema.pick({meetupCapacity: true}).safeParse(request.params)
+
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        const {meetupCapacity} = validationResult.data
+        console.log(meetupCapacity)
+        const meetups = await selectMeetupsByCapacity(meetupCapacity)
+
+        return response.json({
+            status: 200,
+            message: 'meetups based on capacity retrieved',
+            data: meetups
+        })
+
+    } catch(error) {
+        console.error(error);
+        return response.json({
+            status: 500,
+            message: error.message,
+            data: null
+        })
+    }
+}
+
+//tested.
+export async function getMeetupsByGenre(request: Request, response: Response): Promise<Response> {
+    try {
+        const validationResult = z.string({message: 'please provide valid gameGenre'}).min(1, {message: 'Game genre must be at least one character.'}).max(64, {message: 'Game genre cannot exceed 64 characters.'}).safeParse(request.params.gameGenre)
+
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        const gameGenre = validationResult.data
+        const meetups = await selectMeetupsByGenre(gameGenre)
+
+        return response.json({
+            status: 200,
+            message: 'meetups based on genre retrieved',
+            data: meetups
+        })
+
+    } catch(error) {
+        console.error(error);
         return response.json({
             status: 500,
             message: error.message,

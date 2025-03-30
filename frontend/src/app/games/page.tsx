@@ -9,9 +9,9 @@ import {Game} from "@/utils/models/game/game.model";
 import {PageProps} from "@/utils/interfaces/NextComponent";
 
 export default async function (props: PageProps<any>) {
-    let params = await props.params
-    console.log(params)
-    let genreParams: string[] = Object.values(params)
+    let params = await props.searchParams
+    let genreParams: any[] = Object.values(params)
+    console.log(genreParams)
     let games: Game[] = []
     if (genreParams.length) {
         games = await fetchGamesByGenres(genreParams)
@@ -57,10 +57,10 @@ export default async function (props: PageProps<any>) {
                 <div className={"flex"}>
                     <div className="w-64 shrink-0 hidden md:block">
 
-                        {/*<FilterMenu genres={genres}/>*/}
+                        <FilterMenu genres={genres}/>
                     </div>
                     <div className={"w-full md:ml-4"}>
-                        {gameSlice.map(game => <GameResult gameData={game}/>)}
+                        {gameSlice.map((game, i) => <GameResult key={i} gameData={game}/>)}
                     </div>
                 </div>
                 {/* Mobile filter is rendered outside the flex container

@@ -123,7 +123,8 @@ export async function getGamesByGenre(request: Request, response: Response): Pro
 
 export async function getGamesByGenres(request: Request, response: Response): Promise<Response> {
     try {
-        const validationResult = z.string({message: 'please provide valid gameName'}).array().safeParse(request.params.gameGenre)
+
+        const validationResult = z.string({message: 'please provide valid gameGenre'}).array().safeParse(Object.values(request.query))
 
         if (!validationResult.success) {
             return zodErrorResponse(response, validationResult.error)

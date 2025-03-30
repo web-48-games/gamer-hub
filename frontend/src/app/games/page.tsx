@@ -4,12 +4,18 @@ import {Carousel} from "@/app/games/carousel";
 import {GameResult} from "@/app/games/GameResult";
 import {FilterMenu} from "@/app/components/FilterMenu";
 import {GameCard} from "@/app/components/GameCard";
-import {fetchAllGenres, fetchGamesByGenre} from "@/utils/models/game/game.action";
+import {fetchAllGenres, fetchGamesByGenre, fetchGamesByGenres} from "@/utils/models/game/game.action";
 import {Game} from "@/utils/models/game/game.model";
+import {PageProps} from "@/utils/interfaces/NextComponent";
 
-export default async function () {
-
-    let games: Game[] = await fetchGamesByGenre("Nautical")
+export default async function (props: PageProps<any>) {
+    let params = await props.params
+    console.log(params)
+    let genreParams: string[] = Object.values(params)
+    let games: Game[] = []
+    if (genreParams.length) {
+        games = await fetchGamesByGenres(genreParams)
+    }
     const genres: [] = await fetchAllGenres()
     const gameSlice = games.slice(0, 8)
 
@@ -51,7 +57,7 @@ export default async function () {
                 <div className={"flex"}>
                     <div className="w-64 shrink-0 hidden md:block">
 
-                        <FilterMenu genres={genres}/>
+                        {/*<FilterMenu genres={genres}/>*/}
                     </div>
                     <div className={"w-full md:ml-4"}>
                         {gameSlice.map(game => <GameResult gameData={game}/>)}

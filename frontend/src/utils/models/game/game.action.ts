@@ -50,6 +50,24 @@ export async function fetchGamesByGenre(gameGenre: string) : Promise<Game[]> {
     return GameSchema.array().parse(data)
 }
 
+export async function fetchGamesByGenres(gameGenres: string[]) : Promise<Game[]> {
+    let queryString = ''
+    gameGenres.forEach((genre, i) => queryString += (i === 0 ? '?' : '&') + i + '=' + genre)
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/games/genres${queryString}`,
+        {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+        if (!response.ok) {
+            throw new Error('request failed')
+        }
+        return response.json()
+    })
+    return GameSchema.array().parse(data)
+}
+
 export async function fetchGamesByYearPublished(gameYearPublished: string) : Promise<Game[]> {
     const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/games/year/${gameYearPublished}`,
         {

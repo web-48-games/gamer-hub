@@ -28,6 +28,12 @@ export async function selectGamesByGenre(gameGenre: string): Promise<Game[]> {
     return GameSchema.array().parse(rowList)
 }
 
+export async function selectGamesByGenres(gameGenre: string[]): Promise<Game[]> {
+    const rowList = <Game[]>await sql`SELECT game_id, game_description, game_genre, game_image_url, game_max_players, game_name, game_year_published FROM game WHERE game_genre = ${gameGenre} )`
+
+    return GameSchema.array().parse(rowList)
+}
+
 // come back for carousel selection
 export async function selectFeaturedGames(cap: number): Promise<Game[]> {
     return <Game[]>await sql`

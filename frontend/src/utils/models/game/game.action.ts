@@ -34,8 +34,8 @@ export async function fetchGameByGameName(gameName: string) : Promise<Game> {
     return GameSchema.parse(data)
 }
 
-export async function fetchGamesByGenre(gameGenre: string[]) : Promise<Game[]> {
-    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/games/gameGenre/${gameGenre}`,
+export async function fetchGamesByGenre(gameGenre: string) : Promise<Game[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/games/genre/${gameGenre}`,
         {
             method: 'get',
             headers: {
@@ -96,4 +96,20 @@ export async function fetchGamesByFavoriteProfileId(favoriteProfileId: string) :
         return response.json()
     })
     return GameSchema.array().parse(data)
+}
+
+export async function fetchAllGenres() : Promise<[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/games/allGenres`,
+    {
+      method: 'get',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('request failed')
+        }
+        return response.json()
+    })
+    return data
 }

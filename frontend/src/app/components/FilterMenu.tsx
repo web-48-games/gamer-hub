@@ -4,8 +4,14 @@ import {Checkbox} from "@/app/components/Checkbox";
 import { useState } from "react";
 import { IconFilter, IconX } from "@tabler/icons-react";
 
-export function FilterMenu() {
+type FilterProps = {
+    genres: string[]
+}
+
+
+export function FilterMenu(props: FilterProps) {
     const [isOpen, setIsOpen] = useState<boolean>(false)
+    const {genres} = props;
 
     return (
         <>
@@ -23,9 +29,7 @@ export function FilterMenu() {
             w-64 md:w-auto overflow-y-auto`}>
                 <h2 className={"text-2xl font-bold p-1 my-1"}>Filter</h2>
                 <h3 className={"text-lg font-semibold p-1"}>Genres</h3>
-                <Checkbox labelText={"Real-Time"}/>
-                <Checkbox labelText={"Deck-Builder"}/>
-                <Checkbox labelText={"Storytelling"}/>
+                {genres.map(genre => <Checkbox labelText={genre}/>)}
                 <h3 className={"text-lg font-semibold p-1"}>Players</h3>
                 <Checkbox labelText={"1-2"}/>
                 <Checkbox labelText={"3-4"}/>

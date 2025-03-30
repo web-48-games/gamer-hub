@@ -23,7 +23,7 @@ export default function () {
 
     return (
         <>
-            <div className="container flex flex-col items-center mx-auto">
+            <div className="container flex flex-col items-center mx-auto ">
                 <PlayerCard player = {playerInfo}/>
             </div>
         </>

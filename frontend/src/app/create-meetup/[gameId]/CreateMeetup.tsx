@@ -73,7 +73,7 @@ export function CreateMeetup(props : {gameId: string, profileId: string}) {
 
     return (
         <>
-            <div className="container mx-auto w-full md:w-1/2 p-4 m-4 bg-orange-300 flex flex-col text-center">
+            <div className="container mx-auto w-full md:w-1/2 p-4 m-4 bg-lightYellow flex flex-col text-center">
                 <CreateTitle/>
                 <form className="space-y-4 mt-4" onSubmit={handleSubmit(fireServerAction)}>
 

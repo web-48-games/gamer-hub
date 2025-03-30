@@ -10,12 +10,12 @@ export function GameCard(props: GameCardProps) {
 
     return (
         <>
-            <div className={"m-10 sm:m-20 md:max-w-lg bg-redBrown border-2 border-charcoal p-6 rounded-lg"}>
+            <div className={"m-10 sm:m-20 md:max-w-lg p-6 border-2 rounded-lg bg-redBrown"}>
                 <div className={"flex flex-col flex-wrap items-center sm:flex-row p-4 bg-sandyYellow"}>
                     <div>
                         <img className={"w-full"} src={gameImageUrl} alt="Wingspan Placeholder"/>
                     </div>
-                    <div className={"p-2"}>
+                    <div className={"p-2 bg-white"}>
                         <h1 className={"text-[1.5rem] font-semibold"}>{gameName}</h1>
                         <p className={"font-semibold"}>Game Description</p>
                         <p>{gameDescription}</p>

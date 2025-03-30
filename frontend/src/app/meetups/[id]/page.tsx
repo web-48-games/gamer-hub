@@ -113,7 +113,7 @@ export default async function meetupInfoPage({ params }: { params: { id: string 
                                 className="flex-1 p-2 border rounded-l-lg"
                                 placeholder="Type your message..."
                             />
-                            <button className="bg-blue-500 text-white px-4 py-2 rounded-r-lg">
+                            <button className="bg-lightRed text-redBrown px-4 py-2 rounded-r-lg">
                                 SEND
                             </button>
                         </div>

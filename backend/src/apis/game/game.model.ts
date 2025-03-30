@@ -28,8 +28,19 @@ export async function selectGamesByGenre(gameGenre: string): Promise<Game[]> {
     return GameSchema.array().parse(rowList)
 }
 
-export async function selectGamesByGenres(gameGenre: string[]): Promise<Game[]> {
-    const rowList = <Game[]>await sql`SELECT game_id, game_description, game_genre, game_image_url, game_max_players, game_name, game_year_published FROM game WHERE game_genre = ${gameGenre} )`
+export async function selectGamesByGenres(gameGenres: string[]): Promise<Game[]> {
+
+    // grab all games that match the first genre listed in the genres list, starting point for javascript loop coming up
+    let rowList = <Game[]>await sql`
+    SELECT game_id, game_description, game_genre, game_image_url, game_max_players, game_name, game_year_published 
+    FROM game 
+    WHERE ${gameGenres[0]} = ANY(game_genre)`
+
+    // starting from the second genre in genres list, filter results to games that have ALL genres
+    for (let i = 1; i < gameGenres.length; i++) {
+        rowList = rowList.filter(game =>
+            game.gameGenre.includes(gameGenres[i]))
+    }
 
     return GameSchema.array().parse(rowList)
 }

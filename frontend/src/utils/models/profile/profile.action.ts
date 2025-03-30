@@ -3,7 +3,7 @@
 import { Profile, ProfileSchema } from '@/utils/models/profile/profile.model'
 
 export async function fetchProfileByProfileId(profileId: string) : Promise<Profile> {
-    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/profile/${profileId}`,
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/profiles/id/${profileId}`,
         {
             method: 'get',
             headers: {

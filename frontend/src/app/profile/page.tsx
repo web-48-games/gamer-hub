@@ -1,6 +1,10 @@
+'use server'
+
 import {PlayerCard} from "@/app/components/PlayerCard";
 import {Player} from "@/app/components/PlayerCard"
-
+import {fetchProfileByProfileId} from "@/utils/models/profile/profile.action";
+import {getSession} from "@/utils/auth.utils"
+;
 
 export default function () {
     let playerInfo : Player = {

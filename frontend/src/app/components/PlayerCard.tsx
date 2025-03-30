@@ -1,3 +1,4 @@
+//should this be profile object?
 export type Player = {
     name: string
     avatarUrl: string

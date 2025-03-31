@@ -41,10 +41,10 @@ const mockMeetupInfo = {
     ]
 };
 
-export default async function meetupInfoPage({ params }: { params: { meetupId: string } }) {
+export default async function meetupInfoPage({ params }: { params: Promise<{ meetupId: string }> }) {
     // extracting id from the url of the page
-    const meetupId = params.meetupId;
-
+    const {meetupId} = await params;
+    console.log(meetupId);
     const meetup = await fetchMeetupByMeetupId(meetupId)
     const game = await fetchGameByGameId(meetup.meetupGameId)
     // const rsvp = await fetchRsvpBy()
@@ -55,7 +55,7 @@ export default async function meetupInfoPage({ params }: { params: { meetupId: s
     const meetupDummyData = mockMeetupInfo;
 
     // calculate empty slots
-    const emptySlots = Array(meetup.meetupCapacity - meetupDummyData.joined.length).fill(null);
+    // const emptySlots = Array(meetup.meetupCapacity - meetupDummyData.joined.length).fill(null);
 
     return (
         <div className="container mx-auto px-4 py-8">

@@ -24,7 +24,7 @@ export async function postMeetup (meetup: PostMeetup) : Promise<Status> {
     })
 }
 
-export async function fetchMeetupByMeetupId (meetupId: string) : Promise<Meetup> {
+export async function fetchMeetupByMeetupId(meetupId: string) : Promise<Meetup> {
     const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/meetups/${meetupId}`,
         {
             method: 'get',

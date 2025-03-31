@@ -11,8 +11,6 @@ export default async function({ params }: { params: Promise<{ gameId: string }> 
     const game = await fetchGameByGameId(gameId)
     const meetups = await fetchMeetupsByGame(gameId)
     // const host = await fetchProfileByProfileId()
-    console.log(game)
-    console.log(meetups)
 
     return (
         <>

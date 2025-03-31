@@ -7,7 +7,7 @@ import {
     selectGameByGameId,
     selectGameByGameName,
     selectGamesByGameYearPublished,
-    selectGamesByGenre
+    selectGamesByGenre, selectGamesByGenres
 } from "./game.model";
 import {z} from "zod";
 import {FavoriteSchema} from "../favorite/favorite.validator";
@@ -121,7 +121,30 @@ export async function getGamesByGenre(request: Request, response: Response): Pro
     }
 }
 
-// maybe come back later
+export async function getGamesByGenres(request: Request, response: Response): Promise<Response> {
+    try {
+
+        const validationResult = z.string({message: 'please provide valid gameGenre'}).array().safeParse(Object.values(request.query))
+
+        if (!validationResult.success) {
+            return zodErrorResponse(response, validationResult.error)
+        }
+
+        const gameGenres = validationResult.data
+        const games = await selectGamesByGenres(gameGenres)
+
+        return response.json({ status: 200, message: 'games', data: games })
+
+    } catch(error) {
+        console.error(error)
+        return response.json({
+            status: 500,
+            message: error.message,
+            data: null
+        })
+    }
+}
+
 export async function getGamesByYearPublished(request: Request, response: Response): Promise<Response> {
     try {
         const validationResult = GameSchema.pick({gameYearPublished: true}).safeParse(request.params)
@@ -211,3 +234,4 @@ export async function getGameGenres(request: Request, response: Response): Promi
         })
     }
 }
+

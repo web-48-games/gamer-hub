@@ -3,7 +3,7 @@ import {
     getFeaturedGamesController,
     getGameByGameIdController,
     getGameByGameNameController, getGameGenres, getGamesByFavoriteProfileId,
-    getGamesByGenre,
+    getGamesByGenre, getGamesByGenres,
     getGamesByYearPublished,
     postGamesController
 } from "./game.controller";
@@ -18,6 +18,7 @@ const router = Router()
 router.route('/gameId/:gameId').get(getGameByGameIdController)
 router.route('/gameName/:gameName').get(getGameByGameNameController)
 router.route('/genre/:gameGenre').get(getGamesByGenre)
+router.route('/genres').get(getGamesByGenres)
 // router.route('/year/:gameYearPublished').get(getGamesByYearPublished)
 router.route('/featured').get(getFeaturedGamesController)
 router.route('/favorites/:favoriteProfileId').get(getGamesByFavoriteProfileId)

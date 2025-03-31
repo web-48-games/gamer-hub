@@ -1,23 +1,16 @@
 import React from "react";
 import {GameCard} from "@/app/components/GameCard";
+import {Game} from "@/utils/models/game/game.model";
 
-export type gameData = {
-    gameName: string
-    gameImageUrl: string
-    gameGenre: string
-    gameReleased: string
-    gameMaxPlayers: number
-    gameDescription: string
-    gameRanking: number
-}
+
 
 type gameResultProps = {
-    gameData: gameData
+    gameData: Game
 }
 
 export function GameResult(props: gameResultProps) {
     let {gameData} = props
-    let {gameName, gameImageUrl, gameGenre, gameReleased, gameMaxPlayers, gameDescription, gameRanking} = gameData
+    let {gameId, gameDescription, gameGenre, gameImageUrl, gameMaxPlayers, gameName, gameYearPublished} = gameData
 
     return (
         <>
@@ -25,8 +18,8 @@ export function GameResult(props: gameResultProps) {
                 <img className={"w-40 h-40 object-cover p-2"} src={gameImageUrl} alt= {`depicting ${gameName}`}/>
                 <section className={"flex-grow p-4"}>
                     <h2 className={"font-bold text-2xl mb-4"}>{gameName}</h2>
-                    <p>Genre: {gameGenre}</p>
-                    <p>Released on: {gameReleased}</p>
+                    <p>Genre: {gameGenre.map(genre => genre === gameGenre[gameGenre.length-1] ? genre : genre + ", ")}</p>
+                    <p>Released on: {gameYearPublished}</p>
                 </section>
 
                 <div className="flex items-center p-4">

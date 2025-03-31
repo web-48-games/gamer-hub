@@ -28,6 +28,18 @@ export async function selectGamesByGenre(gameGenre: string): Promise<Game[]> {
     return GameSchema.array().parse(rowList)
 }
 
+export async function selectGamesByGenres(gameGenres: string[]): Promise<Game[]> {
+
+    // @> operator checks if array on left contains all elements from the array on the right
+    let rowList = <Game[]>await sql`
+    SELECT game_id, game_description, game_genre, game_image_url, game_max_players, game_name, game_year_published 
+    FROM game 
+    WHERE game_genre @> ${gameGenres}`
+
+
+    return GameSchema.array().parse(rowList)
+}
+
 // come back for carousel selection
 export async function selectFeaturedGames(cap: number): Promise<Game[]> {
     return <Game[]>await sql`

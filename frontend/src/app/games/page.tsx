@@ -4,7 +4,12 @@ import {Carousel} from "@/app/games/carousel";
 import {GameResult} from "@/app/games/GameResult";
 import {FilterMenu} from "@/app/components/FilterMenu";
 import {GameCard} from "@/app/components/GameCard";
-import {fetchAllGenres, fetchGamesByGenre, fetchGamesByGenres} from "@/utils/models/game/game.action";
+import {
+    fetchAllGenres,
+    fetchGamesByFavoriteProfileId,
+    fetchGamesByGenre,
+    fetchGamesByGenres
+} from "@/utils/models/game/game.action";
 import {Game} from "@/utils/models/game/game.model";
 import {PageProps} from "@/utils/interfaces/NextComponent";
 
@@ -19,22 +24,13 @@ export default async function (props: PageProps<any>) {
     const genres: [] = await fetchAllGenres()
     const gameSlice = games.slice(0, 8)
 
-    // let gameInfo: gameData = {
-    //     gameName: "Wingspan",
-    //     gameImageUrl: "/wingspan_sample.webp",
-    //     gameGenre: "Strategy",
-    //     gameReleased: "2019",
-    //     gameMaxPlayers: 4,
-    //     gameDescription: "Friendly but competitive game about interesting and beautiful winged creatures in the great outdoors.",
-    //     gameRanking: 34
-    // }
+    // const defaultGames = await fetchGamesByGenre('Wargame')
+    // console.log(defaultGames[0])
+    // const defaultGameSlice = defaultGames.slice(0, 8)
 
     return (
         <>
             <section className="container mx-auto p-20">
-                {/*<div className={"flex justify-center items-center"}>*/}
-                {/*    <Categories />*/}
-                {/*</div>*/}
 
                 {/*<Carousel slides={[{*/}
                 {/*    title: "HELLO WORLD",*/}
@@ -60,6 +56,7 @@ export default async function (props: PageProps<any>) {
                         <FilterMenu genres={genres}/>
                     </div>
                     <div className={"w-full md:ml-4"}>
+                        {/*{!games && defaultGameSlice.map((game, i) => <GameResult key={i} gameData={game}/>)}*/}
                         {gameSlice.map((game, i) => <GameResult key={i} gameData={game}/>)}
                     </div>
                 </div>

@@ -1,42 +1,87 @@
-import {Profile} from "@/utils/models/profile/profile.model";
+'use client'
+
+import {Profile, ProfileSchema} from "@/utils/models/profile/profile.model";
+import {useForm} from "react-hook-form";
+import {z} from "zod";
+import React from "react";
+import {Status} from "@/utils/interfaces/Status";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {InputField} from "@/app/components/login-signup/InputField";
+import {putProfile} from "@/utils/models/profile/profile.action";
+import {useRouter} from "next/navigation";
+
 
 export type PlayerCardProps = {
     profile: Profile
 }
 
+const formSchema = ProfileSchema
+
+type FormValues = z.infer<typeof formSchema>
+
 export function PlayerCard(props: PlayerCardProps) {
+
+    const router = useRouter();
     let {profile:{profileId, profileAboutMe, profileAvatarUrl, profileName, profileCreationDate}} = props
+    let {profile} = props
+    const [status, setStatus] = React.useState<Status | null>(null)
+
+    const defaultValues = profile
+
+    const {register, handleSubmit, reset, formState: {errors}} = useForm({
+        defaultValues,
+        mode: 'onBlur',
+        resolver: zodResolver (formSchema),
+    })
+
+    const fireServerAction = async(profile: FormValues) => {
+        try {
+            const response = await putProfile(profile)
+            if (response.status === 200) {
+                router.push(`/profiles/${profile.profileId}`)
+            }
+            setStatus(response)
+        } catch (error) {
+            setStatus({
+                status: 500,
+                message: 'Profile cannot be found',
+                data: undefined
+            })
+        }
+    }
+
+
     return (
         <>
+            {/*Name, Avatar, About, Favorites*/}
+
+
             <div
                 className="m-20 w-full md:max-w-xl bg-lightYellow border-b-2 border-redBrown shadow-lg shadow-redBrown rounded-lg shadow-md dark:text-white dark:bg-redBrown dark:border-gray-500 p-8">
                 <div className="p-4 pt-4 bg-white border border-redBrown shadow-sm rounded-lg w-full">
-                    <div className="flex">
-                        {/* Left side - Profile info */}
-                        <div className="flex flex-col items-center pb-10">
-                            <img className="w-24 h-24 mb-3 rounded-full shadow-lg"
-                                 src={profileAvatarUrl} alt="Placeholder Image"/>
-                            <h3 className="mb-1 text-xl font-medium text-redBrown dark:text-white">{profileName}</h3>
-                            <span className="text-sm text-redBrown dark:text-gray-400">Created: {profileCreationDate}</span>
-                        </div>
+                    <form onSubmit={handleSubmit(fireServerAction)}>
+                            <div className="flex flex-col items-center pb-10">
 
-                        {/* Right side - Stats (stacked vertically) */}
-                        <div className="flex flex-col ml-6 justify-center">
-                            {/*<ul>*/}
-                            {/*    <li className={"p-2 mb-1 list-none text-[1.25rem]"}>Participated in {gamesPlayed} game*/}
-                            {/*        sessions*/}
-                            {/*    </li>*/}
-                            {/*    <li className={"p-2 mb-1 list-none text-[1.25rem]"}>Liked {gamesLiked} games</li>*/}
-                            {/*    <li className={"p-2 mb-1 list-none text-[1.25rem]"}>Contact me at: {email}</li>*/}
-                            {/*</ul>*/}
-                        </div>
-                    </div>
+                                <InputField inputProps={{
+                                    name: "profileName",
+                                    type: "text",
+                                    id: "profile-name",
+                                    labelText: "Name",
+                                    register: register
+                                }}/>
+                                <InputField inputProps={{
+                                    name: "profileAboutMe",
+                                    type: "text",
+                                    id: "profile-about-me",
+                                    labelText: "About Me",
+                                    register: register
+                                }}/>
+                            </div>
+
+                    </form>
                 </div>
             </div>
-            <div className={"container mx-auto"}>
-                <h3 className={"text-center text-4xl font-semibold p-2"}>About Me:</h3>
-                <p className={"p-4 mt-2 mb-8 text-xl"}>Love hanging out with friends and playing board games{profileAboutMe}</p>
-            </div>
+
         </>
     )
 }

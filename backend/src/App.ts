@@ -14,6 +14,7 @@ import {profileRoute} from "./apis/profile/profile.route";
 import {favoriteRouter} from "./apis/favorite/favorite.route";
 import {rsvpRoute} from "./apis/rsvp/rsvp.route";
 import helmet from 'helmet'
+import {imageRoute} from "./apis/image/image.route";
 
 // The following class creates the app and instantiates the server
 export class App {
@@ -60,6 +61,7 @@ export class App {
         this.app.use(profileRoute.basePath, profileRoute.router)
         this.app.use(favoriteRouter.basePath, favoriteRouter.router)
         this.app.use (rsvpRoute.basePath, rsvpRoute.router)
+        this.app.use (imageRoute.basePath, imageRoute.router)
     }
 
     // starts the server and tells the terminal to post a message that the server is running and on what port

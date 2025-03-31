@@ -1,7 +1,5 @@
 'use server'
 
-
-
 import {Rsvp, RsvpSchema} from "@/utils/models/rsvp/rsvp.model";
 import {setHeaders} from "@/utils/set-headers.utils";
 import {Status} from "@/utils/interfaces/Status";

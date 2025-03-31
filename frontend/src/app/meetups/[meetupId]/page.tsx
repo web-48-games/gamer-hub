@@ -60,7 +60,7 @@ export default async function meetupInfoPage({ params }: { params: { meetupId: s
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-2xl font-bold text-center mb-6">
-                #{meetupId} For {game.gameName}
+                #{meetupId} For {game?.gameName}
             </h1>
 
             <div className="max-w-md mx-auto">

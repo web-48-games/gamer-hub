@@ -28,7 +28,8 @@ export function GameResult(props: gameResultProps) {
                     </button>
                 </div>
 
-                {/*Popup GameCard - uses absolute positioning and group for hover effect with GameResult as its parent*/}
+                {/* Want to revisit this, and consider not using absolute positioning at all
+                Popup GameCard - uses absolute positioning and group for hover effect with GameResult as its parent*/}
                 <div className={"absolute right-0 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg z-10"}>
                     <GameCard gameCardInfo={gameData} />
                 </div>

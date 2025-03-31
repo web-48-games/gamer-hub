@@ -56,13 +56,12 @@ export async function fetchFavoritesByFavoriteGameId(favoriteGameId: string) : P
     return FavoriteSchema.array().parse(data)
 }
 
-export async function toggleFavorite()  {
+export async function toggleFavorite(favorite: Favorite)  {
     const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/favorites/toggle`,
         {
-            method: '',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            method: 'post',
+            headers: await setHeaders(),
+            body: JSON.stringify(favorite)
         }).then(response => {
         if (!response.ok) {
             throw new Error('request failed')

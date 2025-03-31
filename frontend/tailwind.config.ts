@@ -37,6 +37,7 @@ const config: Config = {
               300: '#E53E3E', // Chili red
               400: '#B91C1C', // Rich burgundy
               500: '#742A2A', // Clay pots
+              600: '#471C1C' // reddish brown
           },
           // i.e. accent-purple
           'accent': {

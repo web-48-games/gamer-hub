@@ -25,7 +25,7 @@ export function GameResult(props: gameResultProps) {
                 <div className="flex flex-col items center p-4">
                     <button
                         className="bg-gh-teal-200 text-redBrown text-[1.5rem] font-medium px-4 my-2 py-2 rounded border-2 border-redBrown whitespace-nowrap">
-                        Find Sessions
+                        <a href="/meetups">Find Sessions</a>
                     </button>
 
                     <button
@@ -34,11 +34,11 @@ export function GameResult(props: gameResultProps) {
                     </button>
                 </div>
 
-                {/* Want to revisit this, and consider not using absolute positioning at all
+                {/* Hover display is currently extremely annoying. turning this off until fixed
                 Popup GameCard - uses absolute positioning and group for hover effect with GameResult as its parent*/}
-                <div className={"absolute right-0 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg z-10"}>
-                    <GameCard gameCardInfo={gameData} />
-                </div>
+                {/*<div className={"absolute right-0 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg z-10"}>*/}
+                {/*    <GameCard gameCardInfo={gameData} />*/}
+                {/*</div>*/}
             </div>
         </>
     )

@@ -1,6 +1,6 @@
 'use server'
 
-// app/meetups/[id]/page.tsx
+// app/meetups/[meetupid]/page.tsx
 import React from 'react';
 import { MeetupSlot } from '../MeetupSlot';
 import { Message } from '../Message';

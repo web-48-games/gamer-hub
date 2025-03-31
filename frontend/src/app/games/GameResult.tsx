@@ -22,9 +22,15 @@ export function GameResult(props: gameResultProps) {
                     <p>Released on: {gameYearPublished}</p>
                 </section>
 
-                <div className="flex items-center p-4">
-                    <button className="bg-white text-redBrown text-[1.5rem] font-medium px-4 py-2 rounded border-2 border-redBrown whitespace-nowrap">
+                <div className="flex flex-col items center p-4">
+                    <button
+                        className="bg-gh-teal-200 text-redBrown text-[1.5rem] font-medium px-4 my-2 py-2 rounded border-2 border-redBrown whitespace-nowrap">
                         Find Sessions
+                    </button>
+
+                    <button
+                        className="bg-gh-teal-200 text-redBrown text-[1.5rem] font-medium px-4 my-2 py-2 rounded border-2 border-redBrown whitespace-nowrap">
+                        Add to Favorites
                     </button>
                 </div>
 

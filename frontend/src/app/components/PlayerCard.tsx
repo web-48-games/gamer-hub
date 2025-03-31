@@ -2,6 +2,7 @@ import {Profile} from "@/utils/models/profile/profile.model";
 
 export type PlayerCardProps = {
     profile: Profile
+    // consider adding meetup, favorite, rsvp for getting certain stats to display
 }
 
 export function PlayerCard(props: PlayerCardProps) {
@@ -35,7 +36,7 @@ export function PlayerCard(props: PlayerCardProps) {
             </div>
             <div className={"container mx-auto"}>
                 <h3 className={"text-center text-4xl font-semibold p-2"}>About Me:</h3>
-                <p className={"p-4 mt-2 mb-8 text-xl"}>Love hanging out with friends and playing board games{profileAboutMe}</p>
+                <p className={"p-4 mt-2 mb-8 text-xl"}>{profileAboutMe}</p>
             </div>
         </>
     )

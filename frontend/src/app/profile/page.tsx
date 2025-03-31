@@ -13,7 +13,7 @@ export default async function (props: PageProps<{}>) {
 
     if(!session) {
         return <>
-            Must be signed in to view profile information
+            <p className="text-4xl m-4 text-center text-gh-red-400">Must be signed in to view profile information</p>
         </>
     }
 

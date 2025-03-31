@@ -39,3 +39,20 @@ export async function fetchMeetupByMeetupId (meetupId: string) : Promise<Meetup>
     })
     return MeetUpSchema.parse(data)
 }
+
+// from getMeetupsByGame
+export async function fetchMeetupsByGame(meetupGameId: string) : Promise<Meetup[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/meetups/meetupGameId/${meetupGameId}`,
+        {
+            method: 'get',
+            headers: {
+                'Content-type' : 'application/json'
+            }
+        }) .then(response => {
+        if( !response.ok ) {
+            throw new Error('request failed')
+        }
+        return response.json()
+    })
+    return MeetUpSchema.array().parse(data)
+}

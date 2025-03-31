@@ -47,7 +47,7 @@ export default async function meetupInfoPage({ params }: { params: { id: string 
 
     const meetup = await fetchMeetupByMeetupId(meetupId)
     const game = await fetchGameByGameId(meetup.meetupGameId)
-    const rsvp = await fetch
+    // const rsvp = await fetch
 
     console.log(game)
 

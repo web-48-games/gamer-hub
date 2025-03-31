@@ -39,3 +39,35 @@ export async function fetchFavoritesByFavoriteProfileId(favoriteProfileId: strin
     })
     return FavoriteSchema.array().parse(data)
 }
+
+export async function fetchFavoritesByFavoriteGameId(favoriteGameId: string) : Promise<Favorite[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/favorites/game-id/${favoriteGameId}`,
+        {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+        if (!response.ok) {
+            throw new Error('request failed')
+        }
+        return response.json()
+    })
+    return FavoriteSchema.array().parse(data)
+}
+
+export async function toggleFavorite()  {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/favorites/toggle`,
+        {
+            method: '',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+        if (!response.ok) {
+            throw new Error('request failed')
+        }
+        return response.json()
+    })
+    return FavoriteSchema.array().parse(data)
+}

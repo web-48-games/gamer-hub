@@ -39,7 +39,7 @@ export async function MeetupCard(props: MeetupCardProps) {
                 <div className="text-lg font-medium">Host: {hostProfile.profileName}</div>
                 <div>Game: {game.gameName}</div>
                 {/*format date and time*/}
-                <div>Join us on {date} @ {time}</div>
+                <div>Join us on {meetup.meetupStartTime.getDate()} @ {meetup.meetupStartTime.getTime()}</div>
                 <div className="text-right">
                     <Link href={`/meetups/${meetup.meetupId}`} className="text-lg font-medium text-redBrown">
                         View Session

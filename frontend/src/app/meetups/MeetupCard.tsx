@@ -71,7 +71,7 @@ export async function MeetupCard(props: MeetupCardProps) {
                 <div>Join us on {meetup.meetupStartTime.getMonth() + "/" + meetup.meetupStartTime.getDate() + "/" + meetup.meetupStartTime.getFullYear()} @ {timeString}</div>
                 <div className="text-right">
                     <Link href={`/meetups/${meetup.meetupId}`} className="text-lg font-medium text-redBrown">
-                        View Session
+                        View Meetup
                     </Link>
                 </div>
             </div>

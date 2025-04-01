@@ -24,7 +24,7 @@ export async function postMeetup (meetup: PostMeetup) : Promise<Status> {
     })
 }
 
-export async function fetchMeetupByMeetupId (meetupId: string) : Promise<Meetup> {
+export async function fetchMeetupByMeetupId(meetupId: string) : Promise<Meetup> {
     const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/meetups/${meetupId}`,
         {
             method: 'get',
@@ -38,4 +38,21 @@ export async function fetchMeetupByMeetupId (meetupId: string) : Promise<Meetup>
         return response.json()
     })
     return MeetUpSchema.parse(data)
+}
+
+// from getMeetupsByGame
+export async function fetchMeetupsByGame(meetupGameId: string) : Promise<Meetup[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/meetups/meetupGameId/${meetupGameId}`,
+        {
+            method: 'get',
+            headers: {
+                'Content-type' : 'application/json'
+            }
+        }) .then(response => {
+        if( !response.ok ) {
+            throw new Error('request failed')
+        }
+        return response.json()
+    })
+    return MeetUpSchema.array().parse(data)
 }

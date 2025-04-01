@@ -1,6 +1,6 @@
 'use server'
 
-// app/meetups/[id]/page.tsx
+// app/meetups/[meetupId]/page.tsx
 import React from 'react';
 import { MeetupSlot } from '../MeetupSlot';
 import { Message } from '../Message';
@@ -41,13 +41,13 @@ const mockMeetupInfo = {
     ]
 };
 
-export default async function meetupInfoPage({ params }: { params: { id: string } }) {
+export default async function meetupInfoPage({ params }: { params: Promise<{ meetupId: string }> }) {
     // extracting id from the url of the page
-    const meetupId = params.id;
-
+    const {meetupId} = await params;
+    console.log(meetupId);
     const meetup = await fetchMeetupByMeetupId(meetupId)
     const game = await fetchGameByGameId(meetup.meetupGameId)
-    const rsvp = await fetch
+    // const rsvp = await fetchRsvpBy()
 
     console.log(game)
 
@@ -55,12 +55,12 @@ export default async function meetupInfoPage({ params }: { params: { id: string 
     const meetupDummyData = mockMeetupInfo;
 
     // calculate empty slots
-    const emptySlots = Array(meetupDummyData.capacity - meetupDummyData.joined.length).fill(null);
+    // const emptySlots = Array(meetup.meetupCapacity - meetupDummyData.joined.length).fill(null);
 
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-2xl font-bold text-center mb-6">
-                #{meetupId} For {game.gameName}
+                #{meetupId} For {game?.gameName}
             </h1>
 
             <div className="max-w-md mx-auto">

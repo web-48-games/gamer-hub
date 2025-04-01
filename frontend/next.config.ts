@@ -14,6 +14,16 @@ const nextConfig: NextConfig = {
             fullUrl: true,
         },
     },
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'placekitten.com',
+                port: '',
+                pathname: '/**',
+            },
+        ],
+    },
 };
 
 export default nextConfig;

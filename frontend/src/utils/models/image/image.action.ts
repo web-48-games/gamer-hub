@@ -3,7 +3,7 @@
 import { Status } from "@/app/interfaces/Status"
 import { getSession } from "@/utils/auth.utils"
 import { headers as incomingHeaders } from "next/dist/server/request/headers"
-import { image } from "@/app/apis/image"
+import { image } from "@/app/apis/image" //can't resolve image?
 
 //creating postImageFunction
 export async function postImage(): Promise<Status> {
@@ -25,7 +25,7 @@ export async function postImage(): Promise<Status> {
     }
     return fetch(`${process.env["REST_API_URL"]}/apis/image`, {
         headers,
-        //import apis/image?
+        //import apis/image let this work, import not resolved
         body: image,
         method: "post"
     }).then(response => {

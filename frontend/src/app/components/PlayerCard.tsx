@@ -9,6 +9,8 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {InputField} from "@/app/components/login-signup/InputField";
 import {putProfile} from "@/utils/models/profile/profile.action";
 import {useRouter} from "next/navigation";
+import {postImage} from "@/utils/models/image/image.action";
+import { v7 as uuid } from "uuid";
 
 
 export type PlayerCardProps = {
@@ -40,13 +42,38 @@ export function PlayerCard(props: PlayerCardProps) {
         resolver: zodResolver (formSchema),
     })
 
+    //fireServerAction rewrite to accommodate image upload
     const fireServerAction = async(profile: FormValues) => {
         try {
-            const response = await putProfile(profile)
-            if (response.status === 200) {
-                router.push(`/profiles/${profile.profileId}`)
+            if(errors?.profileAvatarUrl) {
+                setStatus({status:500, message: 'Select a new image', data: undefined})
+                return
             }
-            setStatus(response)
+            let profileAvaterUrl = null
+            if(profile.profileAvatarUrl) {
+
+                const response = await postImage(profile.profileAvatarUrl)//can't recognize
+                if (response.status === 200) {
+                    profileAvaterUrl = response.message
+                } else {
+                    setStatus({status: 500, message: 'Image failed to upload', data: undefined})
+                    return
+                }
+            }
+            //should profile be data?
+            const finalResponse = await putProfile({...profile, profileAvatarUrl, profileId: uuid()})
+            setStatus(finalResponse)
+            if (finalResponse.status === 200 ) {
+                // const [selectedImage, setSelectedImage] = React.useState<null | string>(null)?
+                setSelectedImage(null)
+                reset ()
+            }
+
+            // const response = await putProfile(profile)
+            // if (response.status === 200) {
+            //     router.push(`/profiles/${profile.profileId}`)
+            // }
+            // setStatus(response)
         } catch (error) {
             setStatus({
                 status: 500,
@@ -89,7 +116,7 @@ export function PlayerCard(props: PlayerCardProps) {
                                       // name={"profileAboutMe"}
                                       id={"profileAboutMe"} {...register("profileAboutMe")}
 
-                                   className={"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"}
+                                   className={"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-redBrown"}
                             />
                         </div>
                         <button type="submit" className="p-2 border-2 border-redBrown bg-paleRed">

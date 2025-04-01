@@ -3,6 +3,7 @@
 import { Status } from "@/app/interfaces/Status"
 import { getSession } from "@/utils/auth.utils"
 import { headers as incomingHeaders } from "next/dist/server/request/headers"
+import { image } from "@/app/apis/image"
 
 //creating postImageFunction
 export default function postImage(): Promise<Status> {
@@ -24,7 +25,7 @@ export default function postImage(): Promise<Status> {
     }
     return fetch(`${process.env["REST_API_URL"]}/apis/image`, {
         headers,
-        //referencing apis/image?
+        //import apis/image?
         body: image,
         method: "post"
     }).then(response => {

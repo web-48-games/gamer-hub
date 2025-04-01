@@ -19,7 +19,7 @@ export function Checkbox(props: CheckboxProps) {
     const searchParams = useSearchParams()
 
 
-    function changeGenres(event) {
+    function changeGenres(event: any) {
         const currentParams = new URLSearchParams(searchParams.toString())
         if (event.target.checked) {
             currentParams.set(value, value)

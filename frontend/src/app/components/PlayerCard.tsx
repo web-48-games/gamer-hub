@@ -65,9 +65,6 @@ export function PlayerCard(props: PlayerCardProps) {
                     setStatus({status: 500, message: 'Image failed to upload', data: undefined})
                     return
                 }
-
-
-
             }
 
             const finalResponse = await putProfile({...data, profileAvatarUrl})
@@ -121,10 +118,6 @@ export function PlayerCard(props: PlayerCardProps) {
                                 register: register
                             }}/>
                         </div>
-                        <div>
-
-                        </div>
-
                         <div>
                             <label htmlFor={"profileAboutMe"}
                                    className="block text-sm font-bold text-blue-800 mb-1">

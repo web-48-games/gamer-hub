@@ -67,6 +67,10 @@ export async function toggleFavorite(favorite: Favorite)  {
             throw new Error('request failed')
         }
         return response.json()
+    }).catch(error => {
+        console.error(error)
+        throw error
     })
-    return FavoriteSchema.array().parse(data)
+    // not sure if catch above is necessary
+    // return FavoriteSchema.array().parse(data)
 }

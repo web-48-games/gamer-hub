@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
             fullUrl: true,
         },
     },
+    //limit size for image upload
+    experimental: {serverActions: {bodySizeLimit: '2mb'}}
 };
 
 export default nextConfig;

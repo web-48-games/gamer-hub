@@ -6,11 +6,12 @@ import {z} from "zod";
 import React from "react";
 import {Status} from "@/utils/interfaces/Status";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {InputField} from "@/app/components/login-signup/InputField";
 import {putProfile} from "@/utils/models/profile/profile.action";
 import {useRouter} from "next/navigation";
 import {postImage} from "@/utils/models/image/image.action";
 import { v7 as uuid } from "uuid";
+import { ImageUploadDropZone } from "./ImageUploadDropZone";
+import {InputField} from "@/app/components/login-signup/InputField";
 
 
 export type PlayerCardProps = {
@@ -30,50 +31,57 @@ export function PlayerCard(props: PlayerCardProps) {
         }
     )
 
+    type ProfileSchema = z.infer<typeof profileSchema>
+
     const router = useRouter();
     let {profile} = props
     const [status, setStatus] = React.useState<Status | null>(null)
 
     const defaultValues = profile
 
-    const {register, handleSubmit, reset, formState: {errors}} = useForm({
+    const {register, handleSubmit, reset, control, setError, clearErrors, formState: {errors}} = useForm<ProfileSchema>({
         defaultValues,
         mode: 'onBlur',
-        resolver: zodResolver (formSchema),
+        resolver: zodResolver (profileSchema),
     })
 
+    const [selectedImage, setSelectedImage] = React.useState<string | null> (null)
+
     //fireServerAction rewrite to accommodate image upload
-    const fireServerAction = async(profile: FormValues) => {
+    const fireServerAction = async(data: ProfileSchema) => {
         try {
+            //checking for valid image type
             if(errors?.profileAvatarUrl) {
                 setStatus({status:500, message: 'Select a new image', data: undefined})
                 return
             }
-            let profileAvaterUrl = null
-            if(profile.profileAvatarUrl) {
+            let profileAvatarUrl = null
+            if(data.profileAvatarUrl) {
 
-                const response = await postImage(profile.profileAvatarUrl)//can't recognize
+                const response = await postImage(data.profileAvatarUrl)
                 if (response.status === 200) {
-                    profileAvaterUrl = response.message
+                    profileAvatarUrl = response.message
                 } else {
                     setStatus({status: 500, message: 'Image failed to upload', data: undefined})
                     return
                 }
+
+
+
             }
-            //should profile be data?
-            const finalResponse = await putProfile({...profile, profileAvatarUrl, profileId: uuid()})
+
+            const finalResponse = await putProfile({...data, profileAvatarUrl})
             setStatus(finalResponse)
             if (finalResponse.status === 200 ) {
-                // const [selectedImage, setSelectedImage] = React.useState<null | string>(null)?
                 setSelectedImage(null)
                 reset ()
             }
 
-            // const response = await putProfile(profile)
-            // if (response.status === 200) {
-            //     router.push(`/profiles/${profile.profileId}`)
-            // }
-            // setStatus(response)
+            const response = await putProfile(profile)
+            if (response.status === 200) {
+                router.push(`/profile`)
+            }
+            setStatus(response)
         } catch (error) {
             setStatus({
                 status: 500,
@@ -93,6 +101,16 @@ export function PlayerCard(props: PlayerCardProps) {
                 className="m-20 w-full md:max-w-xl bg-lightYellow border-b-2 border-redBrown shadow-lg shadow-redBrown rounded-lg shadow-md dark:text-white dark:bg-redBrown dark:border-gray-500 p-8">
                 <div className="p-4 pt-4 bg-white border border-redBrown shadow-sm rounded-lg w-full">
                     <form onSubmit={handleSubmit(fireServerAction)}>
+
+                        {/*Dropzone for image upload*/}
+                        <ImageUploadDropZone control={control}
+                        fieldValue={'profileAvatarUrl'}
+                        setSelectedImage={setSelectedImage}
+                        setError={setError}
+                        clearErrors={clearErrors} />
+
+                        { selectedImage ? <img src={selectedImage} alt={'profile picture'}/>: <></>}
+
                         <div className="flex flex-col items-center pb-10">
 
                             <InputField inputProps={{

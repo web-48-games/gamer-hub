@@ -86,7 +86,7 @@ export function PlayerCard(props: PlayerCardProps) {
                                    className={"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"}
                             />
                         </div>
-                        <button type="submit" className="p-2 border-2 border-redBrown bg-paleRed hover:-red-900">
+                        <button type="submit" className="p-2 border-2 border-redBrown bg-paleRed">
                             Submit
                         </button>
                     </form>

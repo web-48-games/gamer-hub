@@ -14,16 +14,8 @@ const nextConfig: NextConfig = {
             fullUrl: true,
         },
     },
-    images: {
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'placekitten.com',
-                port: '',
-                pathname: '/**',
-            },
-        ],
-    },
+    //limit size for image upload
+    experimental: {serverActions: {bodySizeLimit: '2mb'}}
 };
 
 export default nextConfig;

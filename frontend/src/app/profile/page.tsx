@@ -17,7 +17,7 @@ export default async function (props: PageProps<{}>) {
         </>
     }
 
-
+    console.log('is there a profile?', session.profile.profileId)
     const profile: Profile = await fetchProfileByProfileId(session.profile.profileId)
 
 

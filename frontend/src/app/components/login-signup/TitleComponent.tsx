@@ -54,7 +54,7 @@ export function TitleComponent({ mode }: TitleProps) {
                 <span ref={aRef} className="inline-block relative">A</span>
                 <span ref={gameRef} className="inline-block ml-1">Game</span>
                 <span ref={awayRef} className="inline-block ml-1">Away</span>
-
+            </p>
                 {/* Explosion Effect */}
                 <div
                     ref={explosionRef}
@@ -71,7 +71,6 @@ export function TitleComponent({ mode }: TitleProps) {
                         boxShadow: "0 0 10px rgba(255, 255, 0, 0.8)",
                     }}
                 ></div>
-            </p>
         </div>
     );
 }

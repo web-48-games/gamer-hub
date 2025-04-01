@@ -15,14 +15,20 @@ export type PlayerCardProps = {
     profile: Profile
 }
 
-const formSchema = ProfileSchema
-
-type FormValues = z.infer<typeof formSchema>
-
 export function PlayerCard(props: PlayerCardProps) {
 
+    const formSchema = ProfileSchema
+
+    type FormValues = z.infer<typeof formSchema>
+
+    //added image url to schema
+    const profileSchema = ProfileSchema.extend(
+        {
+            profileAvatarUrl: z.preprocess((val) => (val === "" ? null : val), z.any().optional())
+        }
+    )
+
     const router = useRouter();
-    let {profile:{profileId, profileAboutMe, profileAvatarUrl, profileName, profileCreationDate}} = props
     let {profile} = props
     const [status, setStatus] = React.useState<Status | null>(null)
 

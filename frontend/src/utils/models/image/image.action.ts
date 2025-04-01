@@ -6,7 +6,7 @@ import { headers as incomingHeaders } from "next/dist/server/request/headers"
 import { image } from "@/app/apis/image"
 
 //creating postImageFunction
-export default function postImage(): Promise<Status> {
+export async function postImage(): Promise<Status> {
     //headers for authorization, correct profile for uploading image
     const headers = new Headers()
 

@@ -71,7 +71,7 @@ const config: Config = {
               100: '#CEFFD4',
               200: '#A9F0B7',
               300: '#1BD9B6',
-              400: '#0AA1AA',
+              400: '#0A9FB6',
               500: '#03568A',
           },
           'code': {

@@ -10,16 +10,16 @@ export function GameCard(props: GameCardProps) {
 
     return (
         <>
-            <div className={"m-10 sm:m-20 md:max-w-lg p-6 border-2 rounded-lg bg-redBrown"}>
-                <div className={"flex flex-col flex-wrap items-center sm:flex-row p-4 bg-sandyYellow"}>
+            <div className={"m-10 sm:m-20 md:max-w-lg p-6 rounded-lg shadow-lg shadow-wasa-500 bg-cosa-200"}>
+                <div className={"flex flex-col flex-wrap items-center p-4"}>
                     <div>
-                        <img className={"w-36"} src={gameImageUrl} alt="image from game database"/>
+                        <img className={"w-full p-4"} src={gameImageUrl} alt="image from game database"/>
                     </div>
-                    <div className={"p-2 bg-white"}>
-                        <h1 className={"text-[1.5rem] font-semibold"}>{gameName}</h1>
-                        <p className={"font-semibold"}>Game Description</p>
+                    <div className={"p-4 rounded-lg shadow-lg bg-code-100 shadow-gh-teal-500"}>
+                        <h1 className={"text-[1rem] md:text-[1.5rem] xl:text-[2rem] font-semibold"}>{gameName}</h1>
+                        <p className={"text-[1rem] md:text-[1.25rem] xl:text-[1.75rem] font-semibold"}>Game Description</p>
                         <p dangerouslySetInnerHTML={{__html: gameDescription}} />
-                        <p className={"font-semibold"}>Genre</p>
+                        <p className={"text-[1rem] md:text-[1.25rem] xl:text-[1.75rem] font-semibold"}>Genre</p>
                         <p>{gameGenre.map((genre, i) => i === gameGenre.length-1 ? genre : genre + ", ")}</p>
                         <p className={"font-semibold"}>Max Players</p>
                         <p>{gameMaxPlayers}</p>

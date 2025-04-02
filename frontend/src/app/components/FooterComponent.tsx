@@ -2,7 +2,7 @@ import React from 'react';
 
 export function FooterComponent() {
     return (
-        <footer className="py-6 font-[1rem] md:font-[1.5rem] xl:font-[2rem] text-center text-white bg-wasa-500">
+        <footer className="py-6 text-[1rem] md:text-[1.5rem] xl:text-[2rem] text-center text-white bg-wasa-500">
             A Game Away
         </footer>
 

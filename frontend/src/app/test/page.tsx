@@ -2,6 +2,7 @@
 
 import {PlayerCard} from "@/app/components/PlayerCard";
 import React from "react";
+import {GameResult} from "@/app/games/GameResult";
 
 export default function () {
     return(
@@ -23,6 +24,7 @@ export default function () {
                     <h1 className="text-[1rem] md:text-[1.5rem] xl:text-[2rem] text-cosa-500">Colors going crazy all over the place</h1>
                     </div>
                 </div>
+
             </section>
 
 

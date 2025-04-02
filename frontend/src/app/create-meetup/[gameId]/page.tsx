@@ -1,4 +1,5 @@
 'use server'
+
 import {CreateMeetup} from "@/app/create-meetup/[gameId]/CreateMeetup";
 import {PageProps} from "@/utils/interfaces/NextComponent";
 import {fetchGameByGameId} from "@/utils/models/game/game.action";

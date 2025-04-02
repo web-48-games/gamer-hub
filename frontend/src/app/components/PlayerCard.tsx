@@ -35,7 +35,13 @@ export function PlayerCard(props: PlayerCardProps) {
 
     const [status, setStatus] = React.useState<Status | null>(null)
 
-    const defaultValues = profile
+    const defaultValues = {
+        profileId: profile.profileId,
+        profileAboutMe: profile.profileAboutMe,
+        profileAvatarUrl: null,
+        profileName: profile.profileName,
+        profileCreationDate: profile.profileCreationDate,
+    }
 
     const {register, handleSubmit, reset, control, setError, clearErrors, formState: {errors}} = useForm<ProfileSchema>({
         defaultValues,
@@ -147,7 +153,7 @@ export function PlayerCard(props: PlayerCardProps) {
 
                                       className={"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cosa-500"}
                             />
-                            <button type={"submit"} className={"p-2 my-4 text-[1rem] md:text-[1.25rem] xl:text-[1.25rem] hover:shadow-cosa-500 bg-wasa-300 hover:bg-wasa-400 rounded-lg hover:text-white"}>
+                            <button type={"submit"} className={"p-2 my-4 text-[1rem] md:text-[1.25rem] xl:text-[1.25rem] font-semibold shadow-md  border-2 text-wasa-600 border-wasa-400 shadow-wasa-500  bg-wasa-300 hover:bg-wasa-400 rounded-lg hover:text-white"}>
                                 Submit Update
                             </button>
                         </div>

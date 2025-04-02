@@ -74,22 +74,22 @@ export function ImageUploadDropZone(props: Props) {
                 const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
                 return (
-                    <div {...getRootProps()} className="p-2 rounded bg-wasa-300 hover:bg-wasa-400 hover:text-white text-[1rem] md:text-[1.5rem] xl:text-[1.5rem] text-center">
+                    <div {...getRootProps()} className="p-2 rounded shadow-md border-2 border-wasa-400 shadow-wasa-500 hover:bg-wasa-400 hover:text-white bg-wasa-300 md:text-[1.5rem] xl:text-[1.5rem] text-center font-semibold text-wasa-600">
                         <div className="mb-2 block">
                             <label className="form-label" htmlFor="profileAvatar">Upload Image</label>
                         </div>
-                        {/*<TextInput*/}
-                        {/*    {...getInputProps()}*/}
-                        {/*    aria-label="Image drag and drop area"*/}
-                        {/*    className="form-control-file"*/}
-                        {/*    accept="image/*"*/}
-                        {/*/>*/}
-                        {/*{*/}
-                        {/*    isDragActive ?*/}
-                        {/*        <span className="align-items-center">Drop image here</span> :*/}
-                        {/*        <span*/}
-                        {/*            className="align-items-center">Drag and drop image here, or click here to select an image</span>*/}
-                        {/*}*/}
+                        <TextInput
+                            {...getInputProps()}
+                            aria-label="Image drag and drop area"
+                            className="form-control-file"
+                            accept="image/*"
+                        />
+                        {
+                            isDragActive ?
+                                <span className="align-items-center">Drop image here</span> :
+                                <span
+                                    className="align-items-center">Drag and drop image here, or click here to select an image</span>
+                        }
                     </div>
                 )
             }

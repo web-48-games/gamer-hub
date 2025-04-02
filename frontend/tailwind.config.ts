@@ -49,6 +49,7 @@ const config: Config = {
           //90% White
           'white-95': '#F2F2F2',
 
+
           //Warm Saturated
           'wasa': {
               100: '#FCDB90',
@@ -56,6 +57,8 @@ const config: Config = {
               300: '#E98138',
               400: '#BA3600',
               500: '#5A1000',
+              //Text over Orange
+              600: '#340F00'
           },
           //Warm Desaturated
           'wade': {

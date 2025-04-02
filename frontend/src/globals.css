@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    @apply bg-wasa-100
+}
+
 /*@font-face {*/
 /*    font-family: '';*/
 /*    src: local("Raleway-VariableFont-wght"),*/

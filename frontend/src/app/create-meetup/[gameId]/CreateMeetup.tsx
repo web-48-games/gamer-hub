@@ -37,10 +37,12 @@ export function CreateMeetup(props : {gameId: string, profileId: string}) {
         meetupGameId: gameId,
         meetupHostProfileId: profileId,
         meetupAddress: '',
+        meetupCapacity: 0,
         meetupDescription: '',
         meetupDuration: '',
-        meetupStartTime: '',
-        meetupDate: ''
+        meetupName: '',
+        meetupDate: '',
+        meetupStartTime: ''
     }
 
     const {register, handleSubmit, reset, formState: {errors}} = useForm<FormSchema>({
@@ -76,6 +78,24 @@ export function CreateMeetup(props : {gameId: string, profileId: string}) {
             <div className="container mx-auto w-full md:w-1/2 p-4 m-4 bg-lightYellow flex flex-col text-center">
                 <CreateTitle/>
                 <form className="space-y-4 mt-4" onSubmit={handleSubmit(fireServerAction)}>
+
+                    <InputField inputProps={{
+                        name: "meetupName",
+                        type: "text",
+                        id: "meetup-name",
+                        labelText: "Meetup Name:",
+                        register: register
+                    }}/>
+                    <DisplayError error={errors?.meetupName?.message} />
+
+                    <InputField inputProps={{
+                        name: "meetupCapacity",
+                        type: "number",
+                        id: "meetup-capacity",
+                        labelText: "Meetup Capacity:",
+                        register: register
+                    }}/>
+                    <DisplayError error={errors?.meetupCapacity?.message} />
 
                     <InputField inputProps={{
                         name: "meetupAddress",

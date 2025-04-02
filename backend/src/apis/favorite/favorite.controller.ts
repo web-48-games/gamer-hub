@@ -131,10 +131,10 @@ export async function toggleFavoriteController(request: Request, response: Respo
         } else {
             status.message = await deleteFavorite(favorite)
         }
-
+        console.log(status)
         return response.json(status)
 
-    } catch(error) {
+    } catch(error : any) {
         console.error(error)
         return response.json({
             status:500,

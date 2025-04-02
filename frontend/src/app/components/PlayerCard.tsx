@@ -112,31 +112,32 @@ export function PlayerCard(props: PlayerCardProps) {
                         {selectedImage ? <img src={selectedImage} alt={'profile picture'}/> : <></>}
 
 
-                        <div className="flex flex-col items-center pb-10">
+                        {/*<div className="flex flex-col items-center pb-10">*/}
 
-                            <InputField inputProps={{
-                                name: "profileName",
-                                type: "text",
-                                id: "profile-name",
-                                labelText: "Name",
-                                register: register
-                            }}/>
-                        </div>
+                        {/*    <InputField inputProps={{*/}
+                        {/*        name: "profileName",*/}
+                        {/*        type: "text",*/}
+                        {/*        id: "profile-name",*/}
+                        {/*        labelText: "Name",*/}
+                        {/*        register: register*/}
+                        {/*    }}/>*/}
+                        {/*</div>*/}
                         <div>
-                            <label htmlFor={"profileAboutMe"}
+                            <label htmlFor={"profileName"}
                                    className="block text-[1rem] md:text-[1.5rem] xl:text-[2rem]  font-bold text-gh-teal-500 mb-1">
-                                About Me
+                                Name
                             </label>
-                            <textarea rows={3}
+                            <input
                                 // name={"profileAboutMe"}
-                                      id={"profileAboutMe"} {...register("profileAboutMe")}
+                                      id={"profileName"} {...register("profileName")}
 
                                       className={"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cosa-500"}
                             />
                         </div>
+
                         <div>
                             <label htmlFor={"profileAboutMe"}
-                                   className="block text-[1rem] md:text-[1.5rem] xl:text-[2rem]  font-bold text-gh-teal-500 mb-1">
+                                   className="block text-[1rem] md:text-[1.5rem] xl:text-[2rem] font-bold text-gh-teal-500 mb-1">
                                 About Me
                             </label>
                             <textarea rows={3}
@@ -147,7 +148,7 @@ export function PlayerCard(props: PlayerCardProps) {
                             />
                         </div>
                         <button type="submit"
-                                className="p-2 hover:shadow-cosa-500 bg-wasa-300 hover:bg-wasa-400 rounded-lg hover:text-white">
+                                className="p-2 text-[1rem] md:text-[1.25rem] xl:text-[1.5rem] hover:shadow-cosa-500 bg-wasa-300 hover:bg-wasa-400 rounded-lg hover:text-white">
                             Submit
                         </button>
                         <DisplayStatus status={status}></DisplayStatus>

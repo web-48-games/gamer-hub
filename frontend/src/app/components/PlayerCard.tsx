@@ -21,10 +21,6 @@ export type PlayerCardProps = {
 
 export function PlayerCard(props: PlayerCardProps) {
 
-    const formSchema = ProfileSchema
-
-    type FormValues = z.infer<typeof formSchema>
-
     //added image url to schema
     const profileSchema = ProfileSchema.extend(
         {
@@ -36,6 +32,7 @@ export function PlayerCard(props: PlayerCardProps) {
 
     const router = useRouter();
     let {profile} = props
+
     const [status, setStatus] = React.useState<Status | null>(null)
 
     const defaultValues = profile
@@ -46,6 +43,8 @@ export function PlayerCard(props: PlayerCardProps) {
         resolver: zodResolver (profileSchema),
     })
 
+    //pre-fills profileAvatarUrl with either the newly selected image or existing one from profile
+    //ensures an image, new or existing, is always sent to backend, avoiding potential null value
     const [selectedImage, setSelectedImage] = React.useState<string | null> (profile.profileAvatarUrl)
 
     //fireServerAction rewrite to accommodate image upload
@@ -56,12 +55,16 @@ export function PlayerCard(props: PlayerCardProps) {
                 setStatus({status:500, message: 'Select a new image', data: undefined})
                 return
             }
-            let profileAvatarUrl = null
+
+            //reserves space for new image to be uploaded, remains null if no image is sent to backend
+            let profileAvatarUrl = profile.profileAvatarUrl
+
+            //Upload image only if a new one was selected
             if(data.profileAvatarUrl) {
                 //backend, to cloudinary
                 const response = await postImage(data.profileAvatarUrl)
                 if (response.status === 200) {
-                    profileAvatarUrl = response.message
+                    profileAvatarUrl = response.message //Store uploaded image URL
                 } else {
                     setStatus({status: 500, message: 'Image failed to upload', data: undefined})
                     return
@@ -71,8 +74,9 @@ export function PlayerCard(props: PlayerCardProps) {
             const finalResponse = await putProfile({...data, profileAvatarUrl})
             setStatus(finalResponse)
             if (finalResponse.status === 200 ) {
-                setSelectedImage(null)
-                reset ()
+                // setSelectedImage(null)
+                // reset ()
+                router.refresh()
             }
 
             // const response = await putProfile(profile)
@@ -95,10 +99,8 @@ export function PlayerCard(props: PlayerCardProps) {
             {/*Name, Avatar, About, Favorites*/}
 
 
-            <div
-
-                className="m-20 w-full md:max-w-xl bg-wasa-200 border-b-2 shadow-lg shadow-wasa-500 rounded-lg dark:text-white  dark:border-gray-500 p-8">
-                <div className="flex flex-cols-1 p-4 pt-4 bg-cosa-100 shadow-sm rounded-lg w-full">
+            <div className="container p-8 mx-auto my-10 md:max-w-2xl bg-cosa-400 shadow-lg shadow-wasa-500 rounded-lg dark:text-white">
+                <div className="bg-code-200 p-6 shadow-lg shadow-cosa-500 rounded-lg w-full">
                     <form onSubmit={handleSubmit(fireServerAction)}>
 
                         {/*Dropzone for image upload*/}
@@ -109,8 +111,7 @@ export function PlayerCard(props: PlayerCardProps) {
                                              clearErrors={clearErrors}/>
 
                         {/*send image back to frontend */}
-                        {selectedImage ? <img src={selectedImage} alt={'profile picture'}/> : <></>}
-
+                        {selectedImage ? <img className={"my-4 rounded shadow-md shadow-gh-teal-500"} src={selectedImage} alt={'profile picture'}/> : <></>}
 
                         {/*<div className="flex flex-col items-center pb-10">*/}
 
@@ -129,9 +130,9 @@ export function PlayerCard(props: PlayerCardProps) {
                             </label>
                             <input
                                 // name={"profileAboutMe"}
-                                      id={"profileName"} {...register("profileName")}
+                                id={"profileName"} {...register("profileName")}
 
-                                      className={"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cosa-500"}
+                                className={"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cosa-500"}
                             />
                         </div>
 
@@ -146,11 +147,10 @@ export function PlayerCard(props: PlayerCardProps) {
 
                                       className={"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cosa-500"}
                             />
+                            <button type={"submit"} className={"p-2 my-4 text-[1rem] md:text-[1.25rem] xl:text-[1.25rem] hover:shadow-cosa-500 bg-wasa-300 hover:bg-wasa-400 rounded-lg hover:text-white"}>
+                                Submit Update
+                            </button>
                         </div>
-                        <button type="submit"
-                                className="p-2 text-[1rem] md:text-[1.25rem] xl:text-[1.5rem] hover:shadow-cosa-500 bg-wasa-300 hover:bg-wasa-400 rounded-lg hover:text-white">
-                            Submit
-                        </button>
                         <DisplayStatus status={status}></DisplayStatus>
                     </form>
                 </div>

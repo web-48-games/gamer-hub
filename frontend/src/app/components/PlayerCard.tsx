@@ -103,14 +103,13 @@ export function PlayerCard(props: PlayerCardProps) {
 
                         {/*Dropzone for image upload*/}
                         <ImageUploadDropZone control={control}
-                        fieldValue={'profileAvatarUrl'}
-                        setSelectedImage={setSelectedImage}
-                        setError={setError}
-                        clearErrors={clearErrors} />
+                                             fieldValue={'profileAvatarUrl'}
+                                             setSelectedImage={setSelectedImage}
+                                             setError={setError}
+                                             clearErrors={clearErrors}/>
 
                         {/*send image back to frontend */}
-                        { selectedImage ? <img src={selectedImage} alt={'profile picture'}/>: <></>}
-
+                        {selectedImage ? <img src={selectedImage} alt={'profile picture'}/> : <></>}
 
 
                         <div className="flex flex-col items-center pb-10">
@@ -125,17 +124,30 @@ export function PlayerCard(props: PlayerCardProps) {
                         </div>
                         <div>
                             <label htmlFor={"profileAboutMe"}
-                                   className="block text-sm font-bold text-gh-teal-500 mb-1">
-                                    About Me
+                                   className="block text-[1rem] md:text-[1.5rem] xl:text-[2rem]  font-bold text-gh-teal-500 mb-1">
+                                About Me
                             </label>
                             <textarea rows={3}
-                                      // name={"profileAboutMe"}
+                                // name={"profileAboutMe"}
                                       id={"profileAboutMe"} {...register("profileAboutMe")}
 
-                                   className={"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cosa-500"}
+                                      className={"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cosa-500"}
                             />
                         </div>
-                        <button type="submit" className="p-2 border-2 border-redBrown bg-paleRed">
+                        <div>
+                            <label htmlFor={"profileAboutMe"}
+                                   className="block text-[1rem] md:text-[1.5rem] xl:text-[2rem]  font-bold text-gh-teal-500 mb-1">
+                                About Me
+                            </label>
+                            <textarea rows={3}
+                                // name={"profileAboutMe"}
+                                      id={"profileAboutMe"} {...register("profileAboutMe")}
+
+                                      className={"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cosa-500"}
+                            />
+                        </div>
+                        <button type="submit"
+                                className="p-2 hover:shadow-cosa-500 bg-wasa-300 hover:bg-wasa-400 rounded-lg hover:text-white">
                             Submit
                         </button>
                         <DisplayStatus status={status}></DisplayStatus>

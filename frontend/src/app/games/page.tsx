@@ -5,7 +5,7 @@ import {GameResult} from "@/app/games/GameResult";
 import {FilterMenu} from "@/app/components/FilterMenu";
 import {GameCard} from "@/app/components/GameCard";
 import {
-    fetchAllGenres,
+    fetchAllGenres, fetchFeaturedGames,
     fetchGamesByFavoriteProfileId,
     fetchGamesByGenre,
     fetchGamesByGenres
@@ -17,16 +17,12 @@ export default async function (props: PageProps<any>) {
     let params = await props.searchParams
     let genreParams: any[] = Object.values(params)
     console.log(genreParams)
-    let games: Game[] = []
+    let games: Game[] = await fetchFeaturedGames()
     if (genreParams.length) {
         games = await fetchGamesByGenres(genreParams)
     }
     const genres: [] = await fetchAllGenres()
     const gameSlice = games.slice(0, 8)
-
-    // const defaultGames = await fetchGamesByGenre('Wargame')
-    // console.log(defaultGames[0])
-    // const defaultGameSlice = defaultGames.slice(0, 8)
 
     return (
         <>
@@ -56,7 +52,6 @@ export default async function (props: PageProps<any>) {
                         <FilterMenu genres={genres}/>
                     </div>
                     <div className={"w-full md:ml-4"}>
-                        {/*{!games && defaultGameSlice.map((game, i) => <GameResult key={i} gameData={game}/>)}*/}
                         {gameSlice.map((game, i) => <GameResult key={i} gameData={game}/>)}
                     </div>
                 </div>

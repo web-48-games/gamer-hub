@@ -18,7 +18,7 @@ export function GameCard(props: GameCardProps) {
                     <div className={"p-2 bg-white"}>
                         <h1 className={"text-[1.5rem] font-semibold"}>{gameName}</h1>
                         <p className={"font-semibold"}>Game Description</p>
-                        <p>{gameDescription}</p>
+                        <p dangerouslySetInnerHTML={{__html: gameDescription}} />
                         <p className={"font-semibold"}>Genre</p>
                         <p>{gameGenre.map((genre, i) => i === gameGenre.length-1 ? genre : genre + ", ")}</p>
                         <p className={"font-semibold"}>Max Players</p>

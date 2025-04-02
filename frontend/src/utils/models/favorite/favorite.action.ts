@@ -57,7 +57,7 @@ export async function fetchFavoritesByFavoriteGameId(favoriteGameId: string) : P
 }
 
 export async function toggleFavorite(favorite: Favorite)  {
-    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/favorites/toggle`,
+    return fetch(`${process.env.PUBLIC_API_URL}/apis/favorites/toggle`,
         {
             method: 'post',
             headers: await setHeaders(),

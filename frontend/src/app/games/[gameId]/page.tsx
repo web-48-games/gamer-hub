@@ -5,6 +5,7 @@ import {MeetupCard} from "@/app/meetups/MeetupCard";
 import {fetchProfileByProfileId} from "@/utils/models/profile/profile.action";
 import {FavoriteButton} from "@/app/games/[gameId]/FavoriteButton";
 import {getSession} from "@/utils/auth.utils";
+import {fetchFavoritesByFavoriteGameId} from "@/utils/models/favorite/favorite.action";
 
 
 export default async function({ params }: { params: Promise<{ gameId: string }> }) {
@@ -13,6 +14,7 @@ export default async function({ params }: { params: Promise<{ gameId: string }> 
     const game = await fetchGameByGameId(gameId)
     const meetups = await fetchMeetupsByGame(gameId)
     const session = await getSession()
+    const favorites = await fetchFavoritesByFavoriteGameId(gameId)
     const profileId = session?.profile?.profileId
     // const host = await fetchProfileByProfileId()
 
@@ -28,7 +30,7 @@ export default async function({ params }: { params: Promise<{ gameId: string }> 
             </div>
             {meetups && meetups.map((meetup, i) => <MeetupCard key={i} meetup={meetup} game={game} />)}
             <div className="flex flex-col items center p-4">
-                <FavoriteButton gameId={gameId} profileId={profileId} />
+                <FavoriteButton favorites={favorites} gameId={gameId} profileId={profileId} />
             </div>
         </>
     )

@@ -17,7 +17,9 @@ export function Navigation() {
     return (
         <Navbar fluid rounded className="p-4 bg-wasa-500">
             <NavbarBrand href="/" className={"order-1"}>
-                <img src="/favicon.ico" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
+                <div className="bg-code-100 border-2 border-cosa-400 rounded-full p-4 mr-2">
+                <img src="/dice-svgrepo-com.svg" className="mr-3 h-6 sm:h-9" alt="Handing Dice Svg" />
+                </div>
                 <span className="self-center whitespace-nowrap text-[2rem] font-light text-white">A Game Away</span>
             </NavbarBrand>
             <div className="flex order-2 md:order-3 ml-4 ">

@@ -96,8 +96,9 @@ export function PlayerCard(props: PlayerCardProps) {
 
 
             <div
-                className="m-20 w-full md:max-w-xl bg-lightYellow border-b-2 border-redBrown shadow-lg shadow-redBrown rounded-lg shadow-md dark:text-white dark:bg-redBrown dark:border-gray-500 p-8">
-                <div className="p-4 pt-4 bg-white border border-redBrown shadow-sm rounded-lg w-full">
+
+                className="m-20 w-full md:max-w-xl bg-wasa-200 border-b-2 shadow-lg shadow-wasa-500 rounded-lg dark:text-white  dark:border-gray-500 p-8">
+                <div className="flex flex-cols-1 p-4 pt-4 bg-cosa-100 shadow-sm rounded-lg w-full">
                     <form onSubmit={handleSubmit(fireServerAction)}>
 
                         {/*Dropzone for image upload*/}
@@ -124,14 +125,14 @@ export function PlayerCard(props: PlayerCardProps) {
                         </div>
                         <div>
                             <label htmlFor={"profileAboutMe"}
-                                   className="block text-sm font-bold text-blue-800 mb-1">
+                                   className="block text-sm font-bold text-gh-teal-500 mb-1">
                                     About Me
                             </label>
                             <textarea rows={3}
                                       // name={"profileAboutMe"}
                                       id={"profileAboutMe"} {...register("profileAboutMe")}
 
-                                   className={"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-redBrown"}
+                                   className={"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cosa-500"}
                             />
                         </div>
                         <button type="submit" className="p-2 border-2 border-redBrown bg-paleRed">

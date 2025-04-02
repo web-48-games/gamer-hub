@@ -15,12 +15,12 @@ export function PageIntro() {
             {/*</section>*/}
 
 
-            <section className="p-40 my-10 bg-lightYellow shadow-lg shadow-redBrown text-center font-semibold">
-                <h1 className="pb-4 text-[2.75rem] md:text-[5rem] font-normal text-redBrown">Welcome to A Game Away</h1>
-                <p className="text-[1.75rem] md:text-[3rem] font-normal text-redBrown">Find your table, adventures await!</p>
+            <section className="p-40 mb-10 bg-cosa-100 shadow-lg shadow-wasa-500 text-center font-semibold">
+                <h1 className="pb-4 text-[2.75rem] md:text-[5rem] font-normal text-wasa-500">Welcome to A Game Away</h1>
+                <p className="text-[1.75rem] md:text-[3rem] font-normal text-wasa-500">Find your table, adventures await!</p>
             </section>
 
-            <section className="container mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-4 items-center justify-items-center rounded-[1rem] border-b-redBrown shadow-lg shadow-redBrown bg-paleRed">
+            <section className="container mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-4 items-center justify-items-center rounded-[1rem] border-b-redBrown shadow-lg shadow-redBrown bg-">
                 <h1 className="text-[4rem] font-thin text-redBrown">Play & Explore!</h1>
                 <div className="relative overflow-hidden rounded-[2.5rem] w-[30rem] h-[20rem]">
                     <img src="/play-and-explore-placeholder.jpg" alt="Play" className="absoltue object-cover object-center size-full" />

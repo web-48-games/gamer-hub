@@ -38,5 +38,22 @@ export async function putProfile(profile: Profile) {
         throw error
     })
 }
+export async function fetchProfilesByRsvpMeetupId(meetupId:string): Promise<Profile[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/profiles/rsvpMeetupId/${meetupId}`,
+        {
+        method: 'get',
+        headers: {
+            'Content-type': 'application/json'
+        }
+    }) .then(response => {
+        if( !response.ok) {
+            throw new Error('request failed')
+        }
+        return response.json()
+    })
+    return ProfileSchema.array().parse(data)
+}
+
+
 
 

@@ -46,6 +46,50 @@ const config: Config = {
               'neutral': '#E2E8F0', // Game paper/cards
           },
 
+          //90% White
+          'white-95': '#F2F2F2',
+
+          //Warm Saturated
+          'wasa': {
+              100: '#FCDB90',
+              200: '#FFB755',
+              300: '#FE6900',
+              400: '#BA3600',
+              500: '#5A1000',
+          },
+          //Warm Desaturated
+          'wade': {
+              100: '#FCEECD',
+              200: '#FFDFB3',
+              300: '#FEC7A0',
+              400: '#D5AC9B',
+              500: '#9E7F78',
+
+          },
+          //Cool Saturated
+          'cosa': {
+              100: '#CEFFD4',
+              200: '#A9F0B7',
+              300: '#1BD9B6',
+              400: '#0AA1AA',
+              500: '#03568A',
+          },
+          'code': {
+              100: '#EBFFEE',
+              200: '#D0F3D7',
+              300: '#9FDFD3',
+              400: '#95E3E8',
+              500: '#76B1D6',
+          },
+
+
+
+
+
+
+
+
+
           redBrown: "#321E1B",
           lightYellow: "#FFD073",
           lightRed: "#EAC0C0",

@@ -2,6 +2,7 @@
 
 import {Profile, ProfileSchema} from "@/utils/models/profile/profile.model";
 import {useForm} from "react-hook-form";
+import {useState} from "react";
 import {z} from "zod";
 import React from "react";
 import {Status} from "@/utils/interfaces/Status";
@@ -9,9 +10,9 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {putProfile} from "@/utils/models/profile/profile.action";
 import {useRouter} from "next/navigation";
 import {postImage} from "@/utils/models/image/image.action";
-import { v7 as uuid } from "uuid";
 import { ImageUploadDropZone } from "./ImageUploadDropZone";
 import {InputField} from "@/app/components/login-signup/InputField";
+import {DisplayStatus} from "@/app/components/display-status";
 
 
 export type PlayerCardProps = {
@@ -57,7 +58,7 @@ export function PlayerCard(props: PlayerCardProps) {
             }
             let profileAvatarUrl = null
             if(data.profileAvatarUrl) {
-
+                //backend, to cloudinary
                 const response = await postImage(data.profileAvatarUrl)
                 if (response.status === 200) {
                     profileAvatarUrl = response.message
@@ -74,11 +75,11 @@ export function PlayerCard(props: PlayerCardProps) {
                 reset ()
             }
 
-            const response = await putProfile(profile)
-            if (response.status === 200) {
-                router.push(`/profile`)
-            }
-            setStatus(response)
+            // const response = await putProfile(profile)
+            // if (response.status === 200) {
+            //     router.push(`/profile`)
+            // }
+            // setStatus(response)
         } catch (error) {
             setStatus({
                 status: 500,
@@ -106,7 +107,10 @@ export function PlayerCard(props: PlayerCardProps) {
                         setError={setError}
                         clearErrors={clearErrors} />
 
+                        {/*send image back to frontend */}
                         { selectedImage ? <img src={selectedImage} alt={'profile picture'}/>: <></>}
+
+
 
                         <div className="flex flex-col items-center pb-10">
 
@@ -133,6 +137,7 @@ export function PlayerCard(props: PlayerCardProps) {
                         <button type="submit" className="p-2 border-2 border-redBrown bg-paleRed">
                             Submit
                         </button>
+                        <DisplayStatus status={status}></DisplayStatus>
                     </form>
                 </div>
             </div>

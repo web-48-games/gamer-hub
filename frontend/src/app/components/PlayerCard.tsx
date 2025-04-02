@@ -46,7 +46,7 @@ export function PlayerCard(props: PlayerCardProps) {
         resolver: zodResolver (profileSchema),
     })
 
-    const [selectedImage, setSelectedImage] = React.useState<string | null> (null)
+    const [selectedImage, setSelectedImage] = React.useState<string | null> (profile.profileAvatarUrl)
 
     //fireServerAction rewrite to accommodate image upload
     const fireServerAction = async(data: ProfileSchema) => {

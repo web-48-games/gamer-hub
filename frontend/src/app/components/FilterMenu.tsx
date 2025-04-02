@@ -24,9 +24,10 @@ export function FilterMenu(props: FilterProps) {
             </button>
 
             {/*smooth transitions*/}
-            <section className={`bg-paleRed border-[.25rem] border-solid rounded-[1rem] border-redBrown fixed p-4 md:sticky left-0 top-0 md:top-24 md:m-6 h-screen md:h-auto transition-all duration-300 z-10
+            <section className={`rounded-lg fixed p-4 md:sticky left-0 top-0 md:top-24 md:m-6 h-screen md:h-auto transition-all duration-300 z-10 bg-cosa-400
             ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
             w-64 md:w-auto overflow-y-auto`}>
+                <div className="p-4 bg-code-200 shadow-lg shadow-cosa-500 rounded-lg">
                 <h2 className={"text-2xl font-bold p-1 my-1"}>Filter</h2>
                 <h3 className={"text-lg font-semibold p-1"}>Genres</h3>
                 {genres.map((genre, i) => <Checkbox key={i} value={genre} labelText={genre}/>)}
@@ -38,6 +39,7 @@ export function FilterMenu(props: FilterProps) {
                 {/*<Checkbox labelText={"< 30min."}/>*/}
                 {/*<Checkbox labelText={"1-3 hrs."}/>*/}
                 {/*<Checkbox labelText={"4+ hrs."}/>*/}
+                </div>
             </section>
 
             {/* Backdrop for mobile - only appears when filter is open */}

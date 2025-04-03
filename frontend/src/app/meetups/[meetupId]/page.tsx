@@ -13,6 +13,7 @@ import { getSession } from '@/utils/auth.utils';
 import {postRsvp} from "@/utils/models/rsvp/rsvp.action";
 import {MeetupJoinButton} from "@/app/meetups/MeetupJoinButton";
 import {fetchAllMessages} from "@/utils/models/message/message.action";
+import {MessageForm} from "@/app/meetups/MessageForm";
 
 
 export default async function meetupInfoPage({ params }: { params: Promise<{ meetupId: string }> }) {
@@ -79,19 +80,9 @@ export default async function meetupInfoPage({ params }: { params: Promise<{ mee
                     <div className="bg-pink-50 p-4 rounded-lg">
 
                         {/*insert chat component here*/}
-                        {allMessages.map((message, i) => <MessageEach message={message} key={i}/>)}
+                        {allMessages && allMessages.map((message, i) => <MessageEach message={message} key={i}/>)}
 
-                        <div className="flex mt-4">
-                            <input
-                                type="text"
-                                className="flex-1 p-2 border rounded-l-lg"
-                                placeholder="Type your message..."
-                            />
-                            {/*add functionality to this button*/}
-                            <button onClick={} className="bg-lightRed text-redBrown px-4 py-2 rounded-r-lg">
-                                SEND
-                            </button>
-                        </div>
+                        <MessageForm loggedInProfile={sessionProfile} meetupId={meetupId} />
                     </div>
                 </div>
             </div>

@@ -50,7 +50,8 @@ export async function MeetupCard(props: MeetupCardProps) {
 
 
     return (
-        <div className="flex my-4 rounded-lg overflow-hidden bg-cyan-50 shadow-md">
+        <Link href={`/meetups/${meetup.meetupId}`}>
+        <div className="flex my-4 rounded-lg bg-cyan-50 shadow-md">
             <div className="w-24 h-24 bg-paleRed flex items-center justify-center">
                 {hostProfile? (
                     <Image
@@ -69,12 +70,8 @@ export async function MeetupCard(props: MeetupCardProps) {
                 <div>Game: {game.gameName}</div>
                 {/*format date and time*/}
                 <div>Join us on {meetup.meetupStartTime.getMonth() + "/" + meetup.meetupStartTime.getDate() + "/" + meetup.meetupStartTime.getFullYear()} @ {timeString}</div>
-                <div className="text-right">
-                    <Link href={`/meetups/${meetup.meetupId}`} className="text-lg font-medium text-redBrown">
-                        View Meetup
-                    </Link>
-                </div>
             </div>
         </div>
+        </Link>
     );
 }

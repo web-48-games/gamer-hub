@@ -5,10 +5,11 @@ import {Meetup} from "@/utils/models/meetups/meetup.model";
 import {fetchProfileByProfileId} from "@/utils/models/profile/profile.action";
 import {Game} from "@/utils/models/game/game.model";
 import {Profile} from "@/utils/models/profile/profile.model";
+import {fetchMeetupsByGame} from "@/utils/models/meetups/meetup.action";
+import {fetchGameByGameId} from "@/utils/models/game/game.action";
 
 export type MeetupCardProps = {
     meetup: Meetup
-    game: Game
     // host: Profile
     // id: string;
     // hostName: string;
@@ -19,8 +20,9 @@ export type MeetupCardProps = {
 }
 
 export async function MeetupCard(props: MeetupCardProps) {
-    const {meetup, game} = props
+    const {meetup} = props
     const hostProfile = await fetchProfileByProfileId(meetup.meetupHostProfileId)
+    const game = await fetchGameByGameId(meetup.meetupGameId)
 
     let hourString: string = ''
     if (meetup.meetupStartTime.getHours() < 10) {
@@ -66,7 +68,7 @@ export async function MeetupCard(props: MeetupCardProps) {
             </div>
             <div className="flex-1 p-4 bg-lightYellow">
                 <div className="text-lg font-medium">Host: {hostProfile.profileName}</div>
-                <div>Game: {game.gameName}</div>
+                <div>Game: {game?.gameName}</div>
                 {/*format date and time*/}
                 <div>Join us on {meetup.meetupStartTime.getMonth() + "/" + meetup.meetupStartTime.getDate() + "/" + meetup.meetupStartTime.getFullYear()} @ {timeString}</div>
                 <div className="text-right">

@@ -21,7 +21,7 @@ export async function signUpController(request: Request, response: Response) {
         const {profileEmail, profileName, profilePassword, profilePasswordConfirm, profileId} = validationResult.data
         const profileHash = await setHash(profilePassword)
         const profileActivationToken = setActivationToken()
-        const profileAvatarUrl = 'https://placekitten.com/300/300'
+        const profileAvatarUrl = null
         const basepath = `${request.protocol}://${request.hostname}:8080${request.originalUrl}activation/${profileActivationToken}`
         const html = `<h1>Welcome to A Game Away</h1>
         <p>In order to start finding games please verify your account <a href="${basepath}">${basepath}</a></p>>`
@@ -39,7 +39,7 @@ export async function signUpController(request: Request, response: Response) {
             profileName,
             profileHash,
             profileCreationDate:null,
-            profileAvatarUrl
+            profileAvatarUrl: null
         }
         const message = await insertProfile(profile)
 

@@ -4,14 +4,31 @@ import React from "react";
 import {postRsvp} from "@/utils/models/rsvp/rsvp.action";
 import { useRouter } from "next/navigation";
 import {Rsvp} from "@/utils/models/rsvp/rsvp.model";
+import {Session} from "@/utils/auth.utils";
+
 
 type MeetupJoinButtonProps = {
-    rsvp: Rsvp
+    isJoined: boolean
+    meetupId: string
+    spotsAvailable: boolean
+    sessionProfile?: Session
 }
 
 export function MeetupJoinButton(props: MeetupJoinButtonProps) {
     const router = useRouter();
-    const {rsvp} = props
+    const {isJoined, meetupId, spotsAvailable, sessionProfile} = props;
+
+    if (isJoined) {
+        return <></>
+    }
+    if (!spotsAvailable) {
+        return <></>
+    }
+    if (!sessionProfile) {
+        return <></>
+    }
+
+    const rsvp = {rsvpMeetupId: meetupId, rsvpProfileId: sessionProfile.profile.profileId, rsvpAt: null}
     async function fireServerAction() {
         try {
             const response = await postRsvp(rsvp)

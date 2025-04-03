@@ -16,6 +16,10 @@ export async function PlayerMeetupCard(props:PlayerMeetupCardProps){
     const {meetup, profile: {profileAvatarUrl, profileName, profileId}, isHost, loggedInProfile} =props
     console.log(isHost)
 
+    function LeaveMeetup(){
+        return
+    }
+
     return (
         <div className="flex my-2 rounded-lg bg-cyan-50 shadow-sm">
             <div className="w-16 h-16 bg-cyan-100 flex">
@@ -28,12 +32,13 @@ export async function PlayerMeetupCard(props:PlayerMeetupCardProps){
                         className="rounded-full"
                     />
                 ) : ""}
-                <div className="">{profileName}</div>
-                {isHost && <div>Host</div>}
+                <div className="">{profileName} </div>
+                {isHost && <div> Host</div>}
                 {loggedInProfile?.profileId === profileId && !isHost &&
                 <button>
                     Leave Meetup
                 </button>}
+                {/*button above needs to have functionality - should this be client component and use onClick event handler?*/}
             </div>
 
         </div>

@@ -56,3 +56,20 @@ export async function fetchRsvpByRsvpMeetupId(rsvpMeetupId: string) : Promise<Rs
     })
     return RsvpSchema.array().parse(data)
 }
+
+export async function deleteRsvp(rsvpMeetupId: string) : Promise<Status> {
+    return fetch(`${process.env.PUBLIC_API_URL}/apis/meetupId/${rsvpMeetupId}`,
+        {
+            method: 'delete',
+            headers: await setHeaders()
+        }
+    ).then(response => {
+        if (!response.ok) {
+            throw new Error('Network response failed')
+        }
+        return response.json()
+    }).catch(error => {
+        console.error(error)
+        throw error
+    })
+}

@@ -28,8 +28,7 @@ export default async function meetupInfoPage({ params }: { params: Promise<{ mee
     const spotsAvailable = meetup.meetupCapacity - (meetupProfiles.length)
 
 
-
-
+    if (!sessionProfile) return <></>
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -52,13 +51,14 @@ export default async function meetupInfoPage({ params }: { params: Promise<{ mee
 
                     <div>
                         <h2 className="text-xl font-semibold mb-4 text-center">AVAILABLE</h2>
-                        {spotsAvailable && sessionProfile && <MeetupJoinButton rsvp = {{
-                            rsvpProfileId: sessionProfile?.profileId ?? null,
-                            rsvpMeetupId: meetup.meetupId,
-                            rsvpAt: null
-                        }} />
-                           }
-                        {new Array(spotsAvailable-1).fill(5).map((element, i) => <button className={"w-full h-12 bg-gray-100 font-semibold text-md text-center"} key={i}>OPEN SLOT</button>)}
+                        <MeetupJoinButton
+                            isJoined={meetupProfiles.map(profile => profile.profileId).includes(sessionProfile.profileId)}
+                            meetupId={meetupId}
+                            spotsAvailable={spotsAvailable > 0}
+                            sessionProfile={session} />
+
+                           {/*this will always have 1 less open slot than intended when Join button is no longer available*/}
+                        {new Array(meetupProfiles.map(profile => profile.profileId).includes(sessionProfile.profileId) ? spotsAvailable : spotsAvailable-1).fill(5).map((element, i) => <button className={"w-full h-12 bg-gray-100 font-semibold text-md text-center"} key={i}>OPEN SLOT</button>)}
 
                     </div>
                 </div>

@@ -10,6 +10,9 @@ import {fetchProfileByProfileId, fetchProfilesByRsvpMeetupId} from "@/utils/mode
 import {GameCard} from "@/app/components/GameCard";
 import {PlayerMeetupCard} from "@/app/meetups/PlayerMeetupCard";
 import { getSession } from '@/utils/auth.utils';
+import {postRsvp} from "@/utils/models/rsvp/rsvp.action";
+import {MeetupJoinButton} from "@/app/meetups/MeetupJoinButton";
+
 
 export default async function meetupInfoPage({ params }: { params: Promise<{ meetupId: string }> }) {
     // extracting id from the url of the page
@@ -21,10 +24,9 @@ export default async function meetupInfoPage({ params }: { params: Promise<{ mee
     const session = await getSession()
     const sessionProfile = session?.profile
     const isHost = meetup.meetupHostProfileId === sessionProfile?.profileId
-    const meetupProfile = await fetchProfilesByRsvpMeetupId(meetupId)
-    // const rsvp = await fetchRsvpBy()
+    const meetupProfiles = await fetchProfilesByRsvpMeetupId(meetupId)
+    const spotsAvailable = meetup.meetupCapacity - (meetupProfiles.length)
 
-    console.log(game)
 
 
 
@@ -32,31 +34,31 @@ export default async function meetupInfoPage({ params }: { params: Promise<{ mee
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-2xl font-bold text-center mb-6">
-                #{meetupId} For {game?.gameName}
+                {meetup.meetupName} hosted by {hostProfile.profileName}
             </h1>
 
             <div className="max-w-md mx-auto">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 mb-8">
                     <div>
                         <h2 className="text-xl font-semibold mb-4 text-center">JOINED</h2>
-                        <p className="text-xl font-semibold mb-4 text-center">
-                            {hostProfile.profileName}
-                        </p>
-                        {hostProfile.profileAvatarUrl &&
-                            <img src={hostProfile?.profileAvatarUrl} alt={hostProfile.profileName}/>
-                        }
-
-
+                        {meetupProfiles.map((profile, i) => <PlayerMeetupCard
+                            key={i}
+                            meetup={meetup}
+                            profile={profile}
+                            isHost={meetup.meetupHostProfileId === profile.profileId}
+                            loggedInProfile={session?.profile}
+                        />)}
                     </div>
 
                     <div>
                         <h2 className="text-xl font-semibold mb-4 text-center">AVAILABLE</h2>
-                        <PlayerMeetupCard
-                         meetup={meetup}
-                         profile={hostProfile}
-                         isHost={true}
-                         loggedInProfile={session?.profile}
-                         />
+                        {spotsAvailable && sessionProfile && <MeetupJoinButton rsvp = {{
+                            rsvpProfileId: sessionProfile?.profileId ?? null,
+                            rsvpMeetupId: meetup.meetupId,
+                            rsvpAt: null
+                        }} />
+                           }
+                        {new Array(spotsAvailable-1).fill(5).map((element, i) => <button className={"w-full h-12 bg-gray-100 font-semibold text-md text-center"} key={i}>OPEN SLOT</button>)}
                         {/*{emptySlots.map((_, index) => (*/}
                         {/*    <MeetupSlot*/}
                         {/*        key={index}*/}

@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'placekitten.com',
+                hostname: 'res.cloudinary.com',
                 port: '',
                 pathname: '/**',
             },

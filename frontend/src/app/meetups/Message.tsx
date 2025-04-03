@@ -1,11 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
+import {Profile} from "@/utils/models/profile/profile.model";
 
 type MessageProps = {
-    senderName: string;
-    senderAvatar: string;
-    content: string;
-    timestamp: string;
+    loggedInProfile?: Profile
+    message: Message
 }
 
 export function Message({ senderName, senderAvatar, content, timestamp }: MessageProps) {

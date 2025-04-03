@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 body {
-    @apply bg-wasa-100
+    @apply bg-pale-yellow
 }
 
 /*@font-face {*/

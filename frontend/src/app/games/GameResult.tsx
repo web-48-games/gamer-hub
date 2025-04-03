@@ -16,10 +16,10 @@ export function GameResult(props: gameResultProps) {
         <>
             <a href={`/games/${gameId}`}>
                 <div
-                    className={"flex flex-col items-center sm:flex-row p-4 my-4 h-auto bg-lightYellow border-2 rounded-lg relative group max-w-full"}>
+                    className={"flex flex-col items-center sm:flex-row p-4 my-4 h-auto  rounded-lg relative group max-w-full shadow-md shadow-wasa-500 bg-code-a "}>
                     <img className={"w-40 h-40 object-cover p-2"} src={gameImageUrl} alt={`depicting ${gameName}`}/>
                     <section className={"flex-grow p-4"}>
-                        <h2 className={"font-bold text-2xl mb-4"}>{gameName}</h2>
+                        <h2 className={"font-bold text-2xl mb-4 text-cosa-600"}>{gameName}</h2>
                         <p>Genre: {gameGenre.map(genre => genre === gameGenre[gameGenre.length - 1] ? genre : genre + ", ")}</p>
                         <p>Released on: {gameYearPublished}</p>
                     </section>

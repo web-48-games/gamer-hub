@@ -54,7 +54,7 @@ export async function MeetupCard(props: MeetupCardProps) {
             <div className="w-24 h-24 bg-paleRed flex items-center justify-center">
                 {hostProfile? (
                     <Image
-                        src={hostProfile.profileAvatarUrl}
+                        src={hostProfile.profileAvatarUrl || ''}
                         alt={`${hostProfile.profileName}'s avatar`}
                         width={80}
                         height={80}

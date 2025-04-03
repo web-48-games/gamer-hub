@@ -33,7 +33,7 @@ export async function postMessageController(request: Request, response: Response
             return zodErrorResponse(response, validationResult.error)
         }
 
-        //deconstruct Message request data from validated result
+        //deconstruct MessageEach request data from validated result
         const {messageId, messageProfileId, messageMeetupId, messageContent, messageTimestamp} = validationResult.data
 
         //declared message variable using MessageSchema properties
@@ -88,7 +88,7 @@ export async function getMessagesByMessageMeetupId (request: Request, response: 
 
     const data = await selectMessagesByMeetupId(messageMeetupId)
 
-    return response.json({status: 200, message: 'Message Successfully Found', data: data})
+    return response.json({status: 200, message: 'MessageEach Successfully Found', data: data})
 
     } catch (error) {
         return response.json ({
@@ -114,7 +114,7 @@ export async function getMessagesByMessageProfileId (request: Request, response:
 
         const data = await selectMessagesByProfileId(messageProfileId)
 
-        return response.json({status: 200, message: 'Message Successfully Found', data: data})
+        return response.json({status: 200, message: 'MessageEach Successfully Found', data: data})
 
     } catch (error) {
         return response.json ({
@@ -152,7 +152,7 @@ export async function updateMessageByMessageIdController (request: Request, resp
 
     //if the profile does not exist, return a preformatted response to the client
     if(message === null) {
-        return response.json({status: 400, message: "Message does not exist", data: null})
+        return response.json({status: 400, message: "MessageEach does not exist", data: null})
     }
         if (profileIdFromSession !== message.messageProfileId) {
             return response.json({status: 400, message: "You cannot update a message that is not yours", data: null})
@@ -164,7 +164,7 @@ export async function updateMessageByMessageIdController (request: Request, resp
     await updateMessage(message)
 
     //return a response to the client with a success message
-    return response.json({status: 200, message: "Message successfully updated", data: null})
+    return response.json({status: 200, message: "MessageEach successfully updated", data: null})
 
     } catch (error: unknown) {
         //if an error occurs, return a preformatted response to the client
@@ -197,7 +197,7 @@ export async function deleteMessageByMessageIdController (request: Request, resp
         const message: Message | null = await selectMessageByMessageId(messageId)
 
         if(message === null) {
-            return response.json({status: 404, message: 'Message not found', data: null})
+            return response.json({status: 404, message: 'MessageEach not found', data: null})
         }
 
         const meetup: Meetup | null = await selectMeetupByMeetupId(message.messageMeetupId)

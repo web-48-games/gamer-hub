@@ -58,7 +58,7 @@ export async function fetchRsvpByRsvpMeetupId(rsvpMeetupId: string) : Promise<Rs
 }
 
 export async function deleteRsvp(rsvpMeetupId: string) : Promise<Status> {
-    return fetch(`${process.env.PUBLIC_API_URL}/apis/meetupId/${rsvpMeetupId}`,
+    return fetch(`${process.env.PUBLIC_API_URL}/apis/rsvp/meetupId/${rsvpMeetupId}`,
         {
             method: 'delete',
             headers: await setHeaders()

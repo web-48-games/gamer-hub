@@ -3,6 +3,7 @@ import { Profile } from "@/utils/models/profile/profile.model"
 import Image from "next/image";
 import {fetchRsvpByRsvpMeetupId} from "@/utils/models/rsvp/rsvp.action";
 import React from "react";
+import {MeetupLeaveButton} from "@/app/meetups/MeetupLeaveButton";
 
 
 type PlayerMeetupCardProps = {
@@ -35,10 +36,7 @@ export async function PlayerMeetupCard(props:PlayerMeetupCardProps){
                 <div className="">{profileName} </div>
                 {isHost && <div> Host</div>}
                 {loggedInProfile?.profileId === profileId && !isHost &&
-                <button>
-                    Leave Meetup
-                </button>}
-                {/*button above needs to have functionality - should this be client component and use onClick event handler?*/}
+                <MeetupLeaveButton meetupId={meetup.meetupId} sessionProfile={loggedInProfile}/>}
             </div>
 
         </div>

@@ -59,13 +59,7 @@ export default async function meetupInfoPage({ params }: { params: Promise<{ mee
                         }} />
                            }
                         {new Array(spotsAvailable-1).fill(5).map((element, i) => <button className={"w-full h-12 bg-gray-100 font-semibold text-md text-center"} key={i}>OPEN SLOT</button>)}
-                        {/*{emptySlots.map((_, index) => (*/}
-                        {/*    <MeetupSlot*/}
-                        {/*        key={index}*/}
-                        {/*        isFilled={false}*/}
-                        {/*        onJoin={() => console.log('Join clicked. Replace later with feature to actually have player occupy the slot')}*/}
-                        {/*    />*/}
-                        {/*))}*/}
+
                     </div>
                 </div>
 

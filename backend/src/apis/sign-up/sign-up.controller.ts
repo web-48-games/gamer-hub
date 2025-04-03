@@ -39,7 +39,7 @@ export async function signUpController(request: Request, response: Response) {
             profileName,
             profileHash,
             profileCreationDate:null,
-            profileAvatarUrl
+            profileAvatarUrl: null
         }
         const message = await insertProfile(profile)
 

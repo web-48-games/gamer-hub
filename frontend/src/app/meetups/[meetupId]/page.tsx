@@ -6,106 +6,76 @@ import { MeetupSlot } from '../MeetupSlot';
 import { Message } from '../Message';
 import {fetchMeetupByMeetupId} from "@/utils/models/meetups/meetup.action";
 import {fetchGameByGameId} from "@/utils/models/game/game.action";
+import {fetchProfileByProfileId, fetchProfilesByRsvpMeetupId} from "@/utils/models/profile/profile.action";
+import {GameCard} from "@/app/components/GameCard";
+import {PlayerMeetupCard} from "@/app/meetups/PlayerMeetupCard";
+import { getSession } from '@/utils/auth.utils';
+import {postRsvp} from "@/utils/models/rsvp/rsvp.action";
+import {MeetupJoinButton} from "@/app/meetups/MeetupJoinButton";
 
-// Mock data for testing
-const mockMeetupInfo = {
-    id: '12345',
-    hostName: 'Host Name',
-    hostAvatar: '/window.svg',
-    gameName: 'Settlers of Catan',
-    gameId: '123456',
-    date: 'March 5, 2025',
-    time: '7:00 PM',
-    address: '123 Main St, Albuquerque, NM',
-    capacity: 4,
-    joined: [
-        {
-            playerName: 'Host Name',
-            playerAvatar: '/window.svg',
-            playerAbout: 'Game Host',
-        }
-    ],
-    messages: [
-        {
-            senderName: 'Host Name',
-            senderAvatar: '/window.svg',
-            content: "Hey all! I'm so excited to host this game. Let me know if you got any questions.",
-            timestamp: '11:42:28 MST',
-        },
-        {
-            senderName: 'Player 2',
-            senderAvatar: '/window.svg',
-            content: "Thanks for the host! I heard about this game from friends and trying it out for first time. In fact, a few of them might join for this meetup!",
-            timestamp: '13:24:56 MST',
-        }
-    ]
-};
 
 export default async function meetupInfoPage({ params }: { params: Promise<{ meetupId: string }> }) {
     // extracting id from the url of the page
     const {meetupId} = await params;
     console.log(meetupId);
     const meetup = await fetchMeetupByMeetupId(meetupId)
+    const hostProfile = await fetchProfileByProfileId(meetup.meetupHostProfileId)
     const game = await fetchGameByGameId(meetup.meetupGameId)
-    // const rsvp = await fetchRsvpBy()
+    const session = await getSession()
+    const sessionProfile = session?.profile
+    const isHost = meetup.meetupHostProfileId === sessionProfile?.profileId
+    const meetupProfiles = await fetchProfilesByRsvpMeetupId(meetupId)
+    const spotsAvailable = meetup.meetupCapacity - (meetupProfiles.length)
 
-    console.log(game)
 
-    // when backend is implemented, fetch the meetup data based on the ID
-    const meetupDummyData = mockMeetupInfo;
-
-    // calculate empty slots
-    // const emptySlots = Array(meetup.meetupCapacity - meetupDummyData.joined.length).fill(null);
+    if (!sessionProfile) return <></>
 
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-2xl font-bold text-center mb-6">
-                #{meetupId} For {game?.gameName}
+                {meetup.meetupName} hosted by {hostProfile.profileName}
             </h1>
 
             <div className="max-w-md mx-auto">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 mb-8">
                     <div>
                         <h2 className="text-xl font-semibold mb-4 text-center">JOINED</h2>
-                        {meetupDummyData.joined.map((player, index) => (
-                            <MeetupSlot
-                                key={index}
-                                isFilled={true}
-                                playerName={player.playerName}
-                                playerAvatar={player.playerAvatar}
-                                playerAbout={player.playerAbout}
-                            />
-                        ))}
+                        {meetupProfiles.map((profile, i) => <PlayerMeetupCard
+                            key={i}
+                            meetup={meetup}
+                            profile={profile}
+                            isHost={meetup.meetupHostProfileId === profile.profileId}
+                            loggedInProfile={session?.profile}
+                        />)}
                     </div>
 
                     <div>
                         <h2 className="text-xl font-semibold mb-4 text-center">AVAILABLE</h2>
-                        {/*{emptySlots.map((_, index) => (*/}
-                        {/*    <MeetupSlot*/}
-                        {/*        key={index}*/}
-                        {/*        isFilled={false}*/}
-                        {/*        onJoin={() => console.log('Join clicked. Replace later with feature to actually have player occupy the slot')}*/}
-                        {/*    />*/}
-                        {/*))}*/}
+                        <MeetupJoinButton
+                            isJoined={meetupProfiles.map(profile => profile.profileId).includes(sessionProfile.profileId)}
+                            meetupId={meetupId}
+                            spotsAvailable={spotsAvailable > 0}
+                            sessionProfile={session} />
+
+                           {/*this will always have 1 less open slot than intended when Join button is no longer available*/}
+                        {new Array(meetupProfiles.map(profile => profile.profileId).includes(sessionProfile.profileId) ? spotsAvailable : spotsAvailable-1).fill(5).map((element, i) => <button className={"w-full h-12 bg-gray-100 font-semibold text-md text-center"} key={i}>OPEN SLOT</button>)}
+
                     </div>
+                </div>
+
+                <div>
+                    {game && <GameCard gameCardInfo={game}/>}
                 </div>
 
                 <div className="mt-8">
                     {/*button functionality not added yet*/}
-                    <button className="mx-auto block px-6 py-2 bg-yellow-200 rounded-lg font-medium hover:bg-yellow-300 transition mb-4">
+                    <button
+                        className="mx-auto block px-6 py-2 bg-yellow-200 rounded-lg font-medium hover:bg-yellow-300 transition mb-4">
                         Chat with meetup members
                     </button>
 
                     <div className="bg-pink-50 p-4 rounded-lg">
-                        {meetupDummyData.messages.map((message, index) => (
-                            <Message
-                                key={index}
-                                senderName={message.senderName}
-                                senderAvatar={message.senderAvatar}
-                                content={message.content}
-                                timestamp={message.timestamp}
-                            />
-                        ))}
+
 
                         <div className="flex mt-4">
                             <input

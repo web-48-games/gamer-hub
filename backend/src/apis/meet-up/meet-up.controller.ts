@@ -13,6 +13,7 @@ import {z, ZodObject} from "zod";
 import {FavoriteSchema} from "../favorite/favorite.validator";
 import {RsvpSchema} from "../rsvp/rsvp.validator";
 import {GameSchema} from "../game/game.validator";
+import {insertRsvp} from "../rsvp/rsvp.model";
 
 
 export async function postMeetupController(request: Request, response: Response):Promise<Response> {
@@ -29,6 +30,8 @@ export async function postMeetupController(request: Request, response: Response)
         const meetup = {meetupId, meetupGameId, meetupHostProfileId, meetupAddress, meetupCapacity, meetupCreatedAt, meetupDescription, meetupDuration, meetupLat, meetupLong, meetupName, meetupStartTime}
 
         const uploadMeetup = await insertMeetup(meetup)
+        const rsvp = {rsvpMeetupId : meetupId, rsvpProfileId: meetupHostProfileId, rsvpAt: null}
+        await insertRsvp(rsvp)
 
         return response.json({status:200, message: uploadMeetup, data: null})
 

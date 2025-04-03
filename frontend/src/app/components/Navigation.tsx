@@ -23,7 +23,7 @@ export function Navigation() {
                 <span className="self-center whitespace-nowrap text-[2rem] font-light text-white">A Game Away</span>
             </NavbarBrand>
             <div className="flex order-2 md:order-3 ml-4 ">
-                <Button onClick={handleAuthButtonClick} className="p-2 bg-wasa-300 text-black hover:text-code-100">Login/Sign Up</Button>
+                <Button onClick={handleAuthButtonClick} className="p-2 bg-wasa-a text-white hover:text-code-100">Login/Sign Up</Button>
                 <NavbarToggle />
             </div>
 

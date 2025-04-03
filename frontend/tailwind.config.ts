@@ -58,7 +58,8 @@ const config: Config = {
               400: '#BA3600',
               500: '#5A1000',
               //Text over Orange
-              600: '#340F00'
+              600: '#340F00',
+              'a': '#FE6900'
           },
           //Warm Desaturated
           'wade': {

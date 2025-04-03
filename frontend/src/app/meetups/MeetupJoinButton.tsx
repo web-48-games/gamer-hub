@@ -30,7 +30,7 @@ export function MeetupJoinButton(props: MeetupJoinButtonProps) {
     }
     return (
         <>
-            <button className={"w-full h-12 bg-gray-100 font-semibold text-md text-center"} onClick={fireServerAction}>
+            <button className={"w-full h-12 bg-gray-100 font-semibold text-md text-center my-2"} onClick={fireServerAction}>
                 JOIN
             </button>
         </>

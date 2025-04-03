@@ -8,6 +8,13 @@ import { Profile } from "@/utils/models/profile/profile.model";
 import {Meetup} from "@/utils/models/meetups/meetup.model";
 import {fetchMeetupsByRsvpProfileId} from "@/utils/models/meetups/meetup.action";
 import {MeetupCard} from "@/app/meetups/MeetupCard";
+import {
+    fetchFavoritesByFavoriteGameId,
+    fetchFavoritesByFavoriteProfileId
+} from "@/utils/models/favorite/favorite.action";
+import {fetchGamesByFavoriteProfileId} from "@/utils/models/game/game.action";
+import {Game} from "@/utils/models/game/game.model";
+import {GameResult} from "@/app/games/GameResult";
 
 export default async function (props: PageProps<{}>) {
 
@@ -27,14 +34,20 @@ export default async function (props: PageProps<{}>) {
     const meetups: Meetup[] = await fetchMeetupsByRsvpProfileId(session.profile.profileId)
     console.log(meetups, 'meetup?')
     //get games and filter || get games in meetup card
+    const favoriteGames: Game[] = await fetchGamesByFavoriteProfileId(session.profile.profileId)
     return (
         <>
+
+            <div className="container flex flex-col items-center mx-auto ">
+                {profile && <PlayerCard profile={profile}/>}
+            </div>
             <div>
                 {profile && meetups.map((meetup, i) => <MeetupCard meetup={meetup} key={i}/>
                 )}
             </div>
-            <div className="container flex flex-col items-center mx-auto ">
-                {profile && <PlayerCard profile={profile}/>}
+            <div>
+                {profile && favoriteGames.map((game: Game, i) => <GameResult gameData={game} key={i}/>
+                )}
             </div>
         </>
     )

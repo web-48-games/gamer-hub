@@ -24,17 +24,6 @@ export function GameResult(props: gameResultProps) {
                         <p>Released on: {gameYearPublished}</p>
                     </section>
 
-                    {/*<div className="flex flex-col items center p-4">*/}
-                    {/*    <button*/}
-                    {/*        className="bg-gh-teal-200 text-redBrown text-[1.5rem] font-medium px-4 my-2 py-2 rounded border-2 border-redBrown whitespace-nowrap">*/}
-                    {/*        <a href={`/meetups/${gameId}`}>Find Sessions</a>*/}
-                    {/*    </button>*/}
-
-                    {/*    <button*/}
-                    {/*        className="bg-gh-teal-200 text-redBrown text-[1.5rem] font-medium px-4 my-2 py-2 rounded border-2 border-redBrown whitespace-nowrap">*/}
-                    {/*        Add to Favorites*/}
-                    {/*    </button>*/}
-                    {/*</div>*/}
 
                     {/* Hover display is currently extremely annoying. turning this off until fixed
                 Popup GameCard - uses absolute positioning and group for hover effect with GameResult as its parent*/}

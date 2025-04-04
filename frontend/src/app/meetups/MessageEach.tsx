@@ -41,8 +41,8 @@ export async function MessageEach({ message }: MessageProps) {
     // const DateString:string = message.messageTimestamp.getMonth() + "/" + message.messageTimestamp.getDate() + "/" + message.messageTimestamp.getFullYear()
 
     return (
-        <div className="flex mb-4">
-            <div className="mr-2">
+        <div className="flex mb-4 w-full">
+            <div className="flex-shrink-0 mr-3">
                 <Image
                     src={profile.profileAvatarUrl || ''}
                     alt={`${profile.profileName}'s avatar`}
@@ -51,7 +51,7 @@ export async function MessageEach({ message }: MessageProps) {
                     className="rounded-full"
                 />
             </div>
-            <div className="flex-1">
+            <div className="flex-grow">
                 <div className="text-sm font-medium">{profile.profileName}</div>
                 <div className="bg-pink-100 p-2 rounded-lg">{message.messageContent}</div>
                 {/*<div className="text-xs text-right text-gray-500">{timeString}</div>*/}

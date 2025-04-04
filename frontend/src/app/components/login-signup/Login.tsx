@@ -53,6 +53,7 @@ export function Login({toggleFunction, closeModal}: LoginProps) {
             setStatus(response)
 
         } catch (error) {
+            console.error(error)
             // if an error occurs let user know to try later
             setStatus({status: 500, message: 'sign in request failed try again', data:undefined})
         }

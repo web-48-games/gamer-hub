@@ -42,9 +42,9 @@ export function MeetupLeaveButton(props: MeetupLeaveButtonProps) {
 
     return (
         <>
-            <button className={"w-25 h-12 bg-cyan-100 font-semibold text-md text-center my-2"}
+            <button className={"px-3 py-2 mr-2 bg-pink-100 hover:bg-pink-200 text-pink-800 text-sm font-medium rounded-md transition-colors"}
                     onClick={fireServerAction}>
-                Leave Meetup
+                Leave
             </button>
         </>
     )

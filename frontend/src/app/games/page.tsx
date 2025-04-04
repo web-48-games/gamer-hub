@@ -1,6 +1,6 @@
 
 // import {Categories} from "@/app/games/categories";
-import {Carousel} from "@/app/games/carousel";
+import {Carousel} from "@/app/games/Carousel";
 import {GameResult} from "@/app/games/GameResult";
 import {FilterMenu} from "@/app/components/FilterMenu";
 import {GameCard} from "@/app/components/GameCard";

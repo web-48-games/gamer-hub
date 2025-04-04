@@ -63,17 +63,20 @@ export function MessageForm(props: MessageFormProps) {
     }
 
     return (
-        <div className="flex mt-4">
-            <form onSubmit={handleSubmit(fireServerAction)}>
-                <input
-                    id={"messageContent"} {...register("messageContent")}
-                    type="text"
-                    className="flex-1 p-2 border rounded-l-lg"
-                    placeholder="Type your message..."
-                />
-                <button type={"submit"} className="bg-lightRed text-redBrown px-4 py-2 rounded-r-lg">
-                    Join the Conversation
-                </button>
+        <div className="flex mt-4 w-full">
+            <form onSubmit={handleSubmit(fireServerAction)} className="w-full flex flex-col sm:flex-row gap-2">
+                <div className="w-full flex flex-col sm:flex-row gap-2">
+                    <input
+                        id={"messageContent"} {...register("messageContent")}
+                        type="text"
+                        className="flex-grow p-3 border rounded-lg sm:rounded-r-none"
+                        placeholder="Type your message..."
+                    />
+                    <button type={"submit"}
+                            className="sm:w-auto bg-lightRed text-redBrown px-4 py-3 rounded-r-lg whitespace-nowrap">
+                        Join the Conversation
+                    </button>
+                </div>
                 <DisplayStatus status={status}></DisplayStatus>
 
             </form>

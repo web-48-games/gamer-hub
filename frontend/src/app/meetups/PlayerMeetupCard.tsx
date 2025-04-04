@@ -22,8 +22,8 @@ export async function PlayerMeetupCard(props:PlayerMeetupCardProps){
     }
 
     return (
-        <div className="flex my-2 rounded-lg bg-code-200 shadow-sm shadow-wasa-500">
-            <div className="w-16 h-16 bg-cyan-100 flex">
+        <div className="flex items-center my-2 rounded-lg bg-code-200 shadow-sm shadow-wasa-500">
+            <div className="flex-shrink-0 mr-4">
                 {profileAvatarUrl ? (
                     <Image
                         src={profileAvatarUrl}
@@ -33,12 +33,27 @@ export async function PlayerMeetupCard(props:PlayerMeetupCardProps){
                         className="rounded-full"
                     />
                 ) : ""}
-                <div className="">{profileName} </div>
-                {isHost && <div> Host</div>}
-                {loggedInProfile?.profileId === profileId && !isHost &&
-                <MeetupLeaveButton meetupId={meetup.meetupId} sessionProfile={loggedInProfile}/>}
             </div>
 
-        </div>
+                <div className="flex-grow">
+                    <div className="flex items-center">
+                        {/* Username with medium font weight */}
+                        <span className="ml-4 font-semibold">{profileName}</span>
+
+                        {/* Host badge - only shown if isHost is true */}
+                        {isHost && (
+                            <span className="ml-2 px-2 py-0.5 bg-code-200 text-blue-800 font-medium rounded-full">
+                            [Host]
+                        </span>
+                        )}
+                    </div>
+                </div>
+                {loggedInProfile?.profileId === profileId && !isHost && (
+                    <div className={"ml-auto"}>
+                        <MeetupLeaveButton meetupId={meetup.meetupId} sessionProfile={loggedInProfile}/>
+                    </div>
+                    )}
+
+            </div>
     )
 }

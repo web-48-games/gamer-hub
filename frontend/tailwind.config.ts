@@ -48,7 +48,7 @@ const config: Config = {
 
           //90% White
           'white-95': '#F2F2F2',
-
+          'pale-yellow': '#FEEDC5',
 
           //Warm Saturated
           'wasa': {
@@ -58,7 +58,8 @@ const config: Config = {
               400: '#BA3600',
               500: '#5A1000',
               //Text over Orange
-              600: '#340F00'
+              600: '#340F00',
+              'a': '#FE6900'
           },
           //Warm Desaturated
           'wade': {
@@ -76,6 +77,7 @@ const config: Config = {
               300: '#1BD9B6',
               400: '#0A9FB6',
               500: '#03568A',
+              600: '#01234C'
           },
           'code': {
               100: '#EBFFEE',
@@ -83,6 +85,7 @@ const config: Config = {
               300: '#9FDFD3',
               400: '#95E3E8',
               500: '#76B1D6',
+              'a': '#A6E9DC'
           },
 
 

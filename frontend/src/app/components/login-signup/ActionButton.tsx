@@ -7,7 +7,7 @@ export function ActionButton(props: ButtonProps) {
     return (
         <>
             <div className="container flex justify-center">
-                <input type={"submit"} value={buttonText} className={"text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"}/>
+                <input type={"submit"} value={buttonText} className={"font-medium rounded-lg text-[1rem] md:text-[1.10rem] xl:text-[1.25rem] px-5 py-2.5 me-2 mb-2 shadow-md shadow-wasa-500 text-white bg-wasa-a  hover:bg-wasa-400 hover:text-white focus:ring-4 focus:ring-blue-300"}/>
             </div>
         </>
     )

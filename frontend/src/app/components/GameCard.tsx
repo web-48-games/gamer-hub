@@ -10,7 +10,7 @@ export function GameCard(props: GameCardProps) {
 
     return (
         <>
-            <div className={"m-10 sm:m-20 md:max-w-lg p-6 rounded-lg shadow-lg shadow-wasa-500 bg-cosa-200"}>
+            <div className={"m-10 sm:m-20 md:max-w-lg p-6 rounded-lg shadow-lg shadow-wasa-500 bg-cosa-400"}>
                 <div className={"flex flex-col flex-wrap items-center p-4"}>
                     <div>
                         <img className={"w-full p-4"} src={gameImageUrl} alt="image from game database"/>

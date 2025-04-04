@@ -13,6 +13,10 @@ import { fetchGamesByFavoriteProfileId } from "@/utils/models/game/game.action";
 import { Game } from "@/utils/models/game/game.model";
 import { GameResult } from "@/app/games/GameResult"; // Assuming this component displays a single game card/result
 
+import React from "react";
+import {Carousel, SlideData} from "@/app/games/Carousel"; // Import the Carousel component
+
+
 // Give the component a descriptive name
 export default async function UserProfilePage(props: PageProps<{}>) {
 
@@ -44,9 +48,18 @@ export default async function UserProfilePage(props: PageProps<{}>) {
 
     // Optional: Add error handling for fetches if needed
 
+    // Transform favoriteGames into the SlideData format for the Carousel
+    const favoriteGamesSlides: SlideData[] = favoriteGames ? favoriteGames.map((game: Game) => ({
+        title: game.gameName,
+        button: "View Game",
+        src: game.gameImageUrl || "/images/default-game-image.png", // Use a default image if imageUrl is missing
+        gameId: game.gameId,
+    })) : [];
+
     // console.log(profile, 'Profile fetched');
     // console.log(meetups, 'Meetups fetched');
     // console.log(favoriteGames, 'Favorite games fetched');
+    // console.log(favoriteGamesSlides, 'Favorite games slides');
 
 
     // --- Main Content Rendering ---
@@ -91,12 +104,8 @@ export default async function UserProfilePage(props: PageProps<{}>) {
                     My Favorite Games
                 </h2>
                 {favoriteGames && favoriteGames.length > 0 ? (
-                    // Use a responsive grid for game results/cards
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        {favoriteGames.map((game: Game) => (
-                            // Ensure GameResult itself has appropriate styling
-                            <GameResult gameData={game} key={game.gameId} /> // Use a stable ID for the key!
-                        ))}
+                    <div className="mt-4">
+                        <Carousel slides={favoriteGamesSlides} />
                     </div>
                 ) : (
                     <p className="text-gray-600 italic text-center md:text-left">

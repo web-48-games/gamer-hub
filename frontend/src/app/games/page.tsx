@@ -22,7 +22,7 @@ export default async function (props: PageProps<any>) {
         games = await fetchGamesByGenres(genreParams)
     }
     const genres: [] = await fetchAllGenres()
-    const gameSlice = games.slice(0, 8)
+    const gameSlice = games.slice(0, 100)
 
     return (
         <>

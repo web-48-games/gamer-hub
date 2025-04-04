@@ -62,7 +62,7 @@ export function Login({toggleFunction, closeModal}: LoginProps) {
     return (
         <>
             <ModalContainer onClose={closeModal}>
-                <TitleComponent mode="Challenge Mode" />
+                <TitleComponent mode="Welcome" />
 
                 <form className="space-y-4 mt-4" onSubmit={handleSubmit(fireServerAction)}>
                     <InputField inputProps={{

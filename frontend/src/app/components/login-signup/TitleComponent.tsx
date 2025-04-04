@@ -55,22 +55,22 @@ export function TitleComponent({ mode }: TitleProps) {
                 <span ref={gameRef} className="inline-block ml-1">Game</span>
                 <span ref={awayRef} className="inline-block ml-1">Away</span>
             </p>
-                {/* Explosion Effect */}
-                <div
-                    ref={explosionRef}
-                    className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-orange-500 rounded-full opacity-0"
-                    style={{ boxShadow: "0 0 50px 20px rgba(255, 140, 0, 0.8)" }}
-                ></div>
+                {/*/!* Explosion Effect *!/*/}
+                {/*<div*/}
+                {/*    ref={explosionRef}*/}
+                {/*    className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-orange-500 rounded-full opacity-0"*/}
+                {/*    style={{ boxShadow: "0 0 50px 20px rgba(255, 140, 0, 0.8)" }}*/}
+                {/*></div>*/}
 
-                {/* Sparks Trail */}
-                <div
-                    ref={sparksRef}
-                    className="absolute left-0 top-0 w-2 h-2 bg-yellow-400 opacity-0"
-                    style={{
-                        filter: "blur(3px)",
-                        boxShadow: "0 0 10px rgba(255, 255, 0, 0.8)",
-                    }}
-                ></div>
+                {/*/!* Sparks Trail *!/*/}
+                {/*<div*/}
+                {/*    ref={sparksRef}*/}
+                {/*    className="absolute left-0 top-0 w-2 h-2 bg-yellow-400 opacity-0"*/}
+                {/*    style={{*/}
+                {/*        filter: "blur(3px)",*/}
+                {/*        boxShadow: "0 0 10px rgba(255, 255, 0, 0.8)",*/}
+                {/*    }}*/}
+                {/*></div>*/}
         </div>
     );
 }

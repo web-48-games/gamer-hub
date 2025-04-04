@@ -43,7 +43,7 @@ export default async function meetupInfoPage({ params }: { params: Promise<{ mee
 
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div className="bg-gray-100 rounded-lg p-4 shadow-sm">
+                    <div className="bg-wasa-200 rounded-lg p-4 shadow-sm">
                         <h2 className="text-xl font-semibold mb-4 text-center border-b border-black pb-2">JOINED</h2>
                         <div className="space-y-2">
                             {meetupProfiles.map((profile, i) => <PlayerMeetupCard
@@ -57,7 +57,7 @@ export default async function meetupInfoPage({ params }: { params: Promise<{ mee
 
                     </div>
 
-                    <div className={"bg-gray-100 rounded-lg p-4 shadow-sm"}>
+                    <div className={"bg-wasa-200 rounded-lg p-4 shadow-sm"}>
                         <h2 className="text-xl font-semibold mb-4 text-center border-b border-black pb-2">AVAILABLE</h2>
                         <MeetupJoinButton
                             isJoined={meetupProfiles.map(profile => profile.profileId).includes(sessionProfile.profileId)}
@@ -66,7 +66,7 @@ export default async function meetupInfoPage({ params }: { params: Promise<{ mee
                             sessionProfile={session} />
 
                            {/*this will always have 1 less open slot than intended when Join button is no longer available*/}
-                        {new Array(meetupProfiles.map(profile => profile.profileId).includes(sessionProfile.profileId) ? spotsAvailable : spotsAvailable-1).fill(5).map((element, i) => <button className={"w-full h-12 bg-gh-desert-100 font-semibold text-md text-center my-3"} key={i}>OPEN SLOT</button>)}
+                        {new Array(meetupProfiles.map(profile => profile.profileId).includes(sessionProfile.profileId) ? spotsAvailable : spotsAvailable-1).fill(5).map((element, i) => <button className={"w-full h-12 rounded bg-gh-desert-100 font-semibold text-md text-center my-3"} key={i}>OPEN SLOT</button>)}
 
                     </div>
                 </div>

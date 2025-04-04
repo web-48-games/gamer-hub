@@ -22,12 +22,12 @@ export default async function MeetupsPage() {
                 ))}
             </div>
 
-            <div className="flex justify-center gap-4 mb-8">
+            {/*<div className="flex justify-center gap-4 mb-8">*/}
 
-                {/* try to make this functional? */}
-                <Searchbar/>
+            {/*    /!* try to make this functional? *!/*/}
+            {/*    <Searchbar/>*/}
 
-            </div>
+            {/*</div>*/}
         </div>
     );
 }

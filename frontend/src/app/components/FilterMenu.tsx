@@ -30,13 +30,11 @@ export function FilterMenu(props: FilterProps) {
                 className="fixed z-20 bottom-4 left-4 md:hidden bg-blue-600 text-white p-3 rounded-full shadow-lg"
                 onClick={() => setIsOpen(!isOpen)}
             >
-                {isOpen ? <IconX size={24} /> : <IconFilter size={24} />}
+                <IconFilter size={24} />
             </button>
 
-            {/* Slides in on mobile, sticky on desktop*/}
-            <section className={`rounded-lg fixed p-4 md:sticky left-0 top-0 md:top-24 md:m-6 h-screen md:h-auto transition-all duration-300 z-10 bg-cosa-400
-            ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
-            w-64 md:w-auto overflow-y-auto`}>
+            {/* Desktop menu is always visible on md and larger, hidden by default in mobile*/}
+            <section className={"hidden md:block w-full mb-20"}>
                 <div className="p-4 bg-code-200 shadow-lg shadow-cosa-500 rounded-lg">
                     <h2 className={"text-2xl font-bold p-1 my-1"}>Filter</h2>
 
@@ -49,14 +47,6 @@ export function FilterMenu(props: FilterProps) {
                     <div className={`transition-all duration-300 ${genresExpanded ? 'h-full' : 'hidden'}`}>
                         {sortedGenres.map((genre, i) => <Checkbox key={i} value={genre} labelText={genre}/>)}
                     </div>
-                    {/*<h3 className={"text-lg font-semibold p-1"}>Players</h3>*/}
-                    {/*<Checkbox labelText={"1-2"}/>*/}
-                    {/*<Checkbox labelText={"3-4"}/>*/}
-                    {/*<Checkbox labelText={"5+"}/>*/}
-                    {/*<h3 className={"text-lg font-semibold p-1"}>Game Duration</h3>*/}
-                    {/*<Checkbox labelText={"< 30min."}/>*/}
-                    {/*<Checkbox labelText={"1-3 hrs."}/>*/}
-                    {/*<Checkbox labelText={"4+ hrs."}/>*/}
                 </div>
             </section>
 

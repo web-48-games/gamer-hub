@@ -28,7 +28,7 @@ export default async function({ params }: { params: Promise<{ gameId: string }> 
                     <a href={`/create-meetup/${gameId}`}>Create a Meetup</a>
                 </button>
             </div>
-            {meetups && meetups.map((meetup, i) => <MeetupCard key={i} meetup={meetup} game={game} />)}
+            {meetups && meetups.map((meetup, i) => <MeetupCard key={i} meetup={meetup} />)}
             <div className="flex flex-col items center p-4">
                 <FavoriteButton favorites={favorites} gameId={gameId} profileId={profileId} />
             </div>

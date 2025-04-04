@@ -73,3 +73,19 @@ export async function fetchMeetupsByRsvpProfileId(rsvpProfileId: string) : Promi
     return MeetUpSchema.array().parse(data)
 }
 
+
+export async function fetchCurrentMeetups() : Promise<Meetup[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/meetups/`,
+        {
+            method: 'get',
+            headers: {
+                'Content-type' : 'application/json'
+            }
+        }) .then(response => {
+        if( !response.ok ) {
+            throw new Error('request failed')
+        }
+        return response.json()
+    })
+    return MeetUpSchema.array().parse(data)
+}

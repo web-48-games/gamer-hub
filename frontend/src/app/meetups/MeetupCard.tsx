@@ -10,13 +10,6 @@ import {fetchGameByGameId} from "@/utils/models/game/game.action";
 
 export type MeetupCardProps = {
     meetup: Meetup
-    // host: Profile
-    // id: string;
-    // hostName: string;
-    // hostAvatar: string;
-    // gameName: string;
-    // date: string;
-    // time: string;
 }
 
 export async function MeetupCard(props: MeetupCardProps) {
@@ -61,7 +54,6 @@ export async function MeetupCard(props: MeetupCardProps) {
                         alt={`${hostProfile.profileName}'s avatar`}
                         width={80}
                         height={80}
-                        className="rounded-full"
                     />
                 ) : (
                     <div className="w-16 h-16 bg-gray-200 rounded-full"></div>

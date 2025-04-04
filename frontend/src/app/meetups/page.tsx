@@ -17,8 +17,8 @@ export default async function MeetupsPage() {
             <h1 className="text-3xl font-bold text-center mb-8">All Current/Upcoming Meetups</h1>
 
             <div className="max-w-md mx-auto">
-                {currentMeetups.map(meetup => (
-                    <MeetupCard meetup={meetup}/>
+                {currentMeetups.map((meetup, i) => (
+                    <MeetupCard meetup={meetup} key={i}/>
                 ))}
             </div>
 

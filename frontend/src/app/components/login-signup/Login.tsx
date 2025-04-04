@@ -41,7 +41,6 @@ export function Login({toggleFunction, closeModal}: LoginProps) {
     // define what happens onSubmit
     const fireServerAction = async (data: SignIn) => {
         try {
-            const router = useRouter();
             // call to the postSignIn server action
             const response = await postSignIn(data)
 

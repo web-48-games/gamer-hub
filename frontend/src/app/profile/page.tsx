@@ -104,7 +104,7 @@ export default async function UserProfilePage(props: PageProps<{}>) {
                     My Favorite Games
                 </h2>
                 {favoriteGames && favoriteGames.length > 0 ? (
-                    <div className="mt-4">
+                    <div className="my-6">
                         <Carousel slides={favoriteGamesSlides}/>
                     </div>
                 ) : (

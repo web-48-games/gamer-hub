@@ -2,7 +2,7 @@
 
 // app/meetups/[meetupId]/page.tsx
 import React from 'react';
-import { MeetupSlot } from '../MeetupSlot';
+
 import { MessageEach } from '../MessageEach';
 import {fetchMeetupByMeetupId} from "@/utils/models/meetups/meetup.action";
 import {fetchGameByGameId} from "@/utils/models/game/game.action";

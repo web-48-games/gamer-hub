@@ -42,7 +42,7 @@ export async function selectMeetupsByRsvpProfileId(rsvpProfileId: string) : Prom
         INNER JOIN 
         rsvp
         ON meetup_id = rsvp_meetup_id
-        WHERE rsvp_profile_id = ${rsvpProfileId} OR rsvp_profile_id = meetup_host_profile_id`
+        WHERE rsvp_profile_id = ${rsvpProfileId} OR ${rsvpProfileId} = meetup_host_profile_id`
 
     return MeetUpSchema.array().parse(rowList)
 }

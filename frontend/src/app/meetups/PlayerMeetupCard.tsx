@@ -22,7 +22,7 @@ export async function PlayerMeetupCard(props:PlayerMeetupCardProps){
     }
 
     return (
-        <div className="flex my-2 rounded-lg bg-cyan-50 shadow-sm">
+        <div className="flex my-2 rounded-lg bg-code-200 shadow-sm shadow-wasa-500">
             <div className="w-16 h-16 bg-cyan-100 flex">
                 {profileAvatarUrl ? (
                     <Image

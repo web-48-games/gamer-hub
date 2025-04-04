@@ -11,6 +11,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {postSignIn} from "@/utils/models/sign-in/sign-in.action";
 import {DisplayError} from "@/app/components/display-error";
 import {DisplayStatus} from "@/app/components/display-status";
+import {useRouter} from "next/navigation";
 
 type LoginProps = {
     toggleFunction: () => void
@@ -40,14 +41,18 @@ export function Login({toggleFunction, closeModal}: LoginProps) {
     // define what happens onSubmit
     const fireServerAction = async (data: SignIn) => {
         try {
+
+            const router = useRouter();
             // call to the postSignIn server action
             const response = await postSignIn(data)
             if (response.status === 200) {
                 // if status object returned from express is 200 resetForm
                 reset()
+                //refresh page upon successful login
             }
             // use setStatus to display status from express
             setStatus(response)
+
         } catch (error) {
             // if an error occurs let user know to try later
             setStatus({status: 500, message: 'sign in request failed try again', data:undefined})
@@ -83,7 +88,7 @@ export function Login({toggleFunction, closeModal}: LoginProps) {
                     </div>
 
                     <div className="mt-4">
-                        <ActionButton buttonText="Log In" />
+                        <ActionButton onClick={closeModal} buttonText="Log In" />
                     </div>
                     <DisplayStatus status={status} />
                 </form>

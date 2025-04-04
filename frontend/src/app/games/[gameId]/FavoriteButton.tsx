@@ -18,19 +18,21 @@ export function FavoriteButton({ gameId, profileId, favorites }: FavoriteButtonP
     const router = useRouter()
     return (
         <>
-            {/*need this count to move up or down by one depending on the toggle state - needs useState? */}
-        <p>Total favorites: {favorites?.length}</p>
+            <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 md:px-8 my-6">
 
-        {profileId ? <button onClick={async () => {
-            const favorite = {favoriteGameId: gameId, favoriteProfileId: profileId}
+                <p className={"text-lg font-medium"}>Total favorites: {favorites?.length}</p>
 
-            const toggle = await toggleFavorite(favorite)
-            router.refresh()
-            console.log(toggle)
-        } }
-            className="bg-gh-teal-200 text-redBrown text-[1.5rem] font-medium px-4 my-2 py-2 rounded border-2 border-redBrown whitespace-nowrap">
-            {inFavorites.length === 0 ? 'Add to Favorites' : 'Remove from Favorites'}
-        </button> : <>Please Login</>}
+                {profileId ? <button onClick={async () => {
+                    const favorite = {favoriteGameId: gameId, favoriteProfileId: profileId}
+
+                    const toggle = await toggleFavorite(favorite)
+                    router.refresh()
+                    console.log(toggle)
+                }}
+                                     className="bg-gh-teal-200 text-redBrown text-[1.5rem] font-medium px-4 my-2 py-2 rounded border-2 border-redBrown whitespace-nowrap">
+                    {inFavorites.length === 0 ? 'Add to Favorites' : 'Remove from Favorites'}
+                </button> : <><span className={"text-xl font-bold text-gh-red-400"}>Please Login</span></>}
+            </div>
         </>
     )
 }

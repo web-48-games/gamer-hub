@@ -32,8 +32,8 @@ export default async function (props: PageProps<any>) {
             {/*<hr className="border-b border-gray-300 border-2"/>*/}
             <section className="mx-auto mt-6 container relative">
                 <div className={"flex"}>
+                    {/*Desktop Filter*/}
                     <div className="w-64 shrink-0 hidden md:block">
-
                         <FilterMenu genres={genres}/>
                     </div>
                     <div className={"w-full md:ml-4"}>
@@ -43,7 +43,7 @@ export default async function (props: PageProps<any>) {
                 {/* Mobile filter is rendered outside the flex container
        so it can be positioned fixed without interference */}
                 <div className="md:hidden">
-                    {/*<FilterMenu />*/}
+                    <FilterMenu genres={genres}/>
                 </div>
             </section>
         </>

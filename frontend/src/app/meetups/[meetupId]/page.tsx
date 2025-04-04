@@ -12,7 +12,7 @@ import {PlayerMeetupCard} from "@/app/meetups/PlayerMeetupCard";
 import { getSession } from '@/utils/auth.utils';
 import {postRsvp} from "@/utils/models/rsvp/rsvp.action";
 import {MeetupJoinButton} from "@/app/meetups/MeetupJoinButton";
-import {fetchAllMessages} from "@/utils/models/message/message.action";
+import {fetchAllMessages, fetchMessagesByMessageMeetupId} from "@/utils/models/message/message.action";
 import {MessageForm} from "@/app/meetups/MessageForm";
 
 
@@ -28,8 +28,8 @@ export default async function meetupInfoPage({ params }: { params: Promise<{ mee
     const isHost = meetup.meetupHostProfileId === sessionProfile?.profileId
     const meetupProfiles = await fetchProfilesByRsvpMeetupId(meetupId)
     const spotsAvailable = meetup.meetupCapacity - (meetupProfiles.length)
-    const allMessages = await fetchAllMessages()
-
+    const messages = await fetchMessagesByMessageMeetupId(meetupId)
+    console.log(messages)
 
     if (!sessionProfile) return <></>
 
@@ -71,16 +71,11 @@ export default async function meetupInfoPage({ params }: { params: Promise<{ mee
                 </div>
 
                 <div className="mt-8">
-                    {/*button needs to check if user has joined then allow or lock out user from participating in chat*/}
-                    <button
-                        className="mx-auto block px-6 py-2 bg-yellow-200 rounded-lg font-medium hover:bg-yellow-300 transition mb-4">
-                        Chat with meetup members
-                    </button>
 
                     <div className="bg-pink-50 p-4 rounded-lg">
 
                         {/*insert chat component here*/}
-                        {allMessages && allMessages.map((message, i) => <MessageEach message={message} key={i}/>)}
+                        {messages.map((message, i) => <MessageEach message={message} key={i}/>)}
 
                         <MessageForm loggedInProfile={sessionProfile} meetupId={meetupId} />
                     </div>

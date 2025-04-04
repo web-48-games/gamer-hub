@@ -6,7 +6,7 @@ export function PageIntro() {
 
             <div className="flex flex-col-1 relative overflow-hidden h-[35rem] w-full">
                 <img className={"size-full absolute object-cover object-center blur-[4px]"} src="/jensine-odom-sandia.jpg" alt="Sandia Mountain Top"/>
-                <div className="w-full absolute top-[15%] md:top-[22%] md:left-10 mt-10">
+                <div className="w-full absolute top-[15%] md:top-[22%] text-center md:text-left md:left-10 mt-10">
                     <h2 className={"font-normal text-white md:text-wasa-600 text-[1.75rem] md:text-[1.75rem] xl:text-[5.25rem]"}>Welcome to A Game Away</h2>
                     <h1 className={"font-normal md:text-white text-[1.25rem] md:text-[1.75rem] xl:text-[3rem]"}>Find your table, adventures await!</h1>
                 </div>

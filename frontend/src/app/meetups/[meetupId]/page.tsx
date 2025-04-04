@@ -66,7 +66,7 @@ export default async function meetupInfoPage({ params }: { params: Promise<{ mee
                             sessionProfile={session} />
 
                            {/*this will always have 1 less open slot than intended when Join button is no longer available*/}
-                        {new Array(meetupProfiles.map(profile => profile.profileId).includes(sessionProfile.profileId) ? spotsAvailable : spotsAvailable-1).fill(5).map((element, i) => <button className={"w-full h-12 bg-gh-desert-100 font-semibold text-md text-center"} key={i}>OPEN SLOT</button>)}
+                        {new Array(meetupProfiles.map(profile => profile.profileId).includes(sessionProfile.profileId) ? spotsAvailable : spotsAvailable-1).fill(5).map((element, i) => <button className={"w-full h-12 bg-gh-desert-100 font-semibold text-md text-center my-3"} key={i}>OPEN SLOT</button>)}
 
                     </div>
                 </div>

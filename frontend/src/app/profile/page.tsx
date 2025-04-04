@@ -72,7 +72,7 @@ export default async function UserProfilePage(props: PageProps<{}>) {
                 {/* Hidden heading for accessibility if PlayerCard doesn't have one */}
                 <h1 id="profile-heading" className="sr-only">User Profile</h1>
                 {profile ? (
-                    <PlayerCard profile={profile} />
+                    <PlayerCard profile={profile}/>
                 ) : (
                     <p className="text-center text-gray-500">Could not load profile information.</p> // Handle profile fetch failure
                 )}
@@ -88,7 +88,7 @@ export default async function UserProfilePage(props: PageProps<{}>) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {meetups.map((meetup) => (
                             // Ensure MeetupCard itself has appropriate styling (padding, shadow, rounded corners etc.)
-                            <MeetupCard meetup={meetup} key={meetup.meetupId} /> // Use a stable ID for the key!
+                            <MeetupCard meetup={meetup} key={meetup.meetupId}/> // Use a stable ID for the key!
                         ))}
                     </div>
                 ) : (
@@ -98,19 +98,19 @@ export default async function UserProfilePage(props: PageProps<{}>) {
                 )}
             </section>
 
-            {/* --- Favorite Games Section --- */}
-            <section aria-labelledby="favorite-games-heading">
-                <h2 id="favorite-games-heading" className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 border-b pb-2">
+            <section aria-labelledby="favorite-games-heading" className="mt-8">
+                <h2 id="favorite-games-heading"
+                    className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 border-b pb-2">
                     My Favorite Games
                 </h2>
                 {favoriteGames && favoriteGames.length > 0 ? (
                     <div className="mt-4">
-                        <Carousel slides={favoriteGamesSlides} />
+                        <Carousel slides={favoriteGamesSlides}/>
                     </div>
                 ) : (
                     <p className="text-gray-600 italic text-center md:text-left">
                         You haven't added any favorite games yet.
-                    </p> // Empty state message
+                    </p>
                 )}
             </section>
 

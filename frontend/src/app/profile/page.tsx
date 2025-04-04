@@ -80,7 +80,7 @@ export default async function UserProfilePage(props: PageProps<{}>) {
 
             {/* --- Meetups Section --- */}
             <section aria-labelledby="meetups-heading">
-                <h2 id="meetups-heading" className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 border-b pb-2">
+                <h2 id="meetups-heading" className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 border-b border-wasa-500 pb-2">
                     My Meetups
                 </h2>
                 {meetups && meetups.length > 0 ? (
@@ -100,7 +100,7 @@ export default async function UserProfilePage(props: PageProps<{}>) {
 
             <section aria-labelledby="favorite-games-heading" className="mt-8">
                 <h2 id="favorite-games-heading"
-                    className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 border-b pb-2">
+                    className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 border-b border-wasa-500 pb-2">
                     My Favorite Games
                 </h2>
                 {favoriteGames && favoriteGames.length > 0 ? (

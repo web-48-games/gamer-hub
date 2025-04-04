@@ -1,17 +1,17 @@
 'use server'
 
-import { Status } from '@/utils/interfaces/Status'
-import {Meetup, MeetUpSchema, PostMeetup} from "@/utils/models/meetups/meetup.model";
+import {Status} from "@/utils/interfaces/Status";
+import {Message, MessageSchema} from "@/utils/models/message/message.model";
 import {setHeaders} from "@/utils/set-headers.utils";
 
-export async function postMeetup (meetup: PostMeetup) : Promise<Status> {
 
+export async function postMessage(message: Message) : Promise<Status> {
     return fetch (
-        `${process.env.PUBLIC_API_URL}/apis/meetups/`,
+        `${process.env.PUBLIC_API_URL}/apis/messages/`,
         {
             method: 'post',
             headers: await setHeaders(),
-            body: JSON.stringify(meetup)
+            body: JSON.stringify(message)
         }
     ).then(response => {
         if (!response.ok) {
@@ -24,25 +24,24 @@ export async function postMeetup (meetup: PostMeetup) : Promise<Status> {
     })
 }
 
-export async function fetchMeetupByMeetupId(meetupId: string) : Promise<Meetup> {
-    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/meetups/${meetupId}`,
+export async function fetchAllMessages() : Promise<Message[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/messages/`,
         {
             method: 'get',
             headers: {
-                'Content-type' : 'application/json'
+                'Content-Type': 'application/json'
             }
-        }) .then(response => {
-        if( !response.ok ) {
+        }).then(response => {
+        if (!response.ok) {
             throw new Error('request failed')
         }
         return response.json()
     })
-    return MeetUpSchema.parse(data)
+    return MessageSchema.array().parse(data)
 }
 
-// from getMeetupsByGame
-export async function fetchMeetupsByGame(meetupGameId: string) : Promise<Meetup[]> {
-    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/meetups/meetupGameId/${meetupGameId}`,
+export async function fetchMessagebyMessageId(messageId: string) : Promise<Message> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/messages/messageId/${messageId}`,
         {
             method: 'get',
             headers: {
@@ -54,11 +53,11 @@ export async function fetchMeetupsByGame(meetupGameId: string) : Promise<Meetup[
         }
         return response.json()
     })
-    return MeetUpSchema.array().parse(data)
+    return MessageSchema.parse(data)
 }
 
-export async function fetchMeetupsByRsvpProfileId(rsvpProfileId: string) : Promise<Meetup[]> {
-    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/meetups/profileId/${rsvpProfileId}`,
+export async function fetchMessagesByMessageMeetupId(messageMeetupId: string) : Promise<Message[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/messages/messageMeetupId/${messageMeetupId}`,
         {
             method: 'get',
             headers: {
@@ -70,12 +69,11 @@ export async function fetchMeetupsByRsvpProfileId(rsvpProfileId: string) : Promi
         }
         return response.json()
     })
-    return MeetUpSchema.array().parse(data)
+    return MessageSchema.array().parse(data)
 }
 
-
-export async function fetchCurrentMeetups() : Promise<Meetup[]> {
-    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/meetups/`,
+export async function fetchMessagesByMessageProfileId(messageProfileId: string) : Promise<Message[]> {
+    const {data} = await fetch(`${process.env.PUBLIC_API_URL}/apis/messages/messageProfileId/${messageProfileId}`,
         {
             method: 'get',
             headers: {
@@ -87,5 +85,5 @@ export async function fetchCurrentMeetups() : Promise<Meetup[]> {
         }
         return response.json()
     })
-    return MeetUpSchema.array().parse(data)
+    return MessageSchema.array().parse(data)
 }

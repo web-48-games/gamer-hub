@@ -41,10 +41,9 @@ export function Login({toggleFunction, closeModal}: LoginProps) {
     // define what happens onSubmit
     const fireServerAction = async (data: SignIn) => {
         try {
-
-            const router = useRouter();
             // call to the postSignIn server action
             const response = await postSignIn(data)
+
             if (response.status === 200) {
                 // if status object returned from express is 200 resetForm
                 reset()
@@ -88,7 +87,8 @@ export function Login({toggleFunction, closeModal}: LoginProps) {
                     </div>
 
                     <div className="mt-4">
-                        <ActionButton onClick={closeModal} buttonText="Log In" />
+                        {/* why was this onClick added? ActionButton only take in one prop for buttonText */}
+                        <ActionButton buttonText="Log In" />
                     </div>
                     <DisplayStatus status={status} />
                 </form>

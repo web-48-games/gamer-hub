@@ -18,27 +18,29 @@ export function Navigation() {
         <Navbar fluid rounded className="p-4 bg-wasa-500">
             <NavbarBrand href="/" className={"order-1"}>
                 <div className="bg-code-100 border-2 border-cosa-400 rounded-full p-4 mr-2">
-                <img src="/dice-svgrepo-com.svg" className="mr-3 h-6 sm:h-9" alt="Handing Dice Svg" />
+                    <img src="/dice-svgrepo-com.svg" className="mr-3 h-6 sm:h-9" alt="Handing Dice Svg"/>
                 </div>
                 <span className="self-center whitespace-nowrap text-[2rem] font-light text-white">A Game Away</span>
             </NavbarBrand>
-            <div className="flex order-2 md:order-3 ml-4 ">
-                <Button onClick={handleAuthButtonClick} className="p-2 bg-wasa-a text-white hover:text-code-100">Login/Sign Up</Button>
-                <NavbarToggle />
+
+            <div className="flex order-2 md:order-3 md:ml-auto">
+                <Button onClick={handleAuthButtonClick} className="mr-2 p-2 bg-wasa-a text-white hover:text-code-100">Login/Sign
+                    Up</Button>
+                <NavbarToggle/>
             </div>
 
-            <NavbarCollapse className={"order-4 md:order-2 mx-auto"}>
-
-                <NavbarLink className={"text-[1rem] md:text-[1.5rem] xl:text-[1.75rem] font-light text-white"} href="/">Home</NavbarLink>
-                <NavbarLink className={"text-[1rem] md:text-[1.5rem] xl:text-[1.75rem] font-light text-white"} href="/games">Games</NavbarLink>
-                <NavbarLink className={"text-[1rem] md:text-[1.5rem] xl:text-[1.75rem] font-light text-white"} href="/meetups">Meetups</NavbarLink>
-                <NavbarLink className={"text-[1rem] md:text-[1.5rem] xl:text-[1.75rem] font-light text-white"} href="/profile">Profile Page</NavbarLink>
-
+            <NavbarCollapse className={"order-3 md:order-2 md:flex-grow md:flex md:w-auto md:mx-4 md:justify-center"}>
+                <NavbarLink className={"text-[1rem] md:text-[1.5rem] xl:text-[1.75rem] font-light text-white"}
+                            href="/">Home</NavbarLink>
+                <NavbarLink className={"text-[1rem] md:text-[1.5rem] xl:text-[1.75rem] font-light text-white"}
+                            href="/games">Games</NavbarLink>
+                <NavbarLink className={"text-[1rem] md:text-[1.5rem] xl:text-[1.75rem] font-light text-white"}
+                            href="/meetups">Meetups</NavbarLink>
+                <NavbarLink className={"text-[1rem] md:text-[1.5rem] xl:text-[1.75rem] font-light text-white"}
+                            href="/profile">Profile Page</NavbarLink>
             </NavbarCollapse>
 
-
-
-            <AuthModalContainer ref={authModalRef} />
+            <AuthModalContainer ref={authModalRef}/>
         </Navbar>
     );
 }

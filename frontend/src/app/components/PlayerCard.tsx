@@ -8,7 +8,6 @@ import React from "react";
 import {Status} from "@/utils/interfaces/Status";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {putProfile} from "@/utils/models/profile/profile.action";
-import {useRouter} from "next/navigation";
 import {postImage} from "@/utils/models/image/image.action";
 import { ImageUploadDropZone } from "./ImageUploadDropZone";
 import {InputField} from "@/app/components/login-signup/InputField";
@@ -30,7 +29,6 @@ export function PlayerCard(props: PlayerCardProps) {
 
     type ProfileSchema = z.infer<typeof profileSchema>
 
-    const router = useRouter();
     let {profile} = props
 
     const [status, setStatus] = React.useState<Status | null>(null)
@@ -82,7 +80,7 @@ export function PlayerCard(props: PlayerCardProps) {
             if (finalResponse.status === 200 ) {
                 // setSelectedImage(null)
                 // reset ()
-                router.refresh()
+                reset()
             }
 
             // const response = await putProfile(profile)

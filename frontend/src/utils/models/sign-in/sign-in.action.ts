@@ -46,7 +46,7 @@ export async function postSignIn(signIn: SignIn): Promise<Status> {
 
 
     return response.json().then((response) => {
-
+    console.log(response)
         return response
     }).catch((error) => {
         console.error(error)

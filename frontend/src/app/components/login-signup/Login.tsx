@@ -89,7 +89,7 @@ export function Login({toggleFunction, closeModal}: LoginProps) {
 
                     <div className="mt-4">
                         {/* why was this onClick added? ActionButton only take in one prop for buttonText */}
-                        <ActionButton onClick={closeModal} buttonText="Log In" />
+                        <ActionButton buttonText="Log In" />
                     </div>
                     <DisplayStatus status={status} />
                 </form>

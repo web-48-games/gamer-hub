@@ -7,12 +7,14 @@ import {Game} from "@/utils/models/game/game.model";
 import {Profile} from "@/utils/models/profile/profile.model";
 import {fetchMeetupsByGame} from "@/utils/models/meetups/meetup.action";
 import {fetchGameByGameId} from "@/utils/models/game/game.action";
+import {unstable_noStore} from "next/cache";
 
 export type MeetupCardProps = {
     meetup: Meetup
 }
 
 export async function MeetupCard(props: MeetupCardProps) {
+    unstable_noStore()
     const {meetup} = props
     const hostProfile = await fetchProfileByProfileId(meetup.meetupHostProfileId)
     const game = await fetchGameByGameId(meetup.meetupGameId)

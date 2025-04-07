@@ -7,9 +7,9 @@ import {getSession} from "@/utils/auth.utils";
 import {redirect} from "next/navigation";
 
 
-export default async function (props: PageProps<{gameId: string}>) {
+export default async function (props: PageProps<Promise<{gameId: string}>>) {
 
-    const {gameId} = props.params
+    const {gameId} = await props.params
     const session = await getSession()
 
     const game = await fetchGameByGameId(gameId)

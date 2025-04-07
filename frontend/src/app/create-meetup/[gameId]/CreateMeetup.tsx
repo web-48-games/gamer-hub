@@ -56,7 +56,7 @@ export function CreateMeetup(props : {gameId: string, profileId: string}) {
         try {
             //convert form data into a meetup object
             const meetupStartTime = `${data.meetupDate} ${data.meetupStartTime}:00 +00:00`
-            const meetup = {...data, meetupStartTime, meetupId: uuid(), meetupCreatedAt: null, meetupLong: null, meetupLat: null}
+            const meetup = {...data, meetupStartTime, meetupId: uuid(), meetupCreatedAt: null, meetupLong: null, meetupLat: null, meetupDuration: Number(data.meetupDuration)}
             const response = await postMeetup(meetup)
             console.log(response)
             if (response.status === 200) {

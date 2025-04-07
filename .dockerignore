@@ -3,3 +3,5 @@
 *docker-compose*
 **/node_modules
 README.md
+.next
+node_modules

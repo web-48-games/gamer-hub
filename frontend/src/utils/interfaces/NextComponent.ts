@@ -11,5 +11,5 @@ type DefaultParams = { slug?: string };
 
 export type PageProps<T = DefaultParams> = {
     params: T;
-    searchParams: { [key: string]: string | string[] | undefined };
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };

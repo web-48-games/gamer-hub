@@ -18,7 +18,7 @@ import {Carousel, SlideData} from "@/app/games/Carousel"; // Import the Carousel
 
 
 // Give the component a descriptive name
-export default async function UserProfilePage(props: PageProps<{}>) {
+export default async function UserProfilePage(props: PageProps<Promise<{}>>) {
 
     const session = await getSession();
 

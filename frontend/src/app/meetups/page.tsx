@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { MeetupCard } from './MeetupCard';
 import {Searchbar} from "@/app/components/Searchbar";
 import {fetchCurrentMeetups} from "@/utils/models/meetups/meetup.action";
+import {unstable_noStore} from "next/cache";
 
 // meetups page.tsx
 type MeetupsPageProps = {
@@ -10,6 +11,7 @@ type MeetupsPageProps = {
 }
 
 export default async function MeetupsPage() {
+    unstable_noStore()
     const currentMeetups = await fetchCurrentMeetups()
 
     return (

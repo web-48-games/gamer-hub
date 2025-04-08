@@ -8,6 +8,13 @@ type gameResultProps = {
     gameData: Game
 }
 
+/**
+ * Component to display a single game result.
+ *
+ * @param {gameResultProps} props - The props for the component.
+ * @param {Game} props.gameData - The game data to display.
+ * @returns {JSX.Element} A JSX element representing the game result.
+ */
 export function GameResult(props: gameResultProps) {
     let {gameData} = props
     let {gameId, gameDescription, gameGenre, gameImageUrl, gameMaxPlayers, gameName, gameYearPublished} = gameData

@@ -10,6 +10,15 @@ type MeetupsPageProps = {
 
 }
 
+/**
+ * MeetupsPage Component
+ *
+ * This component fetches and displays all current/upcoming meetups.
+ * It uses the `unstable_noStore` function to disable caching and fetches
+ * the meetups data dynamically using `fetchCurrentMeetups`.
+ *
+ * @returns JSX.Element A container with a list of meetup cards.
+ */
 export default async function MeetupsPage() {
     unstable_noStore()
     const currentMeetups = await fetchCurrentMeetups()

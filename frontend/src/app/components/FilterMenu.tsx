@@ -14,13 +14,12 @@ export function FilterMenu(props: FilterProps) {
     const [genresExpanded, setGenresExpanded] = useState<boolean>(true)
     const {genres} = props;
 
-    // create a new sorted array using sort and localCompare for alphabetical ordering. map over this instead of just genres
+    // create a new sorted array using sort and localeCompare for alphabetical ordering. map over this instead of just genres
     const sortedGenres = [...genres].sort((a,b) => a.localeCompare(b))
 
     const toggleGenres = () => {
         setGenresExpanded(!genresExpanded)
     }
-
 
 
     return (

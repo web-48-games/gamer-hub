@@ -17,6 +17,8 @@ interface SlideProps {
     handleSlideClick: (index: number) => void;
 }
 
+// Slide component
+// This component renders each slide in the carousel
 const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
     const slideRef = useRef<HTMLLIElement>(null);
     const router = useRouter();
@@ -46,6 +48,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
         };
     }, []);
 
+    // Handle mouse move event to update x and y coordinates
     const handleMouseMove = (event: React.MouseEvent) => {
         const el = slideRef.current;
         if (!el) return;
@@ -54,18 +57,18 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
         xRef.current = event.clientX - (r.left + Math.floor(r.width / 2));
         yRef.current = event.clientY - (r.top + Math.floor(r.height / 2));
     };
-
+    // Handle mouse leave event to reset x and y coordinates
     const handleMouseLeave = () => {
         xRef.current = 0;
         yRef.current = 0;
     };
-
+    // Handle image load event to set opacity
     const imageLoaded = (event: React.SyntheticEvent<HTMLImageElement>) => {
         event.currentTarget.style.opacity = "1";
     };
-
+    // Destructure slide data
     const { src, button, title, gameId } = slide;
-
+    // Handle click event to navigate to the game page
     const handleViewGameClick = () => {
         router.push(`/games/${gameId}`);
     };
@@ -132,6 +135,8 @@ interface CarouselControlProps {
     handleClick: () => void;
 }
 
+// CarouselControl component
+// This component renders the previous and next buttons for the carousel
 const CarouselControl = ({
                              type,
                              title,
@@ -154,6 +159,24 @@ interface CarouselProps {
     slides: SlideData[];
 }
 
+// Carousel component
+// This component renders the entire carousel with slides and controls
+// It manages the current slide state and handles slide transitions
+// It also handles the click events for the slides and controls
+// It uses the useId hook to generate a unique id for the carousel
+// It uses the useState hook to manage the current slide index
+// It uses the useEffect hook to handle the animation frame for the slides
+// It uses the useRef hook to create references for the slide elements
+// It uses the useRouter hook to navigate to the game page when a slide is clicked
+// It uses the useCallback hook to memoize the click handlers for the controls
+// It uses the useMemo hook to memoize the slide data for performance optimization
+// It uses the useContext hook to access the theme context for dark mode support
+// It uses the useReducer hook to manage the state of the carousel
+// It uses the useLayoutEffect hook to handle the layout of the carousel
+// It uses the useImperativeHandle hook to expose the carousel methods to the parent component
+// It uses the useDebugValue hook to display a label for the carousel in React DevTools
+// It uses the useTransition hook to handle the transition between slides
+// It uses the useDeferredValue hook to defer the value of the current slide index
 export function Carousel({ slides }: CarouselProps) {
     const [current, setCurrent] = useState(0);
     const id = useId();

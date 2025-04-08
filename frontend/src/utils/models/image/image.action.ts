@@ -24,7 +24,7 @@ export async function postImage(image: FormData): Promise<Status> {
     if (cookie){
         headers.append('cookie', cookie)
     }
-    return fetch(`${process.env["REST_API_URL"]}/apis/image`, {
+    return fetch(`${process.env.PUBLIC_API_URL}/apis/image`, {
         headers,
         //import apis/image let this work, import not resolved
         body: image,

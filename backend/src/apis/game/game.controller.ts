@@ -41,7 +41,7 @@ export async function postGamesController(request: Request, response: Response):
             data: null
         })
 
-    } catch(error) {
+    } catch(error: any) {
         console.error(error)
         return response.json({
             status: 500,
@@ -90,7 +90,7 @@ export async function getGameByGameNameController(request: Request, response: Re
 
         return response.json({ status: 200, message: null, data: game })
 
-    } catch(error) {
+    } catch(error: any) {
         console.error(error)
         return response.json({
             status: 500,
@@ -115,7 +115,7 @@ export async function getGamesByGenre(request: Request, response: Response): Pro
 
         return response.json({ status: 200, message: 'Number of games found ' + gamesData.length, data: gamesData })
 
-    } catch(error) {
+    } catch(error: any) {
         console.error(error)
         return (response.json({ status: 500, data: null, message: error.message }))
     }
@@ -135,7 +135,7 @@ export async function getGamesByGenres(request: Request, response: Response): Pr
 
         return response.json({ status: 200, message: 'games', data: games })
 
-    } catch(error) {
+    } catch(error: any) {
         console.error(error)
         return response.json({
             status: 500,
@@ -158,7 +158,7 @@ export async function getGamesByYearPublished(request: Request, response: Respon
 
         return response.json({ status: 200, message: null, data: gamesData})
 
-    } catch(error) {
+    } catch(error: any) {
         console.error(error)
         return (response.json({ status: 500, data: null, message: error.message }))
     }
@@ -176,7 +176,7 @@ export async function getFeaturedGamesController(request: Request, response: Res
             data: featuredGames,
             message: 'Featured Games found successfully'
         })
-    } catch(error) {
+    } catch(error: any) {
         console.error(error)
         return response.json({
             status: 500,
@@ -205,7 +205,7 @@ export async function getGamesByFavoriteProfileId(request: Request, response: Re
             message: 'successfully selected favorite games for a profile',
             data: favoriteGames })
 
-    } catch(error) {
+    } catch(error: any) {
         console.error(error)
         return response.json({
             status: 500,
@@ -225,7 +225,7 @@ export async function getGameGenres(request: Request, response: Response): Promi
             data: genres
         })
 
-    } catch(error) {
+    } catch(error: any) {
         console.error(error)
         return response.json({
             status: 500,

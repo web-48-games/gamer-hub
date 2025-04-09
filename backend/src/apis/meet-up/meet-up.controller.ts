@@ -36,7 +36,7 @@ export async function postMeetupController(request: Request, response: Response)
         return response.json({status:200, message: uploadMeetup, data: null})
 
 
-    }catch(error){
+    }catch(error: any){
         console.error(error);
         return response.json({ status: 500, data: null, message: error.message })
 
@@ -72,7 +72,7 @@ export async function deleteMeetupByMeetupIdController(request: Request, respons
         return response.json({status: 200, message: result, data: null})
 
 
-    } catch (error) {
+    } catch (error:any) {
         console.error(error);
         return response.json({
             status: 500,
@@ -101,7 +101,7 @@ export async function getMeetupByMeetupIdController(request: Request, response: 
     }
 
 
-    catch(error){
+    catch(error: any){
         console.error(error);
         return response.json({
             status: 500,
@@ -131,7 +131,7 @@ export async function getMeetupsByRsvpProfileId(request: Request, response: Resp
             data: meetups
         })
 
-    } catch(error){
+    } catch(error: any){
         console.error(error);
         return response.json({
             status: 500,
@@ -150,7 +150,7 @@ export async function getCurrentMeetups(request: Request, response: Response): P
             message: 'current meetups retrieved',
             data: currentMeetups
         })
-    } catch(error) {
+    } catch(error: any) {
         console.error(error)
         return response.json({
             status: 500,
@@ -175,7 +175,7 @@ export async function getMeetupsByGame(request: Request, response: Response): Pr
             message: 'meetups from gameId retrieved',
             data: meetups
         })
-    } catch(error) {
+    } catch(error: any) {
         console.error(error)
         return response.json({
             status: 500,
@@ -204,7 +204,7 @@ export async function getMeetupsByCapacity(request: Request, response: Response)
             data: meetups
         })
 
-    } catch(error) {
+    } catch(error: any) {
         console.error(error);
         return response.json({
             status: 500,
@@ -232,7 +232,7 @@ export async function getMeetupsByGenre(request: Request, response: Response): P
             data: meetups
         })
 
-    } catch(error) {
+    } catch(error: any) {
         console.error(error);
         return response.json({
             status: 500,

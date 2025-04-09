@@ -85,6 +85,7 @@ export async function fetchCurrentMeetups() : Promise<Meetup[]> {
         if( !response.ok ) {
             throw new Error('request failed')
         }
+        console.log('API URL:', process.env.PUBLIC_API_URL)
         return response.json()
     })
     return MeetUpSchema.array().parse(data)
